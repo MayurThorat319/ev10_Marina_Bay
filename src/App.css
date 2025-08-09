@@ -279,7 +279,7 @@ body { font-family: Poppins, sans-serif; }
 .prev .list .item.other_2 .main-content{ opacity: 0; }
 
 /* Responsive */
-@media screen and (max-width: 1023px){
+@media screen and(min-width: 768px) and (max-width: 1023px){
   :root{ --calculate: 1; --w-image: 400px; }
   .carousel .list .item .main-content .content h2{ font-size: 3rem; }
   .carousel .list .item .main-content .content{ padding: 130px 20px 20px 60px; }
@@ -301,6 +301,179 @@ body { font-family: Poppins, sans-serif; }
   .carousel .list .item .image figcaption{
     color: #fff; width: 100%; text-align: center; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
   }
-  .carousel .list .item .main-content .content{ display: none; }
-  .arrows{ left: 50%; justify-content: center; transform: translateX(-50%); width: 100%; grid-template-columns: repeat(2, 50px); grid-template-rows: 50px; }
+  .arrows{ 
+    left: 50%;
+    justify-content: center;
+    transform: translateX(-50%);
+    width: 100%;
+    grid-template-columns: repeat(2, 50px);
+    grid-template-rows: 50px;
+   }
+}
+@media screen and (max-width: 370px){
+   :root{ --calculate: 1; --w-image: 220px;}
+ .page-title {
+  
+    margin: 0rem  0rem;
+  }
+  .content{
+    right: 50%;
+  }
+   .image{
+  width: var(--w-image);
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: calc(100% - calc(var(--w-image) * var(--calculate)));
+  padding: 20px;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: start; 
+  align-items: center;
+  font-weight: 500;
+  z-index: 2;
+}
+  /* .carousel .list .item .image{
+    width: 70%;
+    left: 0;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+  } */
+  .arrows{
+  position: absolute;
+  bottom: 40px;
+  width: 20vw;
+  display: grid;
+  grid-template-columns: repeat(2, 40px);
+  grid-template-rows: 40px;
+  justify-content: end;
+  gap: 20px;
+  z-index: 3;
+  padding: 0 24px;
+
+}
+.carousel{
+  height: 80vh;
+}
+}
+
+@media screen and (min-width: 481px) and (max-width: 767px){
+   :root{ --calculate: 1; --w-image: 280px;}
+ .page-title {
+  
+    margin: 0rem  0rem;
+  }
+
+   .image{
+  width: var(--w-image);
+  height: 50%;
+  position: absolute;
+  top: 0;
+  left: calc(100% - calc(var(--w-image) * var(--calculate)));
+  padding: 20px;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: start; 
+  align-items: center;
+  font-weight: 500;
+  z-index: 2;
+}
+  .carousel .list .item .image{
+    width: 50%;
+    left: 0;
+    justify-content: end;
+    background: rgba(0, 0, 0, 0);
+  }
+  .arrows{
+  position: absolute;
+  bottom: 40px;
+  width: 20vw;
+  display: grid;
+  grid-template-columns: repeat(2, 40px);
+  grid-template-rows: 40px;
+  justify-content: end;
+  gap: 20px;
+  
+left: 30%;
+}
+.carousel{
+  height: 90vh;
+
+}
+}
+
+@media screen and (min-width: 371px) and (max-width: 480px){
+   :root{ --calculate: 1; --w-image: 260px;}
+ .page-title {
+  
+    margin: 0rem  0rem;
+  }
+  .content{
+    right: 0%;
+  }
+
+  .carousel .list .item .image{
+    width: 70%;
+    left: 0;
+    justify-content: end;
+    background: rgba(0, 0, 0, 0);
+  }
+ 
+  .arrows{
+  position: absolute;
+  bottom: 10px;
+  width: 20vw;
+  display: grid;
+  grid-template-columns: repeat(2, 35px);
+  grid-template-rows: 35px;
+  justify-content: end;
+  gap: 15px;
+  
+left: 20%;
+}
+.carousel{
+  height: 100vh;
+
+
+}
+
+ .content h2{
+  font-size: 4rem;
+  font-family: 'Aboreto', serif;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  margin: 0 0 0px 0;
+}
+ .content {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.35);
+  max-width: 100%;
+  margin: 0;
+}
+ .carousel .list .item .main-content .content{
+  padding: 10px 24px 24px 40px;
+  max-width: 500px;
+  width: 350px;
+}
+.carousel .list .item .main-content .content h2{
+  font-size: 3rem;
+  font-family: 'Aboreto', serif;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  margin: 0 0 20px 0;
+}
+.carousel .list .item .main-content .content .description{
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.35);
+  max-width: 100%;
+  margin: 0;
+}
+.content h2{
+    line-height:1.2 ;
+}
+  
 }

@@ -172,6 +172,7 @@ export default function App() {
                 </div>
 
                 <figure className="image">
+                
                   <img src={item.image || '/placeholder.svg'} alt={item.caption} />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
