@@ -34,7 +34,7 @@ function hexToRgba(hex: string, alpha = 1) {
  * - Drop this component into your App.tsx and render <FiveTabsSection /> where you want it.
  */
 export default function FiveTabsSection({
-  tabs = ["HOME", "PROFILE", "SETTING", "POINTS", "MORE"],
+  tabs = ["ALL", "2BHK", "3BHK", "LUX", "Ultra LUX"],
   colors = ["#003261", "#003261", "#003261", "#003261", "#003261"],
   width = "90%",
   initialIndex = 0,
@@ -193,17 +193,11 @@ export default function FiveTabsSection({
         </div>
 
         {/* Tab content */}
-        <div
-          id={`tab-panel-${clampedActive}`}
-          role="tabpanel"
-          aria-labelledby={`tab-${clampedActive}`}
-          style={contentBoxStyle}
-        >
-          <strong>{tabs[clampedActive]}</strong> content goes here.
+
           <div style={{ marginTop: 8, color: "#6b7280", fontSize: 14 }}>
             {/* Active color: {colors[clampedActive] ?? "default"} */}
           </div>
-        </div>
+      
       </div>
     </section>
   )

@@ -16,9 +16,9 @@
   margin: 0 auto;
   border-radius: 28px;
   overflow: hidden;
-  background: #0a0f1a;
+  background: transparent;
   min-height: 660px;
-  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  box-shadow: none;
   isolation: isolate;
 }
 
@@ -36,13 +36,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: radial-gradient(
-      1000px 480px at 50% 0%,
-      rgba(15, 23, 42, 0.2),
-      rgba(7, 11, 19, 0.8) 55%,
-      rgba(7, 11, 19, 0.95) 100%
-    ), linear-gradient(180deg, rgba(7, 11, 19, 0.2), rgba(7, 11, 19, 0.85));
-  backdrop-filter: blur(4px);
+  background: transparent;
+  backdrop-filter: none;
 }
 
 .fp3-viewport {
@@ -70,17 +65,33 @@
   transform: translateX(10px);
 }
 
+/* Added side-by-side layout for filtered results with 2 items */
+.fp3-row.fp3-side-by-side {
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.fp3-row.fp3-side-by-side .fp3-card {
+  transform: translateY(0) scale(1);
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
 .fp3-card {
   flex: 0 0 auto;
   width: 340px;
-  background: #284a5e;
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   color: #000000;
   overflow: hidden;
   transition: all 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
   will-change: transform, filter, opacity, box-shadow;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   height: 560px;
@@ -132,6 +143,7 @@
 }
 
 .fp3-card-inner {
+  background: linear-gradient(180deg, rgba(40, 74, 94, 0.95) 0%, rgba(40, 74, 94, 1) 100%);
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -229,7 +241,7 @@
 }
 
 .fp3-title {
- font-family: var(--font-red-rose), serif;
+  font-family: var(--font-red-rose), serif;
   font-weight: 600;
   font-size: 1.05rem;
   letter-spacing: 0.15px;
@@ -296,48 +308,46 @@
 }
 
 .fp3-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center; 
-    align-items: center; 
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .fp3-btn {
-    background: linear-gradient(135deg, #68B6FF, #003261);
-    color: #fff;
-    border: 3px solid #fff; /* thick white border */
-    padding: 5px 10px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-     min-width: 120px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(135deg, #68b6ff, #003261);
+  color: #fff;
+  border: 3px solid #fff; /* thick white border */
+  padding: 5px 10px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  min-width: 120px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .fp3-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
-
 
 /* Ghost button with light outer color */
 .fp3-btn-ghost {
-    background-color: #EFF5F8;
-    color: #003261;
-    border: 2px solid #003261;
-    padding: 10px 18px;
-    border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  background-color: #eff5f8;
+  color: #003261;
+  border: 2px solid #003261;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .fp3-btn-ghost:hover {
-    background-color: #d8e9f2; /* slightly darker than #EFF5F8 */
+  background-color: #d8e9f2; /* slightly darker than #EFF5F8 */
 }
-
 
 .fp3-arrows {
   position: absolute;
@@ -358,9 +368,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e5e7eb;
+  color: #000;
   background: radial-gradient(70% 70% at 30% 20%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #000;
   backdrop-filter: blur(6px);
   cursor: pointer;
   transition: all 160ms ease;
@@ -395,5 +405,11 @@
   .fp3-card {
     width: 100%;
     max-width: 400px;
+  }
+
+  /* Mobile responsive for side-by-side layout */
+  .fp3-row.fp3-side-by-side {
+    flex-direction: column;
+    gap: 20px;
   }
 }

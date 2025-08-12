@@ -2,6 +2,8 @@
 import '../floor-plan/floor_plan.css'
 import type { FloorPlan } from "../floor-plan/floor_plan"
 import FloorPlanCarousel from "../floor-plan/floor_plan"
+import FiveTabsSection from '../filter'
+import { useMemo, useState } from 'react'
 
 const plans: FloorPlan[] = [
   {
@@ -11,6 +13,7 @@ const plans: FloorPlan[] = [
     image: "/images/floor_plan.png",
     features: [
       "Expensive Balcony",
+      "Stunning Cityscape Views",
       "Spacious Living & Dining",
       "King-Sized Bedrooms",
       "Generous Kitchen Space",
@@ -28,6 +31,7 @@ const plans: FloorPlan[] = [
       "Expensive Living & Dining",
       "Large Bedrooms",
       "Generous Kitchen Space",
+      "Stunning Cityscape Views",
     ],
     price: "$2.7*Cr",
     stats: { beds: 2, baths: 2, area: 1180, unit: "sq ft" },
@@ -54,7 +58,7 @@ const plans: FloorPlan[] = [
     image: "/images/floor_plan_4.png",
     features: [
       "Premium Higher Floor Advantage",
-      "Expensive Kitchen with Ample Storage",
+      "Expensive Kitchen & Ample Storage",
       "Elegant Ensuite Bathrooms",
       "Oversized Balcony",
       "Breathtaking Cityscape Views",
@@ -69,9 +73,10 @@ const plans: FloorPlan[] = [
     image: "/images/floor_plan_5.png",
     features: [
       "Dual Ventilation",
-      "Open-Plan Living & Dining",
+      "Expensive Living & Dining",
       "Large Sun Deck",
-      "Breathtaking City & Sea Views",   
+      "Expensive Kitchen & Storage", 
+      "Elegant Ensuite Bathrooms", 
     ],
     price: "$3.75*Cr",
     stats: { beds: 3, baths: 3, area: 990, unit: "sq ft" },
@@ -99,8 +104,8 @@ const plans: FloorPlan[] = [
     features: [
       "Ultra Luxury 3 BHK",
       "Exclusive Pooja Room",
-      "Spacious Dining Area",
-      "Expensive Living Room",
+      "Spacious Kitchen Storage",
+      "Expensive Living & Dining",
       "Large Sun Deck with Stunning Cityscape Views",
     ],
     price: "$5.35*Cr",
@@ -109,9 +114,70 @@ const plans: FloorPlan[] = [
 ]
 
 export default function Page() {
+ const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
+
+  // Filter properties based on selected tab
+  const filteredProperties = useMemo(() => {
+    switch (activeFilter) {
+      case 0: // All
+        return plans
+      case 1: // 2BHK
+        return plans.filter((property) => [1, 2].includes(Number(property.id)))
+      case 2: // 3BHK
+        return plans.filter((property) => [3, 4].includes(Number(property.id)))
+      case 3: // LUX
+        return plans.filter((property) => [5, 6].includes(Number(property.id)))
+      case 4: // Ultra LUX
+        return plans.filter((property) => [7].includes(Number(property.id)))
+      default:
+        return plans
+    }
+  }, [activeFilter])
+
+  const shouldEnableScrolling = activeFilter === 0
+
+  const handleSiteVisit = (property: FloorPlan) => {
+    console.log("Site visit requested for:", property.title)
+    // Add your site visit logic here
+  }
+
+  const handleViewLayout = (property: FloorPlan) => {
+    console.log("View layout requested for:", property.title)
+    // Add your view layout logic here
+  }
+
   return (
-    <main style={{ padding: "24px" }}>
-      <FloorPlanCarousel items={plans} initialIndex={0} autoPlayMs={null} />
-    </main>
+     <section
+      className="property-pricing-section relative min-h-screen py-16"
+      style={{
+        backgroundImage: "url(/images/bg_pricing.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      {/* Filter Tabs */}
+    <div style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
+  <FiveTabsSection
+    tabs={["All", "2BHK", "3BHK", "LUX", "Ultra LUX"]}
+    colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
+    width="90%"
+    initialIndex={0}
+    onChange={setActiveFilter}
+  />
+</div>
+
+
+      {/* Property Carousel */}
+      <FloorPlanCarousel
+        items={filteredProperties}
+        initialIndex={0}
+        autoPlayMs={null} // Disable autoplay when filtering
+        onSiteVisit={handleSiteVisit}
+        onViewLayout={handleViewLayout}
+        className="property-carousel"
+        enableScrolling={shouldEnableScrolling}
+      />
+    </section>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight, BedDouble, ShowerHead, Ruler } from 'lucide-react'
+import { ChevronLeft, ChevronRight, BedDouble, ShowerHead } from 'lucide-react'
 
 export type FloorPlan = {
   id: string | number
@@ -19,6 +19,7 @@ type Props = {
   onSiteVisit?: (item: FloorPlan) => void
   onViewLayout?: (item: FloorPlan) => void
   className?: string
+  enableScrolling?: boolean
 }
 
 export default function FloorPlanCarousel({
@@ -28,6 +29,7 @@ export default function FloorPlanCarousel({
   onSiteVisit,
   onViewLayout,
   className,
+  enableScrolling = true,
 }: Props) {
   const count = items.length
   const [active, setActive] = useState(() => (count ? ((initialIndex % count) + count) % count : 0))
@@ -37,39 +39,63 @@ export default function FloorPlanCarousel({
   const rightIndex = useMemo(() => (active + 1) % count, [active, count])
 
   const prev = useCallback(() => {
-    if (isTransitioning) return
+    if (isTransitioning || !enableScrolling) return
     setIsTransitioning(true)
     setActive((i) => (i - 1 + count) % count)
     setTimeout(() => setIsTransitioning(false), 420)
-  }, [count, isTransitioning])
+  }, [count, isTransitioning, enableScrolling])
 
   const next = useCallback(() => {
-    if (isTransitioning) return
+    if (isTransitioning || !enableScrolling) return
     setIsTransitioning(true)
     setActive((i) => (i + 1) % count)
     setTimeout(() => setIsTransitioning(false), 420)
-  }, [count, isTransitioning])
+  }, [count, isTransitioning, enableScrolling])
 
   useEffect(() => {
-    if (!autoPlayMs) return
+    if (!autoPlayMs || !enableScrolling) return
     const t = setInterval(next, autoPlayMs)
     return () => clearInterval(t)
-  }, [next, autoPlayMs])
+  }, [next, autoPlayMs, enableScrolling])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (!enableScrolling) return
       if (e.key === "ArrowLeft") prev()
       if (e.key === "ArrowRight") next()
     }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
-  }, [prev, next])
+  }, [prev, next, enableScrolling])
+
+  useEffect(() => {
+    if (!enableScrolling) {
+      setActive(0)
+    }
+  }, [items, enableScrolling])
 
   if (count === 0) return null
 
   const left = items[leftIndex]
   const center = items[active]
   const right = items[rightIndex]
+
+  // <CHANGE> Show multiple items side by side when scrolling is disabled and there are 2 items
+  if (!enableScrolling && count === 2) {
+    return (
+      <section className={`fp3-carousel ${className ?? ""}`.trim()}>
+        <div className="fp3-bg" style={{ backgroundImage: `url(/images/sample-living-room.png)` }} aria-hidden="true" />
+        <div className="fp3-overlay" aria-hidden="true" />
+
+        <div className="fp3-viewport">
+          <div className="fp3-row fp3-side-by-side">
+            <Card plan={items[0]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+            <Card plan={items[1]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          </div>
+        </div>
+      </section>
+    )
+  }
 
   return (
     <section className={`fp3-carousel ${className ?? ""}`.trim()}>
@@ -78,20 +104,26 @@ export default function FloorPlanCarousel({
 
       <div className="fp3-viewport">
         <div className={`fp3-row ${isTransitioning ? "fp3-transitioning" : ""}`}>
-          <Card plan={left} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          {enableScrolling && count > 1 && (
+            <Card plan={left} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          )}
           <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-          <Card plan={right} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          {enableScrolling && count > 1 && (
+            <Card plan={right} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          )}
         </div>
       </div>
 
-      <div className="fp3-arrows">
-        <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
-          <ChevronLeft />
-        </button>
-        <button className="fp3-arrow" aria-label="Next" onClick={next} disabled={isTransitioning}>
-          <ChevronRight />
-        </button>
-      </div>
+      {enableScrolling && count > 1 && (
+        <div className="fp3-arrows">
+          <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
+            <ChevronLeft />
+          </button>
+          <button className="fp3-arrow" aria-label="Next" onClick={next} disabled={isTransitioning}>
+            <ChevronRight />
+          </button>
+        </div>
+      )}
     </section>
   )
 }
@@ -118,7 +150,6 @@ function Card({
           <div className="fp3-content-container">
             <header className="fp3-header">
               <h3 className="fp3-title">{plan.title}</h3>
-              {/* <p className="fp3-caption">{plan.caption}</p> */}
             </header>
 
             <ul className="fp3-features">
@@ -140,13 +171,6 @@ function Card({
                 <ShowerHead className="fp3-ic" />
                 <span>{plan.stats.baths}</span>
               </span>
-              {/* <span className="fp3-dot">•</span>
-              <span className="fp3-stat">
-                <Ruler className="fp3-ic" />
-                <span>
-                  {plan.stats.area} {plan.stats.unit ?? "sq ft"}
-                </span>
-              </span> */}
             </div>
           </div>
 
