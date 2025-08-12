@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
+import type { FloorPlan } from './floor-plan/floor_plan'
+import FloorPlanCarousel from './floor-plan/floor_plan'
 
 type Direction = 'next' | 'prev'
 
@@ -42,6 +44,7 @@ function useCarousel(count: number, autoPlayMs = 5000) {
 
   return { active, other_1, other_2, direction, next, prev }
 }
+
 
 const carouselItems = [
   {
@@ -135,6 +138,7 @@ function getItemClass(index: number, active: number, other_1: number, other_2: n
   if (index === other_2) return 'item other_2'
   return 'item'
 }
+
 
 export default function App() {
   // Independent carousel states
@@ -233,6 +237,19 @@ export default function App() {
             </button>
           </div>
         </section>
+
+         <div className="header-center" style={{ marginTop: '2rem', marginBottom: '3rem' }}>
+          <h1 className="page-title">PROPERTY PRICING</h1>
+        </div>
+         {/* <FiveTabsSection
+        // Optional: override anything below to match your needs
+        tabs={["All", "2BHK", "3BHK", "LUX", "ULTRA LUX"]}
+        colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
+        width="90%"
+        initialIndex={0}
+        onChange={(i) => console.log("Switched to tab", i)}
+      /> */}
+  {/* <FloorPlanCarousel items={plans} initialIndex={0} autoPlayMs={null} /> */}
       </main>
     </>
   )

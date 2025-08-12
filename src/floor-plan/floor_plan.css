@@ -1,0 +1,399 @@
+:root {
+  --fp3-bg: #0b1220;
+  --fp3-card-bg: rgba(255, 255, 255, 0.06);
+  --fp3-panel: rgba(7, 11, 19, 0.75);
+  --fp3-text: #e5e7eb;
+  --fp3-muted: #94a3b8;
+  --fp3-primary: #5563cf;
+  --fp3-primary-700: #4853b0;
+  --fp3-ring: rgba(85, 99, 207, 0.35);
+}
+
+.fp3-carousel {
+  position: relative;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  background: #0a0f1a;
+  min-height: 660px;
+  box-shadow: 0 50px 120px rgba(0, 0, 0, 0.55), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  isolation: isolate;
+}
+
+.fp3-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(10px) saturate(1.05);
+  transform: scale(1.04);
+  z-index: 0;
+}
+
+.fp3-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(
+      1000px 480px at 50% 0%,
+      rgba(15, 23, 42, 0.2),
+      rgba(7, 11, 19, 0.8) 55%,
+      rgba(7, 11, 19, 0.95) 100%
+    ), linear-gradient(180deg, rgba(7, 11, 19, 0.2), rgba(7, 11, 19, 0.85));
+  backdrop-filter: blur(4px);
+}
+
+.fp3-viewport {
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fp3-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  max-width: 1080px;
+  transition: transform 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fp3-row.fp3-transitioning {
+  transform: translateX(10px);
+}
+
+.fp3-card {
+  flex: 0 0 auto;
+  width: 340px;
+  background: #284a5e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  color: #000000;
+  overflow: hidden;
+  transition: all 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform, filter, opacity, box-shadow;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+}
+
+.fp3-card-center {
+  transform: translateY(0) scale(1);
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+}
+
+.fp3-card-left {
+  transform: translateX(-20px) scale(0.94);
+  filter: saturate(0.7) brightness(0.9);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.fp3-card-right {
+  transform: translateX(20px) scale(0.94);
+  filter: saturate(0.7) brightness(0.9);
+  opacity: 0.9;
+  z-index: 1;
+}
+
+.fp3-transitioning .fp3-card-left {
+  transform: translateX(-40px) scale(0.94);
+}
+
+.fp3-transitioning .fp3-card-right {
+  transform: translateX(40px) scale(0.94);
+}
+
+.fp3-transitioning .fp3-card-center {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.fp3-card-left::after,
+.fp3-card-right::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 11, 19, 0.15), rgba(7, 11, 19, 0.35));
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fp3-card-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.fp3-image-container {
+  border-radius: 12px;
+  padding: 10px 16px 5px 16px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  height: 200px;
+  flex-shrink: 0;
+  transition: transform 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Remove bottom margin to eliminate space between image and content */
+  margin-bottom: 0;
+}
+
+.fp3-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  transition: transform 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fp3-transitioning .fp3-image-container {
+  transform: translateY(-2px);
+}
+
+.fp3-transitioning .fp3-image-container img {
+  transform: scale(1.05);
+}
+
+.fp3-body {
+  background: linear-gradient(180deg, rgba(40, 74, 94, 0.95) 0%, rgba(40, 74, 94, 1) 100%);
+  /* Remove top padding and reduce gap to eliminate space between image and content */
+  padding: 0 16px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.fp3-content-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 14px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  transition: transform 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* Remove top margin to connect directly with image */
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.fp3-transitioning .fp3-content-container {
+  transform: translateY(-2px);
+}
+
+.fp3-meta-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 5px 30px 5px 20px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  transition: transform 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin-bottom: 12px;
+  margin-top: -5px;
+}
+
+.fp3-transitioning .fp3-meta-container {
+  transform: translateY(-2px);
+}
+
+.fp3-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fp3-title {
+ font-family: var(--font-red-rose), serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.15px;
+  margin: 0;
+  color: #000000;
+}
+
+.fp3-caption {
+  font-size: 0.86rem;
+  color: #333333;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.fp3-features {
+  list-style: disc;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 4px 0 2px;
+  flex: 1;
+  font-family: var(--font-red-rose), serif;
+}
+
+.fp3-features li {
+  color: #1a1a1a;
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.fp3-price {
+  background: radial-gradient(80% 100% at 50% 0%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  padding: 6px 10px;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #000000;
+}
+
+.fp3-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000000;
+}
+
+.fp3-ic {
+  width: 16px;
+  height: 16px;
+  opacity: 0.85;
+}
+
+.fp3-dot {
+  opacity: 0.5;
+}
+
+.fp3-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.fp3-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center; 
+    align-items: center; 
+}
+
+.fp3-btn {
+    background: linear-gradient(135deg, #68B6FF, #003261);
+    color: #fff;
+    border: 3px solid #fff; /* thick white border */
+    padding: 5px 10px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+     min-width: 120px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fp3-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Ghost button with light outer color */
+.fp3-btn-ghost {
+    background-color: #EFF5F8;
+    color: #003261;
+    border: 2px solid #003261;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.fp3-btn-ghost:hover {
+    background-color: #d8e9f2; /* slightly darker than #EFF5F8 */
+}
+
+
+.fp3-arrows {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.fp3-arrow {
+  pointer-events: all;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  background: radial-gradient(70% 70% at 30% 20%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.fp3-arrow:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: radial-gradient(70% 70% at 30% 20%, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.12));
+}
+
+.fp3-arrow:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fp3-arrow svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 820px) {
+  .fp3-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fp3-card-left,
+  .fp3-card-right {
+    display: none;
+  }
+
+  .fp3-card {
+    width: 100%;
+    max-width: 400px;
+  }
+}
