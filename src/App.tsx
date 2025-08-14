@@ -2,6 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
 import type { FloorPlan } from './floor-plan/floor_plan'
 import FloorPlanCarousel from './floor-plan/floor_plan'
+import Page from './App/property_pricing'
+import BuildingProgress from './buildings/building-progress'
 
 type Direction = 'next' | 'prev'
 
@@ -147,9 +149,13 @@ export default function App() {
 
   return (
     <>
-      <div className="header-center">
-        <h1 className="page-title">AMENITIES</h1>
-        <h2 className="page-subtitle">Wellness & Recreation</h2>
+     <div className="header-center" >
+          <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>        
+        </div>
+           <BuildingProgress />
+      <div className="header-center" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+        <h1 className="main-title2">AMENITIES</h1>
+        <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
       </div>
 
       <main>
@@ -195,9 +201,11 @@ export default function App() {
         </section>
 
         {/* Community Corners */}
-        <div className="header-center" style={{ marginTop: '2rem', marginBottom: '3rem' }}>
-          <h1 className="page-title">COMMUNITY CORNERS</h1>
-        </div>
+         <div className="header-center">
+
+        <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
+      </div>
+
 
         <section className={`carousel ${corners.direction}`} aria-label="Community corners carousel">
           <div className="list">
@@ -238,9 +246,10 @@ export default function App() {
           </div>
         </section>
 
-         <div className="header-center" style={{ marginTop: '2rem', marginBottom: '3rem' }}>
-          <h1 className="page-title">PROPERTY PRICING</h1>
+         <div className="header-center" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+          <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
+        <Page />
          {/* <FiveTabsSection
         // Optional: override anything below to match your needs
         tabs={["All", "2BHK", "3BHK", "LUX", "ULTRA LUX"]}
@@ -250,6 +259,7 @@ export default function App() {
         onChange={(i) => console.log("Switched to tab", i)}
       /> */}
   {/* <FloorPlanCarousel items={plans} initialIndex={0} autoPlayMs={null} /> */}
+  
       </main>
     </>
   )
