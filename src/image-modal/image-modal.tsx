@@ -33,29 +33,29 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
   if (!isOpen || !imageSrc) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative max-w-5xl max-h-[90vh] mx-4" onClick={(e) => e.stopPropagation()}>
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-4 -right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
-          aria-label="Close modal"
-        >
-          <X className="w-6 h-6 text-gray-600" />
-        </button>
+    <div className="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md" onClick={onClose}
+    style={{ position: "absolute", top: 0,bottom: 0, left:0,right:0, backgroundColor: "#00000094",display:"flex",justifyContent:"center",alignItems:"center", objectFit: "cover"}}
+    >
+      <div className="absolute inset-0 flex items-center justify-center p-4">
+        <div className="relative max-w-5xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
+          {/* Close button */}
+          <button
+            onClick={onClose}
+            className="absolute -top-4 -right-4 z-[100000] bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
+            aria-label="Close modal"
+          >
+            <X className="w-6 h-6 text-gray-600" />
+          </button>
 
-        {/* Image */}
-        <div className="relative overflow-hidden rounded-lg shadow-2xl">
-          <img
-            src={imageSrc || "/placeholder.svg"}
-            alt="Building progress detail"
-            className="max-w-full max-h-[85vh] object-contain"
-          />
+          <div className="relative overflow-hidden rounded-lg shadow-2xl bg-white flex items-center justify-center">
+            <img
+              src={imageSrc || "/placeholder.svg"}
+              alt="Building progress detail"
+              className="max-w-[40vw] max-h-[85vh] object-contain"
+              style={{ minHeight: "400px", minWidth: "600px",maxWidth:"400px",maxHeight: "400px" }}
+            />
 
-          {/* Image overlay with gradient for better text readability */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-            <h3 className="text-white text-xl font-semibold mb-2">Building Progress Update</h3>
-            <p className="text-white/90 text-sm">Click outside or press ESC to close</p>
+           
           </div>
         </div>
       </div>

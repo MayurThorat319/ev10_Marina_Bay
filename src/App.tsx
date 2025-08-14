@@ -3,7 +3,8 @@ import './App.css'
 import type { FloorPlan } from './floor-plan/floor_plan'
 import FloorPlanCarousel from './floor-plan/floor_plan'
 import Page from './App/property_pricing'
-import BuildingProgress from './buildings/building-progress'
+import BuildingProgress from './components/building-progress/building-progress'
+// import BuildingProgress from './buildings/building-progress'
 
 type Direction = 'next' | 'prev'
 

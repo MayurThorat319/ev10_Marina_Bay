@@ -44,9 +44,10 @@
   }
 }
 
+/* Ensured all images have consistent sizing */
 .scroller img {
   width: 300px;
-  height: 180px;
+  height: 200px;
   border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;

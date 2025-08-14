@@ -1,0 +1,55 @@
+/* Enhanced styles for the building progress section */
+.building-progress-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Ensure container doesn't create stacking context issues */
+  position: relative;
+  z-index: 1;
+}
+
+/* Smooth modal animations */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+/* Apply animations to modal content */
+.modal-content {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-content.closing {
+  animation: modalFadeOut 0.2s ease-in;
+}
+
+/* Added explicit modal overlay styles to ensure proper stacking */
+.modal-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  z-index: 9999 !important;
+}
