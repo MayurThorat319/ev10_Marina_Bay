@@ -192,3 +192,46 @@ body { margin: 0; }
     grid-row: 3 / 7;
   }
 }
+
+  @media (max-width: 768px) {
+            .about-section {
+              flex-direction: column !important;
+              text-align: center;
+              gap: 20px !important;
+            }
+            
+            .about-section > div:first-child {
+              flex: none !important;
+              max-width: 100% !important;
+            }
+            
+            .about-section > div:last-child {
+              padding-left: 0 !important;
+            }
+            
+            .about-section button {
+              width: 100%;
+              margin-bottom: 10px;
+            }
+
+            /* Added responsive styles for MAHARERA section */
+            .maharera-section {
+              flex-direction: column !important;
+              text-align: center;
+              gap: 20px !important;
+            }
+            
+            .maharera-section > div:first-child {
+              flex: none !important;
+              max-width: 100% !important;
+            }
+            
+            .maharera-section > div:last-child {
+              padding-left: 0 !important;
+            }
+            
+            .maharera-section button {
+              width: 100%;
+            }
+            
+          }

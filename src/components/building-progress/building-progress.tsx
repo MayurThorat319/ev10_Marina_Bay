@@ -11,19 +11,26 @@ const BuildingProgress: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const images = [
-    "/images/Marina_bay_garden.png",
-    "/images/Meditation_center.png",
-    "/images/rooftop_lounge.png",
-    "/images/GYM.png",
-    "/images/Barbeque_zone.png",
-    "/images/Infinity_pool.png",
-    "/images/Kids_play_area.png",
-    "/images/floor_plan.png",
+    "/images/mb_vid_ind_1.mp4",
+    "/images/mb_normal_1.jpg",
+    "/images/mb_vid_normal_1.mp4",
+    "/images/mb_ind_1.jpg",
+    "/images/mb_normal_2.jpg",
+  ]
+
+    const images1 = [
+    "/images/mb_vid_normal_2.mp4",
+    "/images/mb_ind_2.jpg",
+    "/images/mb_normal_3.jpg",
+    "/images/mb_vid_ind_2.mp4",
+    "/images/mb_normal_4.jpg",
   ]
 
 
-  const handleImageClick = (imageSrc: string) => {
-    console.log("Image clicked:", imageSrc) // Added debug logging
+    const handleImageClick = (imageSrc: string) => {
+    console.log("[v0] Media clicked:", imageSrc) // Added debug logging
+    const isVideo = imageSrc.toLowerCase().includes(".mp4") // Added video detection logging
+    console.log("[v0] Is video file:", isVideo)
     setSelectedImage(imageSrc)
     setIsModalOpen(true)
   }
@@ -46,7 +53,7 @@ const BuildingProgress: React.FC = () => {
 
           {/* Right scrolling slider */}
           <div className="w-full">
-            <ImageSlider images={images} direction="right" speed="slow" onImageClick={handleImageClick} />
+            <ImageSlider images={images1} direction="right" speed="slow" onImageClick={handleImageClick} />
           </div>
         </div>
 

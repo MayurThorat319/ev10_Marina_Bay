@@ -1,15 +1,22 @@
 "use client"
 
+import type React from "react"
+
 import { useEffect } from "react"
 import { X } from "lucide-react"
 
-interface ImageModalProps {
+interface MediaModalProps {
   isOpen: boolean
-  imageSrc: string | null
+  mediaSrc: string | null
   onClose: () => void
 }
 
-export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
+const isVideoFile = (src: string): boolean => {
+  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"]
+  return videoExtensions.some((ext) => src.toLowerCase().includes(ext.toLowerCase()))
+}
+
+export function MediaModal({ isOpen, mediaSrc, onClose }: MediaModalProps) {
   // Handle escape key press
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -30,7 +37,28 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
     }
   }, [isOpen, onClose])
 
-  if (!isOpen || !imageSrc) return null
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.log("[v0] Video failed to load in modal:", e.currentTarget.src)
+    const video = e.currentTarget
+    video.style.display = "none"
+    // Create a fallback message
+    const fallback = document.createElement("div")
+    fallback.innerHTML = `
+      <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 400px; background: #f3f4f6; border-radius: 8px;">
+        <p style="color: #6b7280; font-size: 18px; margin-bottom: 8px;">Video unavailable</p>
+        <p style="color: #9ca3af; font-size: 14px;">The video could not be loaded</p>
+      </div>
+    `
+    video.parentNode?.insertBefore(fallback, video)
+  }
+
+  const handleVideoCanPlay = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.log("[v0] Video can play in modal:", e.currentTarget.src)
+  }
+
+  if (!isOpen || !mediaSrc) return null
+
+  const isVideo = isVideoFile(mediaSrc)
 
   return (
     <div
@@ -48,18 +76,37 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
           <X className="w-6 h-6 text-gray-600" />
         </button>
 
-        {/* Image */}
+        {/* Media container */}
         <div className="relative overflow-hidden rounded-lg shadow-2xl bg-white">
-          <img
-            src={imageSrc || "/placeholder.svg"}
-            alt="Building progress detail"
-            className="max-w-full max-h-[85vh] object-contain w-full"
-            style={{ minHeight: "400px" }}
-          />
+          {isVideo ? (
+            <video
+              src={mediaSrc}
+              className="max-w-full max-h-[85vh] object-contain w-full"
+              style={{ minHeight: "400px", backgroundColor: "#f3f4f6" }}
+              controls
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onError={handleVideoError}
+              onCanPlay={handleVideoCanPlay}
+            >
+              <source src={mediaSrc} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              src={mediaSrc || "/placeholder.svg"}
+              alt="Media detail"
+              className="max-w-full max-h-[85vh] object-contain w-full"
+              style={{ minHeight: "400px" }}
+            />
+          )}
 
-          {/* Image overlay with gradient for better text readability */}
+          {/* Media overlay with gradient for better text readability */}
           <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-6">
-            <h3 className="text-white text-xl font-semibold mb-2">Building Progress Update</h3>
+            <h3 className="text-white text-xl font-semibold mb-2">{isVideo ? "Video Preview" : "Image Preview"}</h3>
             <p className="text-white/90 text-sm">Click outside or press ESC to close</p>
           </div>
         </div>

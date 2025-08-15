@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useEffect, useRef } from "react"
 import styles from "./image-slider.module.css"
 
@@ -9,6 +11,11 @@ interface ImageSliderProps {
   speed?: "slow" | "fast"
   className?: string
   onImageClick?: (imageSrc: string) => void
+}
+
+const isVideoFile = (src: string): boolean => {
+  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"]
+  return videoExtensions.some((ext) => src.toLowerCase().includes(ext.toLowerCase()))
 }
 
 export function ImageSlider({
@@ -50,34 +57,83 @@ export function ImageSlider({
       scrollerContent.forEach((item) => {
         const duplicatedItem = item.cloneNode(true) as HTMLElement
         duplicatedItem.setAttribute("aria-hidden", "true")
-        // Add click handler to cloned items as well
         const img = duplicatedItem.querySelector("img")
+        const video = duplicatedItem.querySelector("video")
         if (img && onImageClick) {
           img.addEventListener("click", () => onImageClick(img.src))
+        }
+        if (video && onImageClick) {
+          video.addEventListener("click", () => onImageClick(video.src))
         }
         scrollerInner.appendChild(duplicatedItem)
       })
     }
   }, [images, onImageClick])
 
-  const handleImageClick = (imageSrc: string) => {
+  const handleMediaClick = (mediaSrc: string) => {
     if (onImageClick) {
-      onImageClick(imageSrc)
+      onImageClick(mediaSrc)
     }
+  }
+
+  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.log("[v0] Video failed to load:", e.currentTarget.src)
+    const video = e.currentTarget
+    video.style.display = "none"
+    // Create a fallback image element
+    const fallback = document.createElement("img")
+    fallback.src = "/placeholder.svg?height=200&width=300"
+    fallback.className = styles.clickableImage
+    fallback.alt = "Video unavailable"
+    fallback.onclick = () => handleMediaClick(video.src)
+    video.parentNode?.insertBefore(fallback, video)
+  }
+
+  const handleVideoCanPlay = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.log("[v0] Video can play:", e.currentTarget.src)
+  }
+
+  const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
+    console.log("[v0] Video loaded successfully:", e.currentTarget.src)
   }
 
   return (
     <div ref={scrollerRef} className={`${styles.scroller} ${className}`} data-direction={direction} data-speed={speed}>
       <div className={styles.scrollerInner}>
-        {images.map((src, index) => (
-          <img
-            key={index}
-            src={src || "/placeholder.svg"}
-            alt={`Building progress ${index + 1}`}
-            onClick={() => handleImageClick(src)}
-            className={styles.clickableImage}
-          />
-        ))}
+        {images.map((src, index) =>
+          isVideoFile(src) ? (
+            <video
+              key={index}
+              src={src}
+              onClick={() => handleMediaClick(src)}
+              className={styles.clickableImage}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              onMouseEnter={(e) => {
+                const video = e.currentTarget
+                video.play().catch((err) => console.log("[v0] Video play failed:", err))
+              }}
+              onMouseLeave={(e) => e.currentTarget.pause()}
+              onError={handleVideoError}
+              onCanPlay={handleVideoCanPlay}
+              onLoadedData={handleVideoLoad}
+              style={{ objectFit: "cover", backgroundColor: "#f3f4f6" }}
+            >
+              <source src={src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img
+              key={index}
+              src={src || "/placeholder.svg"}
+              alt={`Building progress ${index + 1}`}
+              onClick={() => handleMediaClick(src)}
+              className={styles.clickableImage}
+            />
+          ),
+        )}
       </div>
     </div>
   )

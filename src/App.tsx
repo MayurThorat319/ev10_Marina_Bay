@@ -251,15 +251,598 @@ export default function App() {
           <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
         <Page />
-         {/* <FiveTabsSection
-        // Optional: override anything below to match your needs
-        tabs={["All", "2BHK", "3BHK", "LUX", "ULTRA LUX"]}
-        colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
-        width="90%"
-        initialIndex={0}
-        onChange={(i) => console.log("Switched to tab", i)}
-      /> */}
-  {/* <FloorPlanCarousel items={plans} initialIndex={0} autoPlayMs={null} /> */}
+
+        <div
+          className="about-section" // Added class name for responsive styles
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            maxWidth: "1200px",
+            margin: "40px auto",
+            padding: "40px 20px",
+            gap: "40px",
+            backgroundColor: "#f8f9fa",
+            borderRadius: "8px",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          }}
+        >
+          {/* Left side - Image */}
+          <div
+            style={{
+              flex: "0 0 300px",
+              minHeight: "250px",
+            }}
+          >
+            <img
+              src="/images/mb_ind_1.jpg"
+              alt="EV Group Building"
+              style={{
+                width: "100%",
+                height: "250px",
+                objectFit: "cover",
+                borderRadius: "8px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              }}
+            />
+          </div>
+
+          {/* Right side - Content */}
+          <div
+            style={{
+              flex: "1",
+              paddingLeft: "20px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: 600,
+                color: "#003261",
+                marginBottom: "20px",
+                fontFamily: "serif",
+              }}
+            >
+              About EV Group
+            </h2>
+
+            <div
+              style={{
+                fontSize: "0.95rem",
+                lineHeight: "1.6",
+                color: "#003261",
+                textAlign: "justify",
+                marginBottom: "25px",
+              }}
+            >
+              <p>
+                EV Group is one of India's Leading and Fast Growing Engineering and Real Estate Company. To a Team of
+                Entrepreneurs, focused on Quality and an excellent Return on Investment. The Group has established
+                itself as a market leader in quality and executing projects with realistic timelines. The Group has a
+                diverse portfolio of Engineering and Real Estate assets under its management. The portfolio is also
+                geographically diversified with a Pan India presence in Tier II & Tier III cities of Bangalore, Cochin &
+                N.Mumbai and globally focused on the Middle East market.
+              </p>
+            </div>
+
+            {/* Buttons matching the original style */}
+            <div
+              style={{
+                display: "flex",
+                gap: "15px",
+                flexWrap: "wrap",
+              }}
+            >
+              <button
+                style={{
+                  backgroundColor: "#003261",
+                  color: "white",
+                  padding: "12px 24px",
+                  fontSize: "0.9rem",
+                  fontWeight: 500,
+                  border: "none",
+                  borderRadius: "6px",
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  boxShadow: "0 2px 4px rgba(0,50,97,0.2)",
+                }}
+                onClick={() => window.open("https://evgroup.in/profile.html", "_blank")}
+
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = "#002147"
+                  e.currentTarget.style.transform = "translateY(-1px)"
+                  e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,50,97,0.3)"
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = "#003261"
+                  e.currentTarget.style.transform = "translateY(0)"
+                  e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,50,97,0.2)"
+                }}
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="maharera-section"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            maxWidth: "1200px",
+            margin: "40px auto",
+            padding: "40px 20px",
+            gap: "40px",
+            backgroundColor: "#f8f9fa",
+            borderRadius: "8px",
+             boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          }}
+        >
+          {/* Left side - QR Code */}
+          <div
+            style={{
+              flex: "0 0 200px",
+              minHeight: "200px",
+            }}
+          >
+            <img
+              src="/images/maha_rera_qr.jpeg"
+              alt="MAHARERA QR Code"
+              style={{
+                width: "100%",
+                height: "200px",
+                objectFit: "contain",
+                borderRadius: "8px",
+                backgroundColor: "white",
+                padding: "10px",
+                boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+              }}
+            />
+          </div>
+
+          {/* Right side - MAHARERA Content */}
+          <div
+            style={{
+              flex: "1",
+              paddingLeft: "20px",
+            }}
+          >
+            <h2
+              style={{
+                fontSize: "1.5rem",
+                fontWeight: 600,
+                color: "#003261",
+                marginBottom: "15px",
+                fontFamily: "serif",
+              }}
+            >
+              MAHARERA Registration Number: PST700028722
+            </h2>
+
+            <div
+              style={{
+                fontSize: "0.8rem",
+                lineHeight: "1.6",
+                color: "#000000",
+                textAlign: "justify",
+                marginBottom: "20px",
+                fontWeight: 500,
+              }}
+            >
+              <p style={{ marginBottom: "15px" }}>
+                According to the RERA Act 2018 of the Government of India, all projects of the EV Homes Constructions
+                Pvt Ltd including 10 Marina Bay, are listed on the Maharashtra Government's RERA website under
+                registered projects.
+              </p>
+              <p style={{ marginBottom: "15px" }}>
+                The 10 Marina Bay project is developed and marketed in accordance with the Real Estate (Regulation and
+                Development) Act, 2018 (RERA).
+              </p>
+                 <p style={{ marginBottom: "15px" }}>
+                Buyers are encouraged to visit the official MAHARERA website for complete project details, approvals and registration status.
+              </p>
+              <p>
+                EV Homes Constructions Pvt Ltd has received full rights to Market/Advertise/Sell the apartments in 10
+                Marina Bay Vide MAHARERA Registration Number PST700028722. EV Homes Constructions Pvt Ltd hereby ensures
+                that the fact stated herein are true and complete to the best of our knowledge and belief and nothing
+                has been concealed or suppressed. EV Homes Constructions Pvt Ltd does not take any responsibility for
+                the completeness or correctness of such information. Buyers are encouraged to verify all project-related
+                details from the official MAHARERA website.
+              </p>
+            </div>
+
+          
+          </div>
+        </div>
+
+
+        
+         <footer
+          style={{
+            backgroundColor: "#1a1a1a",
+            color: "#ffffff",
+            padding: "60px 20px 40px",
+            marginTop: "60px",
+          }}
+        >
+          <div
+            style={{
+              maxWidth: "1200px",
+              margin: "0 auto",
+            }}
+          >
+            {/* Header with logo and social icons */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "40px",
+                paddingBottom: "20px",
+                borderBottom: "1px solid #333",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "1.8rem",
+                  fontWeight: "bold",
+                  color: "#ffffff",
+                }}
+              >
+                EV HOMES
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  gap: "15px",
+                  alignItems: "center",
+                }}
+              >
+                <span style={{ marginRight: "10px", fontSize: "0.9rem" }}>Follow Us</span>
+             <div style={{ display: "flex", gap: "10px" }}>
+  {/* Facebook */}
+  <div
+    style={{
+      width: "35px",
+      height: "35px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+    }}
+    onClick={() =>
+      window.open("https://www.facebook.com/evgindia?rdid=T5Y9xWn898Hd6XmZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nwaBWiBf%2F#", "_blank")
+    }
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
+      alt="Facebook"
+      style={{ width: "20px", height: "20px" }}
+    />
+  </div>
+
+  {/* Instagram */}
+  <div
+    style={{
+      width: "35px",
+      height: "35px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+    }}
+    onClick={() =>
+      window.open("https://www.instagram.com/evhomesofficial/?igsh=MTRuZnA1MDd3Ymw0Mg%3D%3D#", "_blank")
+    }
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+      alt="Instagram"
+      style={{ width: "20px", height: "20px" }}
+    />
+  </div>
+
+  {/* LinkedIn */}
+  <div
+    style={{
+      width: "35px",
+      height: "35px",
+      borderRadius: "50%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+    }}
+    onClick={() =>
+      window.open("https://www.linkedin.com/company/ev-homes", "_blank")
+    }
+  >
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+      alt="LinkedIn"
+      style={{ width: "20px", height: "20px" }}
+    />
+  </div>
+</div>
+
+              </div>
+            </div>
+
+            {/* Main footer content */}
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(100px, 1fr))",
+                gap: "40px",
+                marginBottom: "40px",
+              }}
+            >
+              {/* Subscribe Section */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Subscribe
+                </h3>
+          <div
+  style={{
+    display: "flex",
+    marginBottom: "10px",
+  }}
+>
+  <input
+    type="email"
+    placeholder="Your e-mail"
+    style={{
+      flex: "1",
+      padding: "6px 8px", // smaller height
+      backgroundColor: "#333",
+      border: "1px solid #555",
+      borderRadius: "3px 0 0 3px",
+      color: "#ffffff",
+      fontSize: "0.75rem", // smaller text
+    }}
+  />
+  <button
+    style={{
+      padding: "6px 12px", // smaller height
+      backgroundColor: "#003261",
+      color: "#ffffff",
+      border: "none",
+      borderRadius: "0 3px 3px 0",
+      cursor: "pointer",
+      fontSize: "0.75rem", // smaller text
+      transition: "background-color 0.3s ease",
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#002147")}
+    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#003261")}
+  >
+    Send →
+  </button>
+</div>
+
+                <p
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#aaa",
+                    lineHeight: "1.4",
+                  }}
+                >
+                  Subscribe our newsletter to receive our weekly feed.
+                </p>
+              </div>
+
+              {/* Discover Section */}
+           <div
+  style={{
+    paddingLeft: "20px", // small left padding
+  }}
+>
+  <h3
+    style={{
+      fontSize: "1.1rem",
+      fontWeight: "600",
+      marginBottom: "20px",
+      color: "#ffffff",
+    }}
+  >
+    Discover
+  </h3>
+  <ul
+    style={{
+      listStyle: "none",
+      padding: "0",
+      margin: "0",
+    }}
+  >
+    {[
+      "Gwalior",
+      "Aroji",
+      "Koparkhaane",
+      "Sarooda",
+      "Nerul",
+      "Seawoods",
+      "Ulwe",
+      "Kharghar",
+    ].map((item) => (
+      <li
+        key={item}
+        style={{
+          marginBottom: "8px",
+        }}
+      >
+        <a
+          href="#"
+          style={{
+            color: "#ccc",
+            textDecoration: "none",
+            fontSize: "0.9rem",
+            transition: "color 0.3s ease",
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+          onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+        >
+          {item}
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
+
+
+              {/* Quick Links Section */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Quick Links
+                </h3>
+                <ul
+                  style={{
+                    listStyle: "none",
+                    padding: "0",
+                    margin: "0",
+                  }}
+                >
+                  {["About", "Contact", "FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
+                    <li
+                      key={item}
+                      style={{
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <a
+                        href="#"
+                        style={{
+                          color: "#ccc",
+                          textDecoration: "none",
+                          fontSize: "0.9rem",
+                          transition: "color 0.3s ease",
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                      >
+                        {item}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Contact Us Section */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Contact Us
+                </h3>
+                <div
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#ccc",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <p style={{ marginBottom: "8px" }}>www.evgroup.in</p>
+                  <p style={{ marginBottom: "8px" }}>+91 98674 56777</p>
+                </div>
+              </div>
+
+              {/* Our Address Section */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Our Address
+                </h3>
+                <div
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#ccc",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <p>
+                    212 A wing Vrindavan,
+                    <br />
+                    Chambers Above Axis Bank,
+                    <br />
+                    sector-17, Vashi Navi
+                    <br />
+                    Mumbai
+                  </p>
+                </div>
+              </div>
+
+              {/* Get the app Section */}
+              <div>
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Get the app
+                </h3>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                  }}
+                >
+                 
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      backgroundColor: "#333",
+                      padding: "8px 12px",
+                      borderRadius: "6px",
+                      cursor: "pointer",
+                      transition: "background-color 0.3s ease",
+                    }}
+                     onClick={() => {
+                      window.open("https://play.google.com/store/apps/details?id=com.evhomes.ev_homes&hl=en","_blank")
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#444")}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#333")}
+                  >
+                    <span style={{ marginRight: "8px", fontSize: "1.2rem" }}>▶️</span>
+                    <div>
+                      <div style={{ fontSize: "0.7rem", color: "#aaa" }}>Get it on</div>
+                      <div style={{ fontSize: "0.9rem", fontWeight: "600" }}>Google Play</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
   
       </main>
     </>
