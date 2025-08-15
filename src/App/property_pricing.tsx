@@ -4,6 +4,7 @@ import type { FloorPlan } from "../floor-plan/floor_plan"
 import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
 import { useMemo, useState } from 'react'
+import LayoutModal from '../layout-modal'
 
 const plans: FloorPlan[] = [
   {
@@ -115,7 +116,8 @@ const plans: FloorPlan[] = [
 
 export default function Page() {
  const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
-
+const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProperty, setSelectedProperty] = useState<FloorPlan | null>(null)
   // Filter properties based on selected tab
   const filteredProperties = useMemo(() => {
     switch (activeFilter) {
@@ -143,10 +145,16 @@ export default function Page() {
 
   const handleViewLayout = (property: FloorPlan) => {
     console.log("View layout requested for:", property.title)
-    // Add your view layout logic here
+    // Add your view layout logic here setSelectedProperty(property)
+    setIsModalOpen(true)
   }
 
+   const handleCloseModal = () => {
+    setIsModalOpen(false)
+    setSelectedProperty(null)
+  }
   return (
+    <>
      <section
       className="property-pricing-section relative min-h-screen py-16"
       style={{
@@ -179,5 +187,9 @@ export default function Page() {
         enableScrolling={shouldEnableScrolling}
       />
     </section>
+    
+      <LayoutModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} />
+
+    </>
   )
 }

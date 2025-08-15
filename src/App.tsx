@@ -253,6 +253,7 @@ export default function App() {
         <Page />
 
         <div
+        id="about"
           className="about-section" // Added class name for responsive styles
           style={{
             display: "flex",
@@ -716,7 +717,34 @@ export default function App() {
                     margin: "0",
                   }}
                 >
-                  {["About", "Contact", "FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
+                  <p
+  className="cursor-pointer hover:underline"
+  onClick={() => {
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+  }}
+   onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+>
+  About
+</p>
+
+  <p
+  className="cursor-pointer hover:underline"
+  onClick={() => {
+    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+  }}
+  style={{
+                          color: "#ccc",
+                          textDecoration: "none",
+                          fontSize: "0.9rem",
+                          transition: "color 0.3s ease",
+                        }}
+   onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+>
+  Contact
+</p>
+                  {[ "FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
                     <li
                       key={item}
                       style={{

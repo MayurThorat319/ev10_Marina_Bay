@@ -1,6 +1,6 @@
 "use client"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { ChevronLeft, ChevronRight, BedDouble, ShowerHead } from 'lucide-react'
+import { ChevronLeft, ChevronRight, BedDouble, ShowerHead } from "lucide-react"
 
 export type FloorPlan = {
   id: string | number
