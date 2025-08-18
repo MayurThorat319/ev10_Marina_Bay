@@ -175,7 +175,7 @@ function Card({
           </div>
 
           <div className="fp3-actions">
-            <button className="fp3-btn" onClick={() => onSiteVisit?.(plan)}>
+            <button className="fp3-btn" onClick={() => onViewLayout?.(plan)}>
               SITE VISIT
             </button>
             <button className="fp3-btn" onClick={() => onViewLayout?.(plan)}>

@@ -4,7 +4,7 @@ import type { FloorPlan } from "../floor-plan/floor_plan"
 import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
 import { useMemo, useState } from 'react'
-import LayoutModal from '../layout-modal'
+import LayoutModal from '../form/layout-modal'
 
 const plans: FloorPlan[] = [
   {

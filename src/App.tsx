@@ -1,21 +1,22 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
-import './App.css'
-import type { FloorPlan } from './floor-plan/floor_plan'
-import FloorPlanCarousel from './floor-plan/floor_plan'
-import Page from './App/property_pricing'
-import BuildingProgress from './components/building-progress/building-progress'
+"use client"
+
+import { useEffect, useMemo, useRef, useState } from "react"
+import "./App.css"
+import Page from "./App/property_pricing"
+import BuildingProgress from "./components/building-progress/building-progress"
+import PropertyShowcase from "./components/property-showcase/property-showcase"
 // import BuildingProgress from './buildings/building-progress'
 
-type Direction = 'next' | 'prev'
+type Direction = "next" | "prev"
 
 function useCarousel(count: number, autoPlayMs = 5000) {
   const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState<Direction>('next')
+  const [direction, setDirection] = useState<Direction>("next")
   const timerRef = useRef<number | null>(null)
 
   const { other_1, other_2 } = useMemo(() => {
     let o1: number, o2: number
-    if (direction === 'next') {
+    if (direction === "next") {
       o1 = active - 1 < 0 ? count - 1 : active - 1
       o2 = active + 1 >= count ? 0 : active + 1
     } else {
@@ -26,12 +27,12 @@ function useCarousel(count: number, autoPlayMs = 5000) {
   }, [active, direction, count])
 
   const next = () => {
-    setDirection('next')
+    setDirection("next")
     setActive((prev) => (prev + 1) % count)
   }
 
   const prev = () => {
-    setDirection('prev')
+    setDirection("prev")
     setActive((prev) => (prev - 1 + count) % count)
   }
 
@@ -48,113 +49,163 @@ function useCarousel(count: number, autoPlayMs = 5000) {
   return { active, other_1, other_2, direction, next, prev }
 }
 
-
 const carouselItems = [
   {
     id: 1,
-    title: 'Jogging Track',
+    title: "Jogging Track",
     description:
-      'TAKE A WALK, GO FOR A JOG, OR ENJOY A QUIET RUN ALONG THE JOGGING TRACK. IT’S A GREAT WAY TO MOVE YOUR BODY WHILE SOAKING IN THE VIEWS. FITNESS FEELS EASY WHEN IT LOOKS THIS GOOD.',
-    image: '/images/jogging_track.png',
-    backgroundImage: '/background_images/blur_jogging_track.png',
-    caption: 'Jogging Track',
-    backgroundColor: '#f5bfaf',
+      "TAKE A WALK, GO FOR A JOG, OR ENJOY A QUIET RUN ALONG THE JOGGING TRACK. IT’S A GREAT WAY TO MOVE YOUR BODY WHILE SOAKING IN THE VIEWS. FITNESS FEELS EASY WHEN IT LOOKS THIS GOOD.",
+    image: "/images/jogging_track.png",
+    backgroundImage: "/background_images/blur_jogging_track.png",
+    caption: "Jogging Track",
+    backgroundColor: "#f5bfaf",
   },
   {
     id: 2,
-    title: 'Exclusive Gym',
+    title: "Exclusive Gym",
     description:
-      'STEP INTO OUR WELCOMING, WELL-EQUIPPED GYM WHERE EVERY CORNER IS DESIGNED TO INSPIRE YOUR FITNESS JOURNEY. LATEST MACHINES AND STUNNING SCENIC VIEWS, WORKING OUT BECOMES A REFRESHING EXPERIENCE THAT LIFTS BOTH BODY AND SPIRIT.',
-    image: '/images/GYM.png',
-    backgroundImage: '/background_images/blur_gym.png',
-    caption: 'Exclusive Gym',
-    backgroundColor: '#9c4d2f',
+      "STEP INTO OUR WELCOMING, WELL-EQUIPPED GYM WHERE EVERY CORNER IS DESIGNED TO INSPIRE YOUR FITNESS JOURNEY. LATEST MACHINES AND STUNNING SCENIC VIEWS, WORKING OUT BECOMES A REFRESHING EXPERIENCE THAT LIFTS BOTH BODY AND SPIRIT.",
+    image: "/images/GYM.png",
+    backgroundImage: "/background_images/blur_gym.png",
+    caption: "Exclusive Gym",
+    backgroundColor: "#9c4d2f",
   },
   {
     id: 3,
-    title: 'Infinity Pool',
+    title: "Infinity Pool",
     description:
-      'THE INFINITY POOL OFFERS A SERENE ESCAPE WHERE THE WATER APPEARS TO MERGE WITH THE SKY. ENJOY A COOL, REFRESHING SWIM SURROUNDED BY BREATHTAKING VIEWS. IT’S THE PERFECT PLACE TO RELAX, RECHARGE, AND TAKE IN THE BEAUTY AROUND YOU.',
-    image: '/images/Infinity_pool.png',
-    backgroundImage: '/background_images/blur_infinity_pool.png',
-    caption: 'Infinity Pool',
-    backgroundColor: '#b47993',
+      "THE INFINITY POOL OFFERS A SERENE ESCAPE WHERE THE WATER APPEARS TO MERGE WITH THE SKY. ENJOY A COOL, REFRESHING SWIM SURROUNDED BY BREATHTAKING VIEWS. IT’S THE PERFECT PLACE TO RELAX, RECHARGE, AND TAKE IN THE BEAUTY AROUND YOU.",
+    image: "/images/Infinity_pool.png",
+    backgroundImage: "/background_images/blur_infinity_pool.png",
+    caption: "Infinity Pool",
+    backgroundColor: "#b47993",
   },
   {
     id: 4,
-    title: 'Meditation Centre',
+    title: "Meditation Centre",
     description:
-      'A SERENE SANCTUARY TO HELP YOU RECONNECT WITH YOUR INNER SELF AND FIND PEACE AMID LIFE’S HUSTLE. NESTLED IN A TRANQUIL SETTING WITH STUNNING VIEWS, OUR CENTER OFFERS A PERFECT BLEND OF MINDFULNESS, SPIRITUALITY, AND RELAXATION TO REFRESH YOUR MIND, BODY, AND SOUL.',
-    image: '/images/Meditation_center.png',
-    backgroundImage: '/background_images/blur_meditation_center.png',
-    caption: 'Meditation Centre',
-    backgroundColor: '#7eb63d',
+      "A SERENE SANCTUARY TO HELP YOU RECONNECT WITH YOUR INNER SELF AND FIND PEACE AMID LIFE’S HUSTLE. NESTLED IN A TRANQUIL SETTING WITH STUNNING VIEWS, OUR CENTER OFFERS A PERFECT BLEND OF MINDFULNESS, SPIRITUALITY, AND RELAXATION TO REFRESH YOUR MIND, BODY, AND SOUL.",
+    image: "/images/Meditation_center.png",
+    backgroundImage: "/background_images/blur_meditation_center.png",
+    caption: "Meditation Centre",
+    backgroundColor: "#7eb63d",
   },
 ]
 
 const communityCornersItems = [
   {
     id: 1,
-    title: 'Rooftop Lounge',
+    title: "Rooftop Lounge",
     description:
       "WHETHER IT’S A SUNSET COCKTAIL, A ROMANTIC DINNER, OR A LIVELY CELEBRATION, OUR ROOFTOP PARTY LOUNGE WITH STUNNING SEA VIEWS OFFERS A MAGICAL EXPERIENCE. EVERY MOMENT HERE BECOMES A CHERISHED MEMORY AGAINST THE BACKDROP OF BREATHTAKING SCENERY. JOIN US AND MAKE YOUR SPECIAL OCCASIONS TRULY UNFORGETTABLE.",
-    image: '/images/rooftop_lounge.png',
-    backgroundImage: '/background_images/blur_rooftop_lounge.png',
-    caption: 'Rooftop Lounge',
-    backgroundColor: '#0f172a',
+    image: "/images/rooftop_lounge.png",
+    backgroundImage: "/background_images/blur_rooftop_lounge.png",
+    caption: "Rooftop Lounge",
+    backgroundColor: "#0f172a",
   },
   {
     id: 2,
-    title: 'Barbeque Zone',
+    title: "Barbeque Zone",
     description:
-      'FIRE UP THE GRILL AND BRING EVERYONE TOGETHER IN OUR LIVELY BARBECUE ZONE. IT’S THE IDEAL PLACE TO ENJOY GREAT FOOD, GOOD COMPANY, AND PLENTY OF SMILES. MAKE EVERY MEAL A CELEBRATION AND EVERY MOMENT A MEMORY.',
-    image: '/images/Barbeque_zone.png',
-    backgroundImage: '/background_images/blur_barbeque_zone.png',
-    caption: 'Barbeque Zone',
-    backgroundColor: '#7c2d12',
+      "FIRE UP THE GRILL AND BRING EVERYONE TOGETHER IN OUR LIVELY BARBECUE ZONE. IT’S THE IDEAL PLACE TO ENJOY GREAT FOOD, GOOD COMPANY, AND PLENTY OF SMILES. MAKE EVERY MEAL A CELEBRATION AND EVERY MOMENT A MEMORY.",
+    image: "/images/Barbeque_zone.png",
+    backgroundImage: "/background_images/blur_barbeque_zone.png",
+    caption: "Barbeque Zone",
+    backgroundColor: "#7c2d12",
   },
   {
     id: 3,
-    title: 'Marina Bay Garden',
+    title: "Marina Bay Garden",
     description:
-      'STEP INTO A VIBRANT GARDEN BURSTING WITH COLORFUL BLOOMS, TREES, AND SECRET PATHS WAITING TO BE DISCOVERED. EACH CORNER OFFERS A NEW CHANCE TO PAUSE, BREATHE, AND LET NATURE’S BEAUTY WASH OVER YOU. IT’S YOUR EVERYDAY ESCAPE TO PEACE.',
-    image: '/images/Marina_bay_garden.png',
-    backgroundImage: '/background_images/blur_marina_bay_garden.png',
-    caption: 'Marina Bay Garden',
-    backgroundColor: '#3b0764',
+      "STEP INTO A VIBRANT GARDEN BURSTING WITH COLORFUL BLOOMS, TREES, AND SECRET PATHS WAITING TO BE DISCOVERED. EACH CORNER OFFERS A NEW CHANCE TO PAUSE, BREATHE, AND LET NATURE’S BEAUTY WASH OVER YOU. IT’S YOUR EVERYDAY ESCAPE TO PEACE.",
+    image: "/images/Marina_bay_garden.png",
+    backgroundImage: "/background_images/blur_marina_bay_garden.png",
+    caption: "Marina Bay Garden",
+    backgroundColor: "#3b0764",
   },
   {
     id: 4,
-    title: 'Kids Play Area',
+    title: "Kids Play Area",
     description:
-      'A VIBRANT AND EXCITING SPACE BUILT TO SPARK JOY, CREATIVITY, AND ADVENTURE FOR CHILDREN OF ALL AGES. OUR PLAY AREA IS CAREFULLY DESIGNED WITH FUN, SAFETY, AND IMAGINATION IN MIND. IT’S A WELCOMING PLACE WHERE KIDS CAN EXPLORE, LEARN, AND GROW.',
-    image: '/images/Kids_play_area.png',
-    backgroundImage: '/background_images/blur_kids_play_area.png',
-    caption: 'Kids Play Area',
-    backgroundColor: '#166534',
+      "A VIBRANT AND EXCITING SPACE BUILT TO SPARK JOY, CREATIVITY, AND ADVENTURE FOR CHILDREN OF ALL AGES. OUR PLAY AREA IS CAREFULLY DESIGNED WITH FUN, SAFETY, AND IMAGINATION IN MIND. IT’S A WELCOMING PLACE WHERE KIDS CAN EXPLORE, LEARN, AND GROW.",
+    image: "/images/Kids_play_area.png",
+    backgroundImage: "/background_images/blur_kids_play_area.png",
+    caption: "Kids Play Area",
+    backgroundColor: "#166534",
+  },
+]
+
+const videoTestimonials = [
+  {
+    id: 1,
+    title: "Mr./Mrs. Margret Kingsley",
+    thumbnail: "/images/Testimonial-1.jpeg",
+    youtubeUrl: "https://www.youtube.com/watch?v=nOLkacqbZU4", 
+  },
+  {
+    id: 2,
+    title: "Mr./Mrs. Kacholia's",
+    thumbnail: "/images/Testimonial-2.jpeg",
+    youtubeUrl: "https://www.youtube.com/watch?v=9mS37VEgWHU", 
+  },
+  {
+    id: 3,
+    title: "Mr./Mrs. Anurag Tripathi",
+    thumbnail: "/images/Testimonial-3.jpeg",
+    youtubeUrl: "https://www.youtube.com/watch?v=O-h8oQ4e2Nw", 
+  },
+  {
+    id: 4,
+    title: "Mr./Mrs. Uday K Kalgutkar",
+    thumbnail: "/images/Testimonial-4.jpeg",
+    youtubeUrl: "https://www.youtube.com/watch?v=NzOE1F1lqsw", 
   },
 ]
 
 function getItemClass(index: number, active: number, other_1: number, other_2: number) {
-  if (index === active) return 'item active'
-  if (index === other_1) return 'item other_1'
-  if (index === other_2) return 'item other_2'
-  return 'item'
+  if (index === active) return "item active"
+  if (index === other_1) return "item other_1"
+  if (index === other_2) return "item other_2"
+  return "item"
 }
-
 
 export default function App() {
   // Independent carousel states
   const amenities = useCarousel(carouselItems.length, 5000)
   const corners = useCarousel(communityCornersItems.length, 5000)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [videoCarouselItems, setVideoCarouselItems] = useState([...videoTestimonials, ...videoTestimonials])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentVideoIndex((prev) => {
+        const nextIndex = prev + 1
+        if (nextIndex >= videoTestimonials.length) {
+          // Reset the carousel items to start fresh loop
+          setTimeout(() => {
+            setVideoCarouselItems([...videoTestimonials, ...videoTestimonials])
+            setCurrentVideoIndex(0)
+          }, 500) // Wait for transition to complete
+          return 0
+        }
+        return nextIndex
+      })
+    }, 3000) // Auto-scroll every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
+  const handleVideoClick = (youtubeUrl: string) => {
+    window.open(youtubeUrl, "_blank")
+  }
 
   return (
     <>
-     <div className="header-center" >
-          <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>        
-        </div>
-           <BuildingProgress />
-      <div className="header-center" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+      <div className="header-center">
+        <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
+      </div>
+      <BuildingProgress />
+      <div className="header-center" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
         <h1 className="main-title2">AMENITIES</h1>
         <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
       </div>
@@ -172,8 +223,8 @@ export default function App() {
                   className="main-content"
                   style={{
                     backgroundImage: `url(${item.backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                 >
                   <div className="content">
@@ -183,8 +234,7 @@ export default function App() {
                 </div>
 
                 <figure className="image">
-                
-                  <img src={item.image || '/placeholder.svg'} alt={item.caption} />
+                  <img src={item.image || "/placeholder.svg"} alt={item.caption} />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
               </article>
@@ -193,34 +243,29 @@ export default function App() {
 
           <div className="arrows">
             <button onClick={amenities.prev} aria-label="Previous">
-              {'<'}
+              {"<"}
             </button>
             <button onClick={amenities.next} aria-label="Next">
-              {'>'}
+              {">"}
             </button>
           </div>
         </section>
 
         {/* Community Corners */}
-         <div className="header-center">
-
-        <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
-      </div>
-
+        <div className="header-center">
+          <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
+        </div>
 
         <section className={`carousel ${corners.direction}`} aria-label="Community corners carousel">
           <div className="list">
             {communityCornersItems.map((item, index) => (
-              <article
-                key={item.id}
-                className={getItemClass(index, corners.active, corners.other_1, corners.other_2)}
-              >
+              <article key={item.id} className={getItemClass(index, corners.active, corners.other_1, corners.other_2)}>
                 <div
                   className="main-content"
                   style={{
                     backgroundImage: `url(${item.backgroundImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
                   }}
                 >
                   <div className="content">
@@ -230,7 +275,7 @@ export default function App() {
                 </div>
 
                 <figure className="image">
-                  <img src={item.image || '/placeholder.svg'} alt={item.caption} />
+                  <img src={item.image || "/placeholder.svg"} alt={item.caption} />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
               </article>
@@ -239,21 +284,97 @@ export default function App() {
 
           <div className="arrows">
             <button onClick={corners.prev} aria-label="Previous">
-              {'<'}
+              {"<"}
             </button>
             <button onClick={corners.next} aria-label="Next">
-              {'>'}
+              {">"}
             </button>
           </div>
         </section>
 
-         <div className="header-center" style={{ marginTop: '2rem', marginBottom: '1rem' }}>
+      
+
+        <div className="header-center" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
           <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
         <Page />
 
+         <PropertyShowcase />
+
+          {/* Video Testimonials Section */}
+   <div className="video-testimonials-header">
+  <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
+  <div className="video-testimonials-stats">
+    <div className="video-testimonials-stat">
+      <div className="video-testimonials-stat-value">10m+</div>
+      <div className="video-testimonials-stat-label">Happy People</div>
+    </div>
+    <div className="video-testimonials-stat">
+      <div className="video-testimonials-stat-value">4.7</div>
+      <div className="video-testimonials-stat-label">Overall rating</div>
+      <div className="video-testimonials-rating">★★★★★</div>
+    </div>
+  </div>
+</div>
+
+        <div className="video-testimonials-section">
+          <div className="video-carousel-container">
+            <div
+              className="video-carousel-track"
+              style={{
+                transform: `translateX(-${currentVideoIndex * 320}px)`,
+                transition: "transform 0.5s ease-in-out",
+              }}
+            >
+              {videoCarouselItems.map((video, index) => (
+                <div
+                  key={`${video.id}-${index}`}
+                  className="video-testimonial-card"
+                  onClick={() => handleVideoClick(video.youtubeUrl)}
+                >
+                  <div className="video-thumbnail-container">
+                    <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} className="video-thumbnail" />
+                    <div className="play-button-overlay">
+                      <div className="play-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="video-title">{video.title}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "8px",
+              marginTop: "20px",
+            }}
+          >
+            {videoTestimonials.map((_, index) => (
+              <div
+                key={index}
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  backgroundColor: currentVideoIndex === index ? "#003261" : "#ccc",
+                  cursor: "pointer",
+                  transition: "background-color 0.3s ease",
+                }}
+                onClick={() => setCurrentVideoIndex(index)}
+              />
+            ))}
+          </div>
+        </div>
+
         <div
-        id="about"
+          id="about"
           className="about-section" // Added class name for responsive styles
           style={{
             display: "flex",
@@ -347,7 +468,6 @@ export default function App() {
                   boxShadow: "0 2px 4px rgba(0,50,97,0.2)",
                 }}
                 onClick={() => window.open("https://evgroup.in/profile.html", "_blank")}
-
                 onMouseOver={(e) => {
                   e.currentTarget.style.backgroundColor = "#002147"
                   e.currentTarget.style.transform = "translateY(-1px)"
@@ -376,7 +496,7 @@ export default function App() {
             gap: "40px",
             backgroundColor: "#f8f9fa",
             borderRadius: "8px",
-             boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
           }}
         >
           {/* Left side - QR Code */}
@@ -439,8 +559,9 @@ export default function App() {
                 The 10 Marina Bay project is developed and marketed in accordance with the Real Estate (Regulation and
                 Development) Act, 2018 (RERA).
               </p>
-                 <p style={{ marginBottom: "15px" }}>
-                Buyers are encouraged to visit the official MAHARERA website for complete project details, approvals and registration status.
+              <p style={{ marginBottom: "15px" }}>
+                Buyers are encouraged to visit the official MAHARERA website for complete project details, approvals and
+                registration status.
               </p>
               <p>
                 EV Homes Constructions Pvt Ltd has received full rights to Market/Advertise/Sell the apartments in 10
@@ -451,14 +572,10 @@ export default function App() {
                 details from the official MAHARERA website.
               </p>
             </div>
-
-          
           </div>
         </div>
 
-
-        
-         <footer
+        <footer
           style={{
             backgroundColor: "#1a1a1a",
             color: "#ffffff",
@@ -500,74 +617,74 @@ export default function App() {
                 }}
               >
                 <span style={{ marginRight: "10px", fontSize: "0.9rem" }}>Follow Us</span>
-             <div style={{ display: "flex", gap: "10px" }}>
-  {/* Facebook */}
-  <div
-    style={{
-      width: "35px",
-      height: "35px",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-    }}
-    onClick={() =>
-      window.open("https://www.facebook.com/evgindia?rdid=T5Y9xWn898Hd6XmZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nwaBWiBf%2F#", "_blank")
-    }
-  >
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
-      alt="Facebook"
-      style={{ width: "20px", height: "20px" }}
-    />
-  </div>
+                <div style={{ display: "flex", gap: "10px" }}>
+                  {/* Facebook */}
+                  <div
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() =>
+                      window.open(
+                        "https://www.facebook.com/evgindia?rdid=T5Y9xWn898Hd6XmZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nwaBWiBf%2F#",
+                        "_blank",
+                      )
+                    }
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png"
+                      alt="Facebook"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  </div>
 
-  {/* Instagram */}
-  <div
-    style={{
-      width: "35px",
-      height: "35px",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-    }}
-    onClick={() =>
-      window.open("https://www.instagram.com/evhomesofficial/?igsh=MTRuZnA1MDd3Ymw0Mg%3D%3D#", "_blank")
-    }
-  >
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-      alt="Instagram"
-      style={{ width: "20px", height: "20px" }}
-    />
-  </div>
+                  {/* Instagram */}
+                  <div
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() =>
+                      window.open("https://www.instagram.com/evhomesofficial/?igsh=MTRuZnA1MDd3Ymw0Mg%3D%3D#", "_blank")
+                    }
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
+                      alt="Instagram"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  </div>
 
-  {/* LinkedIn */}
-  <div
-    style={{
-      width: "35px",
-      height: "35px",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      cursor: "pointer",
-    }}
-    onClick={() =>
-      window.open("https://www.linkedin.com/company/ev-homes", "_blank")
-    }
-  >
-    <img
-      src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
-      alt="LinkedIn"
-      style={{ width: "20px", height: "20px" }}
-    />
-  </div>
-</div>
-
+                  {/* LinkedIn */}
+                  <div
+                    style={{
+                      width: "35px",
+                      height: "35px",
+                      borderRadius: "50%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => window.open("https://www.linkedin.com/company/ev-homes", "_blank")}
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                      alt="LinkedIn"
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -592,42 +709,42 @@ export default function App() {
                 >
                   Subscribe
                 </h3>
-          <div
-  style={{
-    display: "flex",
-    marginBottom: "10px",
-  }}
->
-  <input
-    type="email"
-    placeholder="Your e-mail"
-    style={{
-      flex: "1",
-      padding: "6px 8px", // smaller height
-      backgroundColor: "#333",
-      border: "1px solid #555",
-      borderRadius: "3px 0 0 3px",
-      color: "#ffffff",
-      fontSize: "0.75rem", // smaller text
-    }}
-  />
-  <button
-    style={{
-      padding: "6px 12px", // smaller height
-      backgroundColor: "#003261",
-      color: "#ffffff",
-      border: "none",
-      borderRadius: "0 3px 3px 0",
-      cursor: "pointer",
-      fontSize: "0.75rem", // smaller text
-      transition: "background-color 0.3s ease",
-    }}
-    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#002147")}
-    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#003261")}
-  >
-    Send →
-  </button>
-</div>
+                <div
+                  style={{
+                    display: "flex",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <input
+                    type="email"
+                    placeholder="Your e-mail"
+                    style={{
+                      flex: "1",
+                      padding: "6px 8px", // smaller height
+                      backgroundColor: "#333",
+                      border: "1px solid #555",
+                      borderRadius: "3px 0 0 3px",
+                      color: "#ffffff",
+                      fontSize: "0.75rem", // smaller text
+                    }}
+                  />
+                  <button
+                    style={{
+                      padding: "6px 12px", // smaller height
+                      backgroundColor: "#003261",
+                      color: "#ffffff",
+                      border: "none",
+                      borderRadius: "0 3px 3px 0",
+                      cursor: "pointer",
+                      fontSize: "0.75rem", // smaller text
+                      transition: "background-color 0.3s ease",
+                    }}
+                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#002147")}
+                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#003261")}
+                  >
+                    Send →
+                  </button>
+                </div>
 
                 <p
                   style={{
@@ -641,62 +758,54 @@ export default function App() {
               </div>
 
               {/* Discover Section */}
-           <div
-  style={{
-    paddingLeft: "20px", // small left padding
-  }}
->
-  <h3
-    style={{
-      fontSize: "1.1rem",
-      fontWeight: "600",
-      marginBottom: "20px",
-      color: "#ffffff",
-    }}
-  >
-    Discover
-  </h3>
-  <ul
-    style={{
-      listStyle: "none",
-      padding: "0",
-      margin: "0",
-    }}
-  >
-    {[
-      "Gwalior",
-      "Aroji",
-      "Koparkhaane",
-      "Sarooda",
-      "Nerul",
-      "Seawoods",
-      "Ulwe",
-      "Kharghar",
-    ].map((item) => (
-      <li
-        key={item}
-        style={{
-          marginBottom: "8px",
-        }}
-      >
-        <a
-          href="#"
-          style={{
-            color: "#ccc",
-            textDecoration: "none",
-            fontSize: "0.9rem",
-            transition: "color 0.3s ease",
-          }}
-          onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-          onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
-        >
-          {item}
-        </a>
-      </li>
-    ))}
-  </ul>
-</div>
-
+              <div
+                style={{
+                  paddingLeft: "20px", // small left padding
+                }}
+              >
+                <h3
+                  style={{
+                    fontSize: "1.1rem",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    color: "#ffffff",
+                  }}
+                >
+                  Discover
+                </h3>
+                <ul
+                  style={{
+                    listStyle: "none",
+                    padding: "0",
+                    margin: "0",
+                  }}
+                >
+                  {["Gwalior", "Aroji", "Koparkhaane", "Sarooda", "Nerul", "Seawoods", "Ulwe", "Kharghar"].map(
+                    (item) => (
+                      <li
+                        key={item}
+                        style={{
+                          marginBottom: "8px",
+                        }}
+                      >
+                        <a
+                          href="#"
+                          style={{
+                            color: "#ccc",
+                            textDecoration: "none",
+                            fontSize: "0.9rem",
+                            transition: "color 0.3s ease",
+                          }}
+                          onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                          onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                        >
+                          {item}
+                        </a>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
 
               {/* Quick Links Section */}
               <div>
@@ -717,34 +826,47 @@ export default function App() {
                     margin: "0",
                   }}
                 >
-                  <p
-  className="cursor-pointer hover:underline"
-  onClick={() => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  }}
-   onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
->
-  About
-</p>
-
-  <p
-  className="cursor-pointer hover:underline"
-  onClick={() => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
-  }}
-  style={{
-                          color: "#ccc",
-                          textDecoration: "none",
-                          fontSize: "0.9rem",
-                          transition: "color 0.3s ease",
-                        }}
-   onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
->
-  Contact
-</p>
-                  {[ "FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
+                  <li
+                    key="About"
+                    style={{
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <a
+                      href="#about"
+                      style={{
+                        color: "#ccc",
+                        textDecoration: "none",
+                        fontSize: "0.9rem",
+                        transition: "color 0.3s ease",
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                      onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                    >
+                      About
+                    </a>
+                  </li>
+                  <li
+                    key="Contact"
+                    style={{
+                      marginBottom: "8px",
+                    }}
+                  >
+                    <a
+                      href="#contact"
+                      style={{
+                        color: "#ccc",
+                        textDecoration: "none",
+                        fontSize: "0.9rem",
+                        transition: "color 0.3s ease",
+                      }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                      onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                    >
+                      Contact
+                    </a>
+                  </li>
+                  {["FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
                     <li
                       key={item}
                       style={{
@@ -843,7 +965,6 @@ export default function App() {
                     gap: "10px",
                   }}
                 >
-                 
                   <div
                     style={{
                       display: "flex",
@@ -854,8 +975,8 @@ export default function App() {
                       cursor: "pointer",
                       transition: "background-color 0.3s ease",
                     }}
-                     onClick={() => {
-                      window.open("https://play.google.com/store/apps/details?id=com.evhomes.ev_homes&hl=en","_blank")
+                    onClick={() => {
+                      window.open("https://play.google.com/store/apps/details?id=com.evhomes.ev_homes&hl=en", "_blank")
                     }}
                     onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#444")}
                     onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#333")}
@@ -871,7 +992,6 @@ export default function App() {
             </div>
           </div>
         </footer>
-  
       </main>
     </>
   )

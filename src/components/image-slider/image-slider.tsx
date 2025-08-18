@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useEffect, useRef } from "react"
 import styles from "./image-slider.module.css"
 
@@ -42,21 +41,55 @@ export function ImageSlider({
       const scrollerInner = scroller.querySelector(`.${styles.scrollerInner}`) as HTMLElement
       if (!scrollerInner) return
 
-      const existingItems = Array.from(scrollerInner.children)
-      const originalItemCount = images.length
+      scrollerInner.innerHTML = ""
 
-      // Remove any duplicated items from previous renders
-      while (scrollerInner.children.length > originalItemCount) {
-        scrollerInner.removeChild(scrollerInner.lastChild!)
-      }
+      // Create original items
+      images.forEach((src, index) => {
+        const itemDiv = document.createElement("div")
 
-      // Get the current original children
-      const scrollerContent = Array.from(scrollerInner.children)
+        if (isVideoFile(src)) {
+          const video = document.createElement("video")
+          video.src = src
+          video.className = styles.clickableImage
+          video.muted = true
+          video.loop = true
+          video.playsInline = true
+          video.preload = "metadata"
+          video.style.objectFit = "cover"
+          video.style.backgroundColor = "#f3f4f6"
 
-      // Clone each item for infinite scroll effect
-      scrollerContent.forEach((item) => {
+          video.addEventListener("mouseenter", () => {
+            video.play().catch((err) => console.log("[v0] Video play failed:", err))
+          })
+          video.addEventListener("mouseleave", () => video.pause())
+
+          if (onImageClick) {
+            video.addEventListener("click", () => onImageClick(src))
+          }
+
+          itemDiv.appendChild(video)
+        } else {
+          const img = document.createElement("img")
+          img.src = src || "/placeholder.svg"
+          img.alt = `Building progress ${index + 1}`
+          img.className = styles.clickableImage
+
+          if (onImageClick) {
+            img.addEventListener("click", () => onImageClick(src))
+          }
+
+          itemDiv.appendChild(img)
+        }
+
+        scrollerInner.appendChild(itemDiv)
+      })
+
+      const originalItems = Array.from(scrollerInner.children)
+      originalItems.forEach((item) => {
         const duplicatedItem = item.cloneNode(true) as HTMLElement
         duplicatedItem.setAttribute("aria-hidden", "true")
+
+        // Re-attach event listeners to cloned items
         const img = duplicatedItem.querySelector("img")
         const video = duplicatedItem.querySelector("video")
         if (img && onImageClick) {
@@ -64,11 +97,16 @@ export function ImageSlider({
         }
         if (video && onImageClick) {
           video.addEventListener("click", () => onImageClick(video.src))
+          video.addEventListener("mouseenter", () => {
+            video.play().catch((err) => console.log("[v0] Video play failed:", err))
+          })
+          video.addEventListener("mouseleave", () => video.pause())
         }
+
         scrollerInner.appendChild(duplicatedItem)
       })
     }
-  }, [images, onImageClick])
+  }, [images, onImageClick]) // Added images to dependency array to ensure proper re-rendering
 
   const handleMediaClick = (mediaSrc: string) => {
     if (onImageClick) {
@@ -89,52 +127,9 @@ export function ImageSlider({
     video.parentNode?.insertBefore(fallback, video)
   }
 
-  const handleVideoCanPlay = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    console.log("[v0] Video can play:", e.currentTarget.src)
-  }
-
-  const handleVideoLoad = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    console.log("[v0] Video loaded successfully:", e.currentTarget.src)
-  }
-
   return (
     <div ref={scrollerRef} className={`${styles.scroller} ${className}`} data-direction={direction} data-speed={speed}>
-      <div className={styles.scrollerInner}>
-        {images.map((src, index) =>
-          isVideoFile(src) ? (
-            <video
-              key={index}
-              src={src}
-              onClick={() => handleMediaClick(src)}
-              className={styles.clickableImage}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              onMouseEnter={(e) => {
-                const video = e.currentTarget
-                video.play().catch((err) => console.log("[v0] Video play failed:", err))
-              }}
-              onMouseLeave={(e) => e.currentTarget.pause()}
-              onError={handleVideoError}
-              onCanPlay={handleVideoCanPlay}
-              onLoadedData={handleVideoLoad}
-              style={{ objectFit: "cover", backgroundColor: "#f3f4f6" }}
-            >
-              <source src={src} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          ) : (
-            <img
-              key={index}
-              src={src || "/placeholder.svg"}
-              alt={`Building progress ${index + 1}`}
-              onClick={() => handleMediaClick(src)}
-              className={styles.clickableImage}
-            />
-          ),
-        )}
-      </div>
+      <div className={styles.scrollerInner}></div>
     </div>
   )
 }

@@ -57,12 +57,8 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
       <div className="absolute inset-0 flex items-center justify-center p-4">
         <div className="relative max-w-5xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
           {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute -top-3 -right-4 z-[100000] bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition-colors"
-            aria-label="Close modal"
-          >
-            <X className="w-6 h-6 text-gray-600" />
+          <button onClick={onClose} className="absolute -top-3 -right-4 z-[100000] p-1" aria-label="Close modal">
+            <X className="w-6 h-6 text-red-500 hover:text-red-600" />
           </button>
 
           <div className="relative overflow-hidden rounded-lg shadow-2xl bg-white flex items-center justify-center">
