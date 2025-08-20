@@ -740,6 +740,15 @@ body {
   .content h2 {
     line-height: 0.9;
   }
+    .carousel .list .item .image img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    object-fit: cover;
+    filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
+  }
 }
 
 @media screen and (min-width: 581px) and (max-width: 690px) {
@@ -816,6 +825,15 @@ body {
   .content h2 {
     line-height: 0.9;
   }
+    .carousel .list .item .image img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    object-fit: cover;
+    filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
+  }
 }
 
 @media screen and (min-width: 691px) and (max-width: 767px) {
@@ -836,6 +854,16 @@ body {
     bottom: 10;
     justify-content: end;
     background: rgba(0, 0, 0, 0);
+  }
+
+    .carousel .list .item .image img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    object-fit: cover;
+    filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
   }
 
   .arrows {
@@ -973,7 +1001,7 @@ left: -5%;
     position: absolute;
     top: 0;
     left: calc(100% - calc(var(--w-image) * var(--calculate)));
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     justify-content: end;
@@ -1012,6 +1040,7 @@ left: -5%;
     width: 80%;
     height: auto;
     margin-bottom: 20px;
+    margin-right: 20px;
     object-fit: cover;
     filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
     border-radius: 16px;
@@ -1398,3 +1427,33 @@ left: -5%;
   }
 }
 
+  @media (max-width: 400px) {
+    footer {
+      padding: 30px 15px 20px !important;
+    }
+    footer h3 {
+      font-size: 1rem !important;
+      margin-bottom: 12px !important;
+    }
+    footer .footer-grid {
+      display: grid !important;
+      grid-template-columns: 1fr !important; /* stack items */
+      gap: 20px !important;
+    }
+    footer input {
+      font-size: 0.7rem !important;
+      padding: 5px 6px !important;
+    }
+    footer button {
+      font-size: 0.7rem !important;
+      padding: 5px 10px !important;
+    }
+    footer p, 
+    footer a {
+      font-size: 0.8rem !important;
+    }
+    footer .social-icons {
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+    }
+  }

@@ -826,16 +826,15 @@ export default function App() {
             }}
           >
             {/* Header with logo and social icons */}
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "40px",
-                paddingBottom: "20px",
-                borderBottom: "1px solid #333",
-              }}
-            >
+          <div
+      className="footer-grid"
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+        gap: "40px",
+        marginBottom: "40px",
+      }}
+    >
               <div
                 style={{
                   fontSize: "1.8rem",
