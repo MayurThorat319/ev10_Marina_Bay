@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState } from "react"
 import "./building-progress.css"
-import { ImageSlider } from "../image-slider/image-slider"
+import { BuildingSlider } from "../building-slider/building-slider"
 import { ImageModal } from "../../image-modal/image-modal"
 
 
@@ -47,13 +47,13 @@ const BuildingProgress: React.FC = () => {
           {/* Left scrolling slider - should only show images array */}
           <div className="w-full">
         
-            <ImageSlider images={images} direction="left" speed="slow" onImageClick={handleImageClick} />
+            <BuildingSlider images={images} direction="left" speed="slow" onImageClick={handleImageClick} />
           </div>
 
           {/* Right scrolling slider - should only show images1 array */}
           <div className="w-full">
         
-            <ImageSlider images={images1} direction="right" speed="slow" onImageClick={handleImageClick} />
+            <BuildingSlider images={images1} direction="right" speed="slow" onImageClick={handleImageClick} />
           </div>
         </div>
       </div>

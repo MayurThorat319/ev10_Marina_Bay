@@ -4,7 +4,7 @@ import type { FloorPlan } from "../floor-plan/floor_plan"
 import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
 import { useMemo, useState } from 'react'
-import LayoutModal from '../form/layout-modal'
+import FormModal from '../form/form'
 
 const plans: FloorPlan[] = [
   {
@@ -114,7 +114,7 @@ const plans: FloorPlan[] = [
   },
 ]
 
-export default function Page() {
+export default function PropertyPricing() {
  const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
 const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState<FloorPlan | null>(null)
@@ -188,7 +188,7 @@ const [isModalOpen, setIsModalOpen] = useState(false)
       />
     </section>
     
-      <LayoutModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} />
+      <FormModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} />
 
     </>
   )

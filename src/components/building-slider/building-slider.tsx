@@ -2,9 +2,9 @@
 
 import type React from "react"
 import { useEffect, useRef } from "react"
-import styles from "./image-slider.module.css"
+import styles from "./building-slider.module.css"
 
-interface ImageSliderProps {
+interface BuildingSliderProps {
   images: string[]
   direction?: "left" | "right"
   speed?: "slow" | "fast"
@@ -17,13 +17,13 @@ const isVideoFile = (src: string): boolean => {
   return videoExtensions.some((ext) => src.toLowerCase().includes(ext.toLowerCase()))
 }
 
-export function ImageSlider({
+export function BuildingSlider({
   images,
   direction = "left",
   speed = "slow",
   className = "",
   onImageClick,
-}: ImageSliderProps) {
+}: BuildingSliderProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

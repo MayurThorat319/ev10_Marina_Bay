@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react"
 import "./App.css"
-import Page from "./App/property_pricing"
+
 import BuildingProgress from "./components/building-progress/building-progress"
-import PropertyShowcase from "./components/property-showcase/property-showcase"
+import PropertyPricing from "./App/property_pricing"
+import OtherProjects from "./components/other-projects/other-projects"
 
 // CSS for all the animations
 const scrollAnimationCSS = `
@@ -528,11 +529,11 @@ export default function App() {
         </div>
         
         <div className="animate-special">
-          <Page />
+          <PropertyPricing />
         </div>
 
         <div className="animate-fade-up">
-          <PropertyShowcase />
+          <OtherProjects />
         </div>
 
         {/* Video Testimonials Section */}

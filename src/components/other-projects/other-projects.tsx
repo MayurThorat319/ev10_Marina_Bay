@@ -1,7 +1,7 @@
 import type React from "react"
-import "./property-showcase.css"
+import "./other-projects.css"
 
-const PropertyShowcase: React.FC = () => {
+const OtherProjects: React.FC = () => {
   return (
     <div className="property-showcase-section">
       <div className="header-center">
@@ -54,4 +54,4 @@ const PropertyShowcase: React.FC = () => {
   )
 }
 
-export default PropertyShowcase
+export default OtherProjects

@@ -2,15 +2,15 @@
 import { useState, useEffect } from "react"
 import type React from "react"
 import { X } from "lucide-react"
-import "./layout-modal.css"
+import "./form.css"
 
-interface LayoutModalProps {
+interface FormProps {
   isOpen: boolean
   onClose: () => void
   propertyTitle?: string
 }
 
-export default function LayoutModal({ isOpen, onClose, propertyTitle }: LayoutModalProps) {
+export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
