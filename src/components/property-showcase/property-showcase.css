@@ -81,9 +81,11 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center; /* centers vertically */
+  align-items: center;     /* centers horizontally */
+  text-align: center;      /* centers text inside */
 }
+
 
 .property-count {
   font-size: 2.5rem;
@@ -101,11 +103,15 @@
 }
 
 .property-description {
-  font-size: 0.85rem;
+  font-family: 'Red Rose';
+  font-size: 0.95rem;
   line-height: 1.4;
   opacity: 0.9;
   max-width: 180px;
+  text-align: center;
 }
+
+
 
 /* Responsive design */
 @media (max-width: 768px) {

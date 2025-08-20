@@ -12,13 +12,13 @@ const PropertyShowcase: React.FC = () => {
         {/* Property 1 - With overlay */}
         <div className="property-item property-large">
           <img src="/images/mb_bg.jpeg" alt="Luxury Apartments" className="property-image" />
-          <div className="property-overlay">
+          {/* <div className="property-overlay">
             <div className="property-count">28+</div>
             <div className="property-label">Properties</div>
             <div className="property-description">
               Explore our wide variety of properties to find your dream home today
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Property 2 - Ocean view */}
@@ -29,11 +29,20 @@ const PropertyShowcase: React.FC = () => {
         {/* Property 3 - High rise building */}
         <div className="property-item property-medium">
           <img src="/images/ev23malibu.jpg" alt="High Rise Building" className="property-image" />
+            <div className="property-overlay">
+            <div className="property-description">
+              Explore our wide variety of properties to find your dream home today
+            </div>
+            </div>
         </div>
 
         {/* Property 4 - Modern apartments */}
         <div className="property-item property-tall">
           <img src="/images/evheartcity.png" alt="Modern Apartments" className="property-image" />
+             <div className="property-overlay">
+            <div className="property-count">28+</div>
+            <div className="property-label">Properties</div>
+            </div>
         </div>
 
         {/* Property 5 - Luxury tower */}

@@ -5,7 +5,161 @@ import "./App.css"
 import Page from "./App/property_pricing"
 import BuildingProgress from "./components/building-progress/building-progress"
 import PropertyShowcase from "./components/property-showcase/property-showcase"
-// import BuildingProgress from './buildings/building-progress'
+
+// CSS for all the animations
+const scrollAnimationCSS = `
+  /* Fade in from bottom */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Slide in from left */
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Slide in from right */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* Scale up */
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Flip animation */
+  @keyframes flipIn {
+    from {
+      opacity: 0;
+      transform: perspective(1000px) rotateX(90deg);
+    }
+    to {
+      opacity: 1;
+      transform: perspective(1000px) rotateX(0);
+    }
+  }
+  
+  /* Bounce in */
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Rotate in */
+  @keyframes rotateIn {
+    from {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0.1);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+  }
+  
+  /* Special clip-path animation */
+  @keyframes specialReveal {
+    from {
+      opacity: 0;
+      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+    }
+    to {
+      opacity: 1;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+  
+  /* Animation classes */
+  .animate-fade-up {
+    animation: fadeInUp linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-slide-left {
+    animation: slideInLeft linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-slide-right {
+    animation: slideInRight linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-scale {
+    animation: scaleUp linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-flip {
+    animation: flipIn linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-bounce {
+    animation: bounceIn linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-rotate {
+    animation: rotateIn linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  
+  .animate-special {
+    animation: specialReveal linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+`
 
 type Direction = "next" | "prev"
 
@@ -170,6 +324,17 @@ function getItemClass(index: number, active: number, other_1: number, other_2: n
 }
 
 export default function App() {
+  // Add CSS to document head
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = scrollAnimationCSS;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // Independent carousel states
   const amenities = useCarousel(carouselItems.length, 5000)
   const corners = useCarousel(communityCornersItems.length, 5000)
@@ -201,18 +366,84 @@ export default function App() {
 
   return (
     <>
-      <div className="header-center">
+     {/* <section
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "100vh",
+          minHeight: "500px",
+          maxHeight: "800px",
+          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundImage: "url(/images/starter.png)",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            filter: "brightness(0.7)",
+          }}
+        />
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            textAlign: "center",
+            color: "white",
+            padding: "0 20px",
+            maxWidth: "800px",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "clamp(2rem, 5vw, 4rem)",
+              fontWeight: "bold",
+              marginBottom: "1rem",
+              textShadow: "2px 2px 4px rgba(0,0,0,0.7)",
+              letterSpacing: "2px",
+            }}
+          >
+            10 MARINA BAY
+          </h1>
+         
+          <div
+            style={{
+              display: "flex",
+              gap: "1rem",
+              justifyContent: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            
+          </div>
+        </div>
+      </section> */}
+      
+      <div className="header-center animate-fade-up">
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>
-      <BuildingProgress />
-      <div className="header-center" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+      
+      <div className="animate-scale">
+        <BuildingProgress />
+      </div>
+      
+      <div className="header-center animate-slide-left" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
         <h1 className="main-title2">AMENITIES</h1>
         <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
       </div>
 
       <main>
         {/* Amenities Carousel */}
-        <section className={`carousel ${amenities.direction}`} aria-label="Amenities carousel">
+        <section className={`carousel ${amenities.direction} animate-slide-right`} aria-label="Amenities carousel">
           <div className="list">
             {carouselItems.map((item, index) => (
               <article
@@ -252,11 +483,11 @@ export default function App() {
         </section>
 
         {/* Community Corners */}
-        <div className="header-center">
+        <div className="header-center animate-flip">
           <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
         </div>
 
-        <section className={`carousel ${corners.direction}`} aria-label="Community corners carousel">
+        <section className={`carousel ${corners.direction} animate-bounce`} aria-label="Community corners carousel">
           <div className="list">
             {communityCornersItems.map((item, index) => (
               <article key={item.id} className={getItemClass(index, corners.active, corners.other_1, corners.other_2)}>
@@ -292,32 +523,35 @@ export default function App() {
           </div>
         </section>
 
-      
-
-        <div className="header-center" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        <div className="header-center animate-rotate" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
           <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
-        <Page />
+        
+        <div className="animate-special">
+          <Page />
+        </div>
 
-         <PropertyShowcase />
+        <div className="animate-fade-up">
+          <PropertyShowcase />
+        </div>
 
-          {/* Video Testimonials Section */}
-   <div className="video-testimonials-header">
-  <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
-  <div className="video-testimonials-stats">
-    <div className="video-testimonials-stat">
-      <div className="video-testimonials-stat-value">10m+</div>
-      <div className="video-testimonials-stat-label">Happy People</div>
-    </div>
-    <div className="video-testimonials-stat">
-      <div className="video-testimonials-stat-value">4.7</div>
-      <div className="video-testimonials-stat-label">Overall rating</div>
-      <div className="video-testimonials-rating">★★★★★</div>
-    </div>
-  </div>
-</div>
+        {/* Video Testimonials Section */}
+        <div className="video-testimonials-header animate-scale">
+          <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
+          <div className="video-testimonials-stats">
+            <div className="video-testimonials-stat">
+              <div className="video-testimonials-stat-value">10m+</div>
+              <div className="video-testimonials-stat-label">Happy People</div>
+            </div>
+            <div className="video-testimonials-stat">
+              <div className="video-testimonials-stat-value">4.7</div>
+              <div className="video-testimonials-stat-label">Overall rating</div>
+              <div className="video-testimonials-rating">★★★★★</div>
+            </div>
+          </div>
+        </div>
 
-        <div className="video-testimonials-section">
+        <div className="video-testimonials-section animate-slide-left">
           <div className="video-carousel-container">
             <div
               className="video-carousel-track"
@@ -375,7 +609,7 @@ export default function App() {
 
         <div
           id="about"
-          className="about-section" // Added class name for responsive styles
+          className="about-section animate-slide-right"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -486,7 +720,7 @@ export default function App() {
         </div>
 
         <div
-          className="maharera-section"
+          className="maharera-section animate-flip"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -576,6 +810,7 @@ export default function App() {
         </div>
 
         <footer
+          className="animate-fade-up"
           style={{
             backgroundColor: "#1a1a1a",
             color: "#ffffff",
@@ -953,7 +1188,7 @@ export default function App() {
                     fontSize: "1.1rem",
                     fontWeight: "600",
                     marginBottom: "20px",
-                    color: "#ffffff",
+                    color: "white",
                   }}
                 >
                   Get the app
@@ -984,7 +1219,7 @@ export default function App() {
                     <span style={{ marginRight: "8px", fontSize: "1.2rem" }}>▶️</span>
                     <div>
                       <div style={{ fontSize: "0.7rem", color: "#aaa" }}>Get it on</div>
-                      <div style={{ fontSize: "0.9rem", fontWeight: "600" }}>Google Play</div>
+                      <div style={{ fontSize: "0.9rem", fontWeight: "600", color: "white" }}>Google Play</div>
                     </div>
                   </div>
                 </div>
