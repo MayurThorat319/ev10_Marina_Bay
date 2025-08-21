@@ -6,6 +6,7 @@ import "./App.css"
 import BuildingProgress from "./components/building-progress/building-progress"
 import PropertyPricing from "./App/property_pricing"
 import OtherProjects from "./components/other-projects/other-projects"
+import Hero from "./sections/Hero"
 
 // CSS for all the animations
 const scrollAnimationCSS = `
@@ -428,7 +429,7 @@ export default function App() {
           </div>
         </div>
       </section> */}
-      
+      <Hero />
       <div className="header-center animate-fade-up">
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>

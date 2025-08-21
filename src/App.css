@@ -588,6 +588,15 @@ body {
   .content h2 {
     line-height: 0.9;
   }
+   .carousel .list .item .image img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    object-fit: cover;
+    filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
+  }
 }
 
 @media screen and (min-width: 382px) and (max-width: 480px) {
@@ -663,6 +672,15 @@ body {
   }
   .content h2 {
     line-height: 0.9;
+  }
+   .carousel .list .item .image img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    object-fit: cover;
+    filter: drop-shadow(0 60px 40px rgba(0, 0, 0, 0.25));
+    border-radius: 16px;
   }
 }
 
