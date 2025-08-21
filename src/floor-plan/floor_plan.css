@@ -413,3 +413,13 @@
     gap: 20px;
   }
 }
+.property-pricing-section {
+  transition: all 0.8s ease-in-out;
+  width: 100%;
+}
+
+.property-pricing-section.shrink {
+  width: 95%;  
+  margin: 0 auto;
+  border-radius: 25px;
+}

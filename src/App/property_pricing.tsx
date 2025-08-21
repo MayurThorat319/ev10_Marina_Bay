@@ -3,7 +3,7 @@ import '../floor-plan/floor_plan.css'
 import type { FloorPlan } from "../floor-plan/floor_plan"
 import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import FormModal from '../form/form'
 
 const plans: FloorPlan[] = [
@@ -118,6 +118,35 @@ export default function PropertyPricing() {
  const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
 const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState<FloorPlan | null>(null)
+const [isShrink, setIsShrink] = useState(false)
+const sectionRef = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio < 0.5) {
+          setIsShrink(true)
+        } else {
+          setIsShrink(false)
+        }
+      })
+    },
+    {
+      root: null,
+      threshold: [0, 0.5, 1], 
+    }
+  )
+
+  if (sectionRef.current) {
+    observer.observe(sectionRef.current)
+  }
+
+  return () => {
+    if (sectionRef.current) {
+      observer.unobserve(sectionRef.current)
+    }
+  }
+}, [])
   // Filter properties based on selected tab
   const filteredProperties = useMemo(() => {
     switch (activeFilter) {
@@ -155,9 +184,8 @@ const [isModalOpen, setIsModalOpen] = useState(false)
   }
   return (
     <>
-     <section
-      className="property-pricing-section relative min-h-screen py-16"
-      style={{
+     <section  ref={sectionRef}
+className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}      style={{
         backgroundImage: "url(/images/bg_pricing.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
