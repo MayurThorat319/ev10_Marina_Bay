@@ -1,5 +1,10 @@
+
 /* tailwind */
 @import "tailwindcss";
+
+html, body, #root { height: 100%; }
+body { margin: 0; }
+
 
 @font-face {
   font-family: "Long";
@@ -404,6 +409,7 @@ body {
     backface-visibility: hidden;
   }
 }
+
 /* tailwind */
 /* @import "tailwindcss";
 
@@ -668,3 +674,4 @@ main {
   top: -14%;
   left: 8%;
 }
+

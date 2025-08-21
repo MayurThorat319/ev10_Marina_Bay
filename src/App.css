@@ -13,6 +13,71 @@ body {
   font-family: Poppins, sans-serif;
 }
 
+/* Container */
+.subscribe-form {
+  display: flex;
+  margin-bottom: 10px;
+  flex-wrap: nowrap; /* row by default */
+  width: 100%;
+  max-width: 400px; /* optional: keeps it from being too wide on large screens */
+}
+
+/* Input */
+.subscribe-input {
+  flex: 1;
+  padding: 6px 8px;
+  background-color: #333;
+  border: 1px solid #555;
+  border-radius: 3px 0 0 3px;
+  color: #ffffff;
+  font-size: 0.85rem;
+  min-width: 0; /* 👈 important: allows input to shrink with flex */
+  box-sizing: border-box;
+}
+
+/* Button */
+.subscribe-button {
+  padding: 6px 12px;
+  background-color: #003261;
+  color: #ffffff;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background-color 0.3s ease;
+  white-space: nowrap; /* prevent text breaking */
+}
+
+.subscribe-button:hover {
+  background-color: #002147;
+}
+
+/* Paragraph */
+.subscribe-text {
+  font-size: 0.8rem;
+  color: #aaa;
+  line-height: 1.4;
+}
+
+/* 📱 Responsive (stack input & button vertically) */
+@media screen and (max-width: 600px) {
+  .subscribe-form {
+    flex-direction: column;
+  }
+
+  .subscribe-input {
+    width: 100%; /* full width */
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+
+  .subscribe-button {
+    width: 100%; /* full width button */
+    border-radius: 3px;
+  }
+}
+
+
 /* Header */
 .site-header {
   display: grid;
@@ -511,6 +576,15 @@ body {
   .carousel {
     height: 90vh;
   }
+    .main-title {
+  font-size: 1.7rem;
+  margin: 1rem 0 -2rem;
+  font-weight: 400;
+  color: #003261;
+  font-family: "Extraordinaire", serif;
+  text-align: center;
+  margin: 0 0rem;
+}
 }
 
 @media screen and (min-width: 250px) and (max-width: 381px) {
@@ -524,6 +598,41 @@ body {
   .content {
     right: 0%;
   }
+
+  .video-testimonials-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto 2rem;
+  padding: 10px 0px;
+}
+
+.video-testimonials-stat-value {
+  font-size: 1.0rem;
+  font-weight: bold;
+  color: #003261;
+}
+
+.video-testimonials-stat-label {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.video-testimonials-rating {
+  color: #fbbf24;
+  font-size: 1.0rem;
+}
+
+  .main-title {
+  font-size: 1.5rem;
+  margin: 1rem 0 -2rem;
+  font-weight: 400;
+  color: #003261;
+  font-family: "Extraordinaire", serif;
+  text-align: center;
+  margin: 0 0rem;
+}
 
   .carousel .list .item .image {
     width: 80%;
@@ -618,6 +727,15 @@ body {
     justify-content: end;
     background: rgba(0, 0, 0, 0);
   }
+    .main-title {
+  font-size: 1.5rem;
+  margin: 1rem 0 -2rem;
+  font-weight: 400;
+  color: #003261;
+  font-family: "Extraordinaire", serif;
+  text-align: center;
+  margin: 0 0rem;
+}
 
   .arrows {
     position: absolute;
@@ -1012,7 +1130,15 @@ left: -5%;
 .content h2{
     line-height:0.9 ;
 } */
-
+  .main-title {
+  font-size: 1.9rem;
+  margin: 1rem 0 -2rem;
+  font-weight: 400;
+  color: #003261;
+  font-family: "Extraordinaire", serif;
+  text-align: center;
+  margin: 0 0rem;
+}
   .carousel .list .item .image {
     width: var(--w-image);
     height: 100%;
@@ -1475,3 +1601,26 @@ left: -5%;
       gap: 8px !important;
     }
   }
+.section-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.property-section {
+  position: relative;
+  z-index: 3;  transition: opacity 0.6s ease;
+}
+
+.other-section {
+  position: relative;
+  z-index: 2;
+  transform: translateY(-40vh); 
+  opacity: 0.5;
+  transition: transform 1s ease, opacity 0.8s ease, z-index 0.3s ease;
+}
+
+.other-section.active {
+  transform: translateY(0); 
+  opacity: 1;
+  z-index: 2;
+}

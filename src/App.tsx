@@ -347,14 +347,42 @@ export default function App() {
   }, []);
 
   // Independent carousel states
-  const amenities = useCarousel(carouselItems.length, 5000);
-  const corners = useCarousel(communityCornersItems.length, 5000);
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-  const [videoCarouselItems, setVideoCarouselItems] = useState([
-    ...videoTestimonials,
-    ...videoTestimonials,
-  ]);
 
+  const amenities = useCarousel(carouselItems.length, 5000)
+  const corners = useCarousel(communityCornersItems.length, 5000)
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
+  const [videoCarouselItems, setVideoCarouselItems] = useState([...videoTestimonials, ...videoTestimonials])
+const sectionRef = useRef<HTMLDivElement | null>(null);
+  const [showOther, setShowOther] = useState(false);
+    useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio >= 0.5) {
+            setShowOther(false);
+          } else {
+            setShowOther(true);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10), 
+      }
+    );
+
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []); 
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex((prev) => {
@@ -441,7 +469,7 @@ export default function App() {
           </div>
         </div>
       </section> */}
-      <Hero />
+      {/* <Hero /> */}
       <div className="header-center animate-fade-up">
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>
@@ -572,14 +600,17 @@ export default function App() {
           <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
 
-        <div className="animate-special">
-          <PropertyPricing />
-        </div>
+        
+         <div className="section-container">
+          <div ref={sectionRef} id="property-section" className="property-section">
+            <PropertyPricing />
+          </div>
 
-        <div className="animate-fade-up">
-          <OtherProjects />
-        </div>
 
+          <div className={`other-section ${showOther ? "active" : ""}`}>
+            <OtherProjects />
+          </div>
+        </div>
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">
           <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
@@ -785,19 +816,20 @@ export default function App() {
         </div>
 
         <div
-          className="maharera-section animate-flip"
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            maxWidth: "1200px",
-            margin: "40px auto",
-            padding: "40px 20px",
-            gap: "40px",
-            backgroundColor: "#f8f9fa",
-            borderRadius: "8px",
-            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-          }}
-        >
+  className="maharera-section animate-flip"
+  style={{
+    display: "flex",
+    alignItems: "flex-start",
+    maxWidth: "1200px",
+    margin: "40px auto",
+    padding: "40px 40px 40px 20px", // top right bottom left
+    gap: "40px",
+    backgroundColor: "#f8f9fa",
+    borderRadius: "8px",
+    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+  }}
+>
+
           {/* Left side - QR Code */}
           <div
             style={{
@@ -1013,68 +1045,21 @@ export default function App() {
               }}
             >
               {/* Subscribe Section */}
-              <div>
-                <h3
-                  style={{
-                    fontSize: "1.1rem",
-                    fontWeight: "600",
-                    marginBottom: "20px",
-                    color: "#ffffff",
-                  }}
-                >
-                  Subscribe
-                </h3>
-                <div
-                  style={{
-                    display: "flex",
-                    marginBottom: "10px",
-                  }}
-                >
-                  <input
-                    type="email"
-                    placeholder="Your e-mail"
-                    style={{
-                      flex: "1",
-                      padding: "6px 8px", // smaller height
-                      backgroundColor: "#333",
-                      border: "1px solid #555",
-                      borderRadius: "3px 0 0 3px",
-                      color: "#ffffff",
-                      fontSize: "0.75rem", // smaller text
-                    }}
-                  />
-                  <button
-                    style={{
-                      padding: "6px 12px", // smaller height
-                      backgroundColor: "#003261",
-                      color: "#ffffff",
-                      border: "none",
-                      borderRadius: "0 3px 3px 0",
-                      cursor: "pointer",
-                      fontSize: "0.75rem", // smaller text
-                      transition: "background-color 0.3s ease",
-                    }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.backgroundColor = "#002147")
-                    }
-                    onMouseOut={(e) =>
-                      (e.currentTarget.style.backgroundColor = "#003261")
-                    }
-                  >
-                    Send →
-                  </button>
-                </div>
 
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "#aaa",
-                    lineHeight: "1.4",
-                  }}
-                >
-                  Subscribe our newsletter to receive our weekly feed.
-                </p>
-              </div>
+             <div>
+  <h3 className="subscribe-title">Subscribe</h3>
+
+  <div className="subscribe-form">
+    <input type="email" placeholder="Your e-mail" className="subscribe-input" />
+    <button className="subscribe-button">Send →</button>
+  </div>
+
+  <p className="subscribe-text">
+    Subscribe our newsletter to receive our weekly feed.
+  </p>
+</div>
+
+
 
               {/* Discover Section */}
               <div
