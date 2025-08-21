@@ -354,11 +354,40 @@ export default function App() {
   const [videoCarouselItems, setVideoCarouselItems] = useState([...videoTestimonials, ...videoTestimonials])
 const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
+  const [isShrink, setIsShrink] = useState(false)
+const section = useRef<HTMLDivElement | null>(null)
+  useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio < 0.5) {
+          setIsShrink(true)
+        } else {
+          setIsShrink(false)
+        }
+      })
+    },
+    {
+      root: null,
+      threshold: [0, 0.5, 1], 
+    }
+  )
+
+  if (section.current) {
+    observer.observe(section.current)
+  }
+
+  return () => {
+    if (section.current) {
+      observer.unobserve(section.current)
+    }
+  }
+}, [])
     useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.intersectionRatio >= 0.5) {
+          if (entry.intersectionRatio >= 0.2) {
             setShowOther(false);
           } else {
             setShowOther(true);
@@ -469,7 +498,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
           </div>
         </div>
       </section> */}
-      {/* <Hero /> */}
+      <Hero />
       <div className="header-center animate-fade-up">
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>
@@ -537,14 +566,14 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
             </button>
           </div>
         </section>
-
+ <div className="section-container">
         {/* Community Corners */}
         <div className="header-center animate-flip">
           <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
         </div>
 
-        <section
-          className={`carousel ${corners.direction} animate-bounce`}
+        <section ref={section}
+          className={`carousel ${corners.direction} animate-bounce ${isShrink ? "shrink" : ""}`}
           aria-label="Community corners carousel"
         >
           <div className="list">
@@ -601,15 +630,16 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
         </div>
 
         
-         <div className="section-container">
-          <div ref={sectionRef} id="property-section" className="property-section">
-            <PropertyPricing />
-          </div>
+        
+        <div ref={sectionRef} id="property-section" 
+     className={`property-section ${showOther ? "shift-up" : ""}`}>
+  <PropertyPricing />
+</div>
 
+<div className={`other-section ${showOther ? "active" : ""}`}>
+  <OtherProjects />
+</div>
 
-          <div className={`other-section ${showOther ? "active" : ""}`}>
-            <OtherProjects />
-          </div>
         </div>
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">

@@ -14,7 +14,7 @@ const Hero = () => {
       maskSize: initialMaskSize,
     });
 
-    gsap.set(".mask-logo", { marginTop: "-100vh", opacity: 0 });
+    gsap.set(".mask-logo", {  opacity: 0 });
 
     gsap.set(".entrance-message", { marginTop: "0vh" });
 
@@ -96,7 +96,13 @@ const Hero = () => {
       </div>
 
       <div className="fake-logo-wrapper">
-        <img src="/images/AAA-text3.svg" className="overlay-logo" />
+          {/* <video
+    src="/images/video-1.mp4"
+   
+    autoPlay
+    loop
+    muted
+    playsInline  /> */}
       </div>
 
       <ComingSoon />
