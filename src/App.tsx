@@ -1,12 +1,16 @@
-"use client"
+"use client";
 
-import { useEffect, useMemo, useRef, useState } from "react"
-import "./App.css"
+import { useEffect, useMemo, useRef, useState } from "react";
+import "./App.css";
 
-import BuildingProgress from "./components/building-progress/building-progress"
-import PropertyPricing from "./App/property_pricing"
-import OtherProjects from "./components/other-projects/other-projects"
-import Hero from "./sections/Hero"
+import BuildingProgress from "./components/building-progress/building-progress";
+import PropertyPricing from "./App/property_pricing";
+import OtherProjects from "./components/other-projects/other-projects";
+import Hero from "./sections/Hero";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // CSS for all the animations
 const scrollAnimationCSS = `
@@ -161,48 +165,48 @@ const scrollAnimationCSS = `
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
   }
-`
+`;
 
-type Direction = "next" | "prev"
+type Direction = "next" | "prev";
 
 function useCarousel(count: number, autoPlayMs = 5000) {
-  const [active, setActive] = useState(0)
-  const [direction, setDirection] = useState<Direction>("next")
-  const timerRef = useRef<number | null>(null)
+  const [active, setActive] = useState(0);
+  const [direction, setDirection] = useState<Direction>("next");
+  const timerRef = useRef<number | null>(null);
 
   const { other_1, other_2 } = useMemo(() => {
-    let o1: number, o2: number
+    let o1: number, o2: number;
     if (direction === "next") {
-      o1 = active - 1 < 0 ? count - 1 : active - 1
-      o2 = active + 1 >= count ? 0 : active + 1
+      o1 = active - 1 < 0 ? count - 1 : active - 1;
+      o2 = active + 1 >= count ? 0 : active + 1;
     } else {
-      o1 = active + 1 >= count ? 0 : active + 1
-      o2 = o1 + 1 >= count ? 0 : o1 + 1
+      o1 = active + 1 >= count ? 0 : active + 1;
+      o2 = o1 + 1 >= count ? 0 : o1 + 1;
     }
-    return { other_1: o1, other_2: o2 }
-  }, [active, direction, count])
+    return { other_1: o1, other_2: o2 };
+  }, [active, direction, count]);
 
   const next = () => {
-    setDirection("next")
-    setActive((prev) => (prev + 1) % count)
-  }
+    setDirection("next");
+    setActive((prev) => (prev + 1) % count);
+  };
 
   const prev = () => {
-    setDirection("prev")
-    setActive((prev) => (prev - 1 + count) % count)
-  }
+    setDirection("prev");
+    setActive((prev) => (prev - 1 + count) % count);
+  };
 
   useEffect(() => {
-    if (timerRef.current) clearInterval(timerRef.current)
+    if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = window.setInterval(() => {
-      next()
-    }, autoPlayMs)
+      next();
+    }, autoPlayMs);
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current)
-    }
-  }, [active, autoPlayMs])
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [active, autoPlayMs]);
 
-  return { active, other_1, other_2, direction, next, prev }
+  return { active, other_1, other_2, direction, next, prev };
 }
 
 const carouselItems = [
@@ -246,7 +250,7 @@ const carouselItems = [
     caption: "Meditation Centre",
     backgroundColor: "#7eb63d",
   },
-]
+];
 
 const communityCornersItems = [
   {
@@ -289,55 +293,61 @@ const communityCornersItems = [
     caption: "Kids Play Area",
     backgroundColor: "#166534",
   },
-]
+];
 
 const videoTestimonials = [
   {
     id: 1,
     title: "Mr./Mrs. Margret Kingsley",
     thumbnail: "/images/Testimonial-1.jpeg",
-    youtubeUrl: "https://www.youtube.com/watch?v=nOLkacqbZU4", 
+    youtubeUrl: "https://www.youtube.com/watch?v=nOLkacqbZU4",
   },
   {
     id: 2,
     title: "Mr./Mrs. Kacholia's",
     thumbnail: "/images/Testimonial-2.jpeg",
-    youtubeUrl: "https://www.youtube.com/watch?v=9mS37VEgWHU", 
+    youtubeUrl: "https://www.youtube.com/watch?v=9mS37VEgWHU",
   },
   {
     id: 3,
     title: "Mr./Mrs. Anurag Tripathi",
     thumbnail: "/images/Testimonial-3.jpeg",
-    youtubeUrl: "https://www.youtube.com/watch?v=O-h8oQ4e2Nw", 
+    youtubeUrl: "https://www.youtube.com/watch?v=O-h8oQ4e2Nw",
   },
   {
     id: 4,
     title: "Mr./Mrs. Uday K Kalgutkar",
     thumbnail: "/images/Testimonial-4.jpeg",
-    youtubeUrl: "https://www.youtube.com/watch?v=NzOE1F1lqsw", 
+    youtubeUrl: "https://www.youtube.com/watch?v=NzOE1F1lqsw",
   },
-]
+];
 
-function getItemClass(index: number, active: number, other_1: number, other_2: number) {
-  if (index === active) return "item active"
-  if (index === other_1) return "item other_1"
-  if (index === other_2) return "item other_2"
-  return "item"
+function getItemClass(
+  index: number,
+  active: number,
+  other_1: number,
+  other_2: number
+) {
+  if (index === active) return "item active";
+  if (index === other_1) return "item other_1";
+  if (index === other_2) return "item other_2";
+  return "item";
 }
 
 export default function App() {
   // Add CSS to document head
   useEffect(() => {
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = scrollAnimationCSS;
     document.head.appendChild(style);
-    
+
     return () => {
       document.head.removeChild(style);
     };
   }, []);
 
   // Independent carousel states
+
   const amenities = useCarousel(carouselItems.length, 5000)
   const corners = useCarousel(communityCornersItems.length, 5000)
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
@@ -361,6 +371,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
       }
     );
 
+
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
@@ -375,29 +386,29 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex((prev) => {
-        const nextIndex = prev + 1
+        const nextIndex = prev + 1;
         if (nextIndex >= videoTestimonials.length) {
           // Reset the carousel items to start fresh loop
           setTimeout(() => {
-            setVideoCarouselItems([...videoTestimonials, ...videoTestimonials])
-            setCurrentVideoIndex(0)
-          }, 500) // Wait for transition to complete
-          return 0
+            setVideoCarouselItems([...videoTestimonials, ...videoTestimonials]);
+            setCurrentVideoIndex(0);
+          }, 500); // Wait for transition to complete
+          return 0;
         }
-        return nextIndex
-      })
-    }, 3000) // Auto-scroll every 3 seconds
+        return nextIndex;
+      });
+    }, 3000); // Auto-scroll every 3 seconds
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const handleVideoClick = (youtubeUrl: string) => {
-    window.open(youtubeUrl, "_blank")
-  }
+    window.open(youtubeUrl, "_blank");
+  };
 
   return (
     <>
-     {/* <section
+      {/* <section
         style={{
           position: "relative",
           width: "100%",
@@ -462,24 +473,35 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
       <div className="header-center animate-fade-up">
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>
-      
+
       <div className="animate-scale">
         <BuildingProgress />
       </div>
-      
-      <div className="header-center animate-slide-left" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+
+      <div
+        className="header-center animate-slide-left"
+        style={{ marginTop: "2rem", marginBottom: "1rem" }}
+      >
         <h1 className="main-title2">AMENITIES</h1>
         <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
       </div>
 
       <main>
         {/* Amenities Carousel */}
-        <section className={`carousel ${amenities.direction} animate-slide-right`} aria-label="Amenities carousel">
+        <section
+          className={`carousel ${amenities.direction} animate-slide-right`}
+          aria-label="Amenities carousel"
+        >
           <div className="list">
             {carouselItems.map((item, index) => (
               <article
                 key={item.id}
-                className={getItemClass(index, amenities.active, amenities.other_1, amenities.other_2)}
+                className={getItemClass(
+                  index,
+                  amenities.active,
+                  amenities.other_1,
+                  amenities.other_2
+                )}
               >
                 <div
                   className="main-content"
@@ -496,7 +518,10 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                 </div>
 
                 <figure className="image">
-                  <img src={item.image || "/placeholder.svg"} alt={item.caption} />
+                  <img
+                    src={item.image || "/placeholder.svg"}
+                    alt={item.caption}
+                  />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
               </article>
@@ -518,10 +543,21 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
           <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
         </div>
 
-        <section className={`carousel ${corners.direction} animate-bounce`} aria-label="Community corners carousel">
+        <section
+          className={`carousel ${corners.direction} animate-bounce`}
+          aria-label="Community corners carousel"
+        >
           <div className="list">
             {communityCornersItems.map((item, index) => (
-              <article key={item.id} className={getItemClass(index, corners.active, corners.other_1, corners.other_2)}>
+              <article
+                key={item.id}
+                className={getItemClass(
+                  index,
+                  corners.active,
+                  corners.other_1,
+                  corners.other_2
+                )}
+              >
                 <div
                   className="main-content"
                   style={{
@@ -537,7 +573,10 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                 </div>
 
                 <figure className="image">
-                  <img src={item.image || "/placeholder.svg"} alt={item.caption} />
+                  <img
+                    src={item.image || "/placeholder.svg"}
+                    alt={item.caption}
+                  />
                   <figcaption>{item.caption}</figcaption>
                 </figure>
               </article>
@@ -554,14 +593,19 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
           </div>
         </section>
 
-        <div className="header-center animate-rotate" style={{ marginTop: "2rem", marginBottom: "1rem" }}>
+        <div
+          className="header-center animate-rotate"
+          style={{ marginTop: "2rem", marginBottom: "1rem" }}
+        >
           <h1 className="main-title">PROPERTY PRICING</h1>
         </div>
+
         
          <div className="section-container">
           <div ref={sectionRef} id="property-section" className="property-section">
             <PropertyPricing />
           </div>
+
 
           <div className={`other-section ${showOther ? "active" : ""}`}>
             <OtherProjects />
@@ -577,7 +621,9 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
             </div>
             <div className="video-testimonials-stat">
               <div className="video-testimonials-stat-value">4.7</div>
-              <div className="video-testimonials-stat-label">Overall rating</div>
+              <div className="video-testimonials-stat-label">
+                Overall rating
+              </div>
               <div className="video-testimonials-rating">★★★★★</div>
             </div>
           </div>
@@ -599,10 +645,19 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                   onClick={() => handleVideoClick(video.youtubeUrl)}
                 >
                   <div className="video-thumbnail-container">
-                    <img src={video.thumbnail || "/placeholder.svg"} alt={video.title} className="video-thumbnail" />
+                    <img
+                      src={video.thumbnail || "/placeholder.svg"}
+                      alt={video.title}
+                      className="video-thumbnail"
+                    />
                     <div className="play-button-overlay">
                       <div className="play-button">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="white"
+                        >
                           <path d="M8 5v14l11-7z" />
                         </svg>
                       </div>
@@ -629,7 +684,8 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                   width: "10px",
                   height: "10px",
                   borderRadius: "50%",
-                  backgroundColor: currentVideoIndex === index ? "#003261" : "#ccc",
+                  backgroundColor:
+                    currentVideoIndex === index ? "#003261" : "#ccc",
                   cursor: "pointer",
                   transition: "background-color 0.3s ease",
                 }}
@@ -703,12 +759,16 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
               }}
             >
               <p>
-                EV Group is one of India's Leading and Fast Growing Engineering and Real Estate Company. To a Team of
-                Entrepreneurs, focused on Quality and an excellent Return on Investment. The Group has established
-                itself as a market leader in quality and executing projects with realistic timelines. The Group has a
-                diverse portfolio of Engineering and Real Estate assets under its management. The portfolio is also
-                geographically diversified with a Pan India presence in Tier II & Tier III cities of Bangalore, Cochin &
-                N.Mumbai and globally focused on the Middle East market.
+                EV Group is one of India's Leading and Fast Growing Engineering
+                and Real Estate Company. To a Team of Entrepreneurs, focused on
+                Quality and an excellent Return on Investment. The Group has
+                established itself as a market leader in quality and executing
+                projects with realistic timelines. The Group has a diverse
+                portfolio of Engineering and Real Estate assets under its
+                management. The portfolio is also geographically diversified
+                with a Pan India presence in Tier II & Tier III cities of
+                Bangalore, Cochin & N.Mumbai and globally focused on the Middle
+                East market.
               </p>
             </div>
 
@@ -733,16 +793,20 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                   transition: "all 0.3s ease",
                   boxShadow: "0 2px 4px rgba(0,50,97,0.2)",
                 }}
-                onClick={() => window.open("https://evgroup.in/profile.html", "_blank")}
+                onClick={() =>
+                  window.open("https://evgroup.in/profile.html", "_blank")
+                }
                 onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = "#002147"
-                  e.currentTarget.style.transform = "translateY(-1px)"
-                  e.currentTarget.style.boxShadow = "0 4px 8px rgba(0,50,97,0.3)"
+                  e.currentTarget.style.backgroundColor = "#002147";
+                  e.currentTarget.style.transform = "translateY(-1px)";
+                  e.currentTarget.style.boxShadow =
+                    "0 4px 8px rgba(0,50,97,0.3)";
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = "#003261"
-                  e.currentTarget.style.transform = "translateY(0)"
-                  e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,50,97,0.2)"
+                  e.currentTarget.style.backgroundColor = "#003261";
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.boxShadow =
+                    "0 2px 4px rgba(0,50,97,0.2)";
                 }}
               >
                 Learn More
@@ -818,25 +882,31 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
               }}
             >
               <p style={{ marginBottom: "15px" }}>
-                According to the RERA Act 2018 of the Government of India, all projects of the EV Homes Constructions
-                Pvt Ltd including 10 Marina Bay, are listed on the Maharashtra Government's RERA website under
-                registered projects.
+                According to the RERA Act 2018 of the Government of India, all
+                projects of the EV Homes Constructions Pvt Ltd including 10
+                Marina Bay, are listed on the Maharashtra Government's RERA
+                website under registered projects.
               </p>
               <p style={{ marginBottom: "15px" }}>
-                The 10 Marina Bay project is developed and marketed in accordance with the Real Estate (Regulation and
-                Development) Act, 2018 (RERA).
+                The 10 Marina Bay project is developed and marketed in
+                accordance with the Real Estate (Regulation and Development)
+                Act, 2018 (RERA).
               </p>
               <p style={{ marginBottom: "15px" }}>
-                Buyers are encouraged to visit the official MAHARERA website for complete project details, approvals and
-                registration status.
+                Buyers are encouraged to visit the official MAHARERA website for
+                complete project details, approvals and registration status.
               </p>
               <p>
-                EV Homes Constructions Pvt Ltd has received full rights to Market/Advertise/Sell the apartments in 10
-                Marina Bay Vide MAHARERA Registration Number PST700028722. EV Homes Constructions Pvt Ltd hereby ensures
-                that the fact stated herein are true and complete to the best of our knowledge and belief and nothing
-                has been concealed or suppressed. EV Homes Constructions Pvt Ltd does not take any responsibility for
-                the completeness or correctness of such information. Buyers are encouraged to verify all project-related
-                details from the official MAHARERA website.
+                EV Homes Constructions Pvt Ltd has received full rights to
+                Market/Advertise/Sell the apartments in 10 Marina Bay Vide
+                MAHARERA Registration Number PST700028722. EV Homes
+                Constructions Pvt Ltd hereby ensures that the fact stated herein
+                are true and complete to the best of our knowledge and belief
+                and nothing has been concealed or suppressed. EV Homes
+                Constructions Pvt Ltd does not take any responsibility for the
+                completeness or correctness of such information. Buyers are
+                encouraged to verify all project-related details from the
+                official MAHARERA website.
               </p>
             </div>
           </div>
@@ -858,15 +928,15 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
             }}
           >
             {/* Header with logo and social icons */}
-          <div
-      className="footer-grid"
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
-        gap: "40px",
-        marginBottom: "40px",
-      }}
-    >
+            <div
+              className="footer-grid"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+                gap: "40px",
+                marginBottom: "40px",
+              }}
+            >
               <div
                 style={{
                   fontSize: "1.8rem",
@@ -883,7 +953,9 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                   alignItems: "center",
                 }}
               >
-                <span style={{ marginRight: "10px", fontSize: "0.9rem" }}>Follow Us</span>
+                <span style={{ marginRight: "10px", fontSize: "0.9rem" }}>
+                  Follow Us
+                </span>
                 <div style={{ display: "flex", gap: "10px" }}>
                   {/* Facebook */}
                   <div
@@ -899,7 +971,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                     onClick={() =>
                       window.open(
                         "https://www.facebook.com/evgindia?rdid=T5Y9xWn898Hd6XmZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19nwaBWiBf%2F#",
-                        "_blank",
+                        "_blank"
                       )
                     }
                   >
@@ -922,7 +994,10 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                       cursor: "pointer",
                     }}
                     onClick={() =>
-                      window.open("https://www.instagram.com/evhomesofficial/?igsh=MTRuZnA1MDd3Ymw0Mg%3D%3D#", "_blank")
+                      window.open(
+                        "https://www.instagram.com/evhomesofficial/?igsh=MTRuZnA1MDd3Ymw0Mg%3D%3D#",
+                        "_blank"
+                      )
                     }
                   >
                     <img
@@ -943,7 +1018,12 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                       justifyContent: "center",
                       cursor: "pointer",
                     }}
-                    onClick={() => window.open("https://www.linkedin.com/company/ev-homes", "_blank")}
+                    onClick={() =>
+                      window.open(
+                        "https://www.linkedin.com/company/ev-homes",
+                        "_blank"
+                      )
+                    }
                   >
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
@@ -965,6 +1045,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
               }}
             >
               {/* Subscribe Section */}
+
              <div>
   <h3 className="subscribe-title">Subscribe</h3>
 
@@ -977,6 +1058,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
     Subscribe our newsletter to receive our weekly feed.
   </p>
 </div>
+
 
 
               {/* Discover Section */}
@@ -1002,30 +1084,41 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                     margin: "0",
                   }}
                 >
-                  {["Gwalior", "Aroji", "Koparkhaane", "Sarooda", "Nerul", "Seawoods", "Ulwe", "Kharghar"].map(
-                    (item) => (
-                      <li
-                        key={item}
+                  {[
+                    "Gwalior",
+                    "Aroji",
+                    "Koparkhaane",
+                    "Sarooda",
+                    "Nerul",
+                    "Seawoods",
+                    "Ulwe",
+                    "Kharghar",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      style={{
+                        marginBottom: "8px",
+                      }}
+                    >
+                      <a
+                        href="#"
                         style={{
-                          marginBottom: "8px",
+                          color: "#ccc",
+                          textDecoration: "none",
+                          fontSize: "0.9rem",
+                          transition: "color 0.3s ease",
                         }}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.color = "#003261")
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.color = "#ccc")
+                        }
                       >
-                        <a
-                          href="#"
-                          style={{
-                            color: "#ccc",
-                            textDecoration: "none",
-                            fontSize: "0.9rem",
-                            transition: "color 0.3s ease",
-                          }}
-                          onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-                          onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
-                        >
-                          {item}
-                        </a>
-                      </li>
-                    ),
-                  )}
+                        {item}
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -1062,7 +1155,9 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                         fontSize: "0.9rem",
                         transition: "color 0.3s ease",
                       }}
-                      onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.color = "#003261")
+                      }
                       onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
                     >
                       About
@@ -1082,34 +1177,42 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                         fontSize: "0.9rem",
                         transition: "color 0.3s ease",
                       }}
-                      onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+                      onMouseOver={(e) =>
+                        (e.currentTarget.style.color = "#003261")
+                      }
                       onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
                     >
                       Contact
                     </a>
                   </li>
-                  {["FAQ's", "Privacy Policy", "Terms & Conditions"].map((item) => (
-                    <li
-                      key={item}
-                      style={{
-                        marginBottom: "8px",
-                      }}
-                    >
-                      <a
-                        href="#"
+                  {["FAQ's", "Privacy Policy", "Terms & Conditions"].map(
+                    (item) => (
+                      <li
+                        key={item}
                         style={{
-                          color: "#ccc",
-                          textDecoration: "none",
-                          fontSize: "0.9rem",
-                          transition: "color 0.3s ease",
+                          marginBottom: "8px",
                         }}
-                        onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-                        onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
                       >
-                        {item}
-                      </a>
-                    </li>
-                  ))}
+                        <a
+                          href="#"
+                          style={{
+                            color: "#ccc",
+                            textDecoration: "none",
+                            fontSize: "0.9rem",
+                            transition: "color 0.3s ease",
+                          }}
+                          onMouseOver={(e) =>
+                            (e.currentTarget.style.color = "#003261")
+                          }
+                          onMouseOut={(e) =>
+                            (e.currentTarget.style.color = "#ccc")
+                          }
+                        >
+                          {item}
+                        </a>
+                      </li>
+                    )
+                  )}
                 </ul>
               </div>
 
@@ -1198,15 +1301,34 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
                       transition: "background-color 0.3s ease",
                     }}
                     onClick={() => {
-                      window.open("https://play.google.com/store/apps/details?id=com.evhomes.ev_homes&hl=en", "_blank")
+                      window.open(
+                        "https://play.google.com/store/apps/details?id=com.evhomes.ev_homes&hl=en",
+                        "_blank"
+                      );
                     }}
-                    onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#444")}
-                    onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#333")}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#444")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#333")
+                    }
                   >
-                    <span style={{ marginRight: "8px", fontSize: "1.2rem" }}>▶️</span>
+                    <span style={{ marginRight: "8px", fontSize: "1.2rem" }}>
+                      ▶️
+                    </span>
                     <div>
-                      <div style={{ fontSize: "0.7rem", color: "#aaa" }}>Get it on</div>
-                      <div style={{ fontSize: "0.9rem", fontWeight: "600", color: "white" }}>Google Play</div>
+                      <div style={{ fontSize: "0.7rem", color: "#aaa" }}>
+                        Get it on
+                      </div>
+                      <div
+                        style={{
+                          fontSize: "0.9rem",
+                          fontWeight: "600",
+                          color: "white",
+                        }}
+                      >
+                        Google Play
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1216,5 +1338,5 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
         </footer>
       </main>
     </>
-  )
+  );
 }

@@ -4,7 +4,6 @@ import { useGSAP } from "@gsap/react";
 import { useMaskSettings } from "../../constants";
 import ComingSoon from "./ComingSoon";
 
-
 const Hero = () => {
   const { initialMaskPos, initialMaskSize, maskPos, maskSize } =
     useMaskSettings();
@@ -24,7 +23,7 @@ const Hero = () => {
         trigger: ".hero-section",
         start: "top top",
         scrub: 2.5,
-        end: "+=200%",
+        end: "+=400%",
         pin: true,
       },
     });
@@ -82,9 +81,9 @@ const Hero = () => {
             src="https://cdn.evhomes.tech/fe03fe9d-b3a2-4882-94e5-eabbec1f63a2-10-marina-bay-logo-golden.png"
             alt="play" */}
 
-            {/* // className="w-7 ml-1"
+        {/* // className="w-7 ml-1"
           /> */}
-          {/* <img src="/images/play.png" alt="play" className="w-7 ml-1" /> */}
+        {/* <img src="/images/play.png" alt="play" className="w-7 ml-1" /> */}
         {/* </div> */}
       </div>
 
