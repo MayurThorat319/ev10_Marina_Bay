@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from "./building-slider.module.css"
 
 interface BuildingSliderProps {
@@ -25,10 +25,32 @@ export function BuildingSlider({
   onImageClick,
 }: BuildingSliderProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
+  const [isInView, setIsInView] = useState(false)
+  const hasInitialized = useRef(false)
+
+  // Intersection Observer to detect when slider is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting)
+      },
+      { threshold: 0.5 }
+    )
+
+    if (scrollerRef.current) {
+      observer.observe(scrollerRef.current)
+    }
+
+    return () => {
+      if (scrollerRef.current) {
+        observer.unobserve(scrollerRef.current)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     const scroller = scrollerRef.current
-    if (!scroller) return
+    if (!scroller || hasInitialized.current) return
 
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -41,13 +63,16 @@ export function BuildingSlider({
       const scrollerInner = scroller.querySelector(`.${styles.scrollerInner}`) as HTMLElement
       if (!scrollerInner) return
 
-      scrollerInner.innerHTML = ""
-
-      // Create original items
-      images.forEach((src, index) => {
+      // Create a function to generate items
+      const createItem = (src: string, index: number, isClone = false) => {
         const itemDiv = document.createElement("div")
+        itemDiv.className = styles.itemContainer
 
         if (isVideoFile(src)) {
+          // Create container for video with play button overlay
+          const videoContainer = document.createElement("div")
+          videoContainer.className = styles.videoContainer
+          
           const video = document.createElement("video")
           video.src = src
           video.className = styles.clickableImage
@@ -58,16 +83,40 @@ export function BuildingSlider({
           video.style.objectFit = "cover"
           video.style.backgroundColor = "#f3f4f6"
 
-          video.addEventListener("mouseenter", () => {
-            video.play().catch((err) => console.log("[v0] Video play failed:", err))
+          // Add play button overlay
+          const playButton = document.createElement("div")
+          playButton.className = styles.playButton
+          playButton.innerHTML = `
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="11" fill="white" fill-opacity="0.6"/>
+              <path d="M9 7L17 12L9 17V7Z" fill="black"/>
+            </svg>
+          `
+
+          videoContainer.appendChild(video)
+          videoContainer.appendChild(playButton)
+
+          // Play video on hover only when in view
+          videoContainer.addEventListener("mouseenter", () => {
+            if (isInView) {
+              video.play().catch((err) => console.log("[v0] Video play failed:", err))
+            }
           })
-          video.addEventListener("mouseleave", () => video.pause())
+          
+          videoContainer.addEventListener("mouseleave", () => {
+            video.pause()
+            video.currentTime = 0
+          })
 
           if (onImageClick) {
-            video.addEventListener("click", () => onImageClick(src))
+            videoContainer.addEventListener("click", () => onImageClick(src))
+            playButton.addEventListener("click", (e) => {
+              e.stopPropagation()
+              onImageClick(src)
+            })
           }
 
-          itemDiv.appendChild(video)
+          itemDiv.appendChild(videoContainer)
         } else {
           const img = document.createElement("img")
           img.src = src || "/placeholder.svg"
@@ -81,51 +130,24 @@ export function BuildingSlider({
           itemDiv.appendChild(img)
         }
 
-        scrollerInner.appendChild(itemDiv)
+        return itemDiv
+      }
+
+      // Create original items
+      images.forEach((src, index) => {
+        scrollerInner.appendChild(createItem(src, index))
       })
 
-      const originalItems = Array.from(scrollerInner.children)
-      originalItems.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true) as HTMLElement
+      // Create duplicated items for seamless scrolling
+      images.forEach((src, index) => {
+        const duplicatedItem = createItem(src, index, true)
         duplicatedItem.setAttribute("aria-hidden", "true")
-
-        // Re-attach event listeners to cloned items
-        const img = duplicatedItem.querySelector("img")
-        const video = duplicatedItem.querySelector("video")
-        if (img && onImageClick) {
-          img.addEventListener("click", () => onImageClick(img.src))
-        }
-        if (video && onImageClick) {
-          video.addEventListener("click", () => onImageClick(video.src))
-          video.addEventListener("mouseenter", () => {
-            video.play().catch((err) => console.log("[v0] Video play failed:", err))
-          })
-          video.addEventListener("mouseleave", () => video.pause())
-        }
-
         scrollerInner.appendChild(duplicatedItem)
       })
+      
+      hasInitialized.current = true
     }
-  }, [images, onImageClick]) // Added images to dependency array to ensure proper re-rendering
-
-  const handleMediaClick = (mediaSrc: string) => {
-    if (onImageClick) {
-      onImageClick(mediaSrc)
-    }
-  }
-
-  const handleVideoError = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
-    console.log("[v0] Video failed to load:", e.currentTarget.src)
-    const video = e.currentTarget
-    video.style.display = "none"
-    // Create a fallback image element
-    const fallback = document.createElement("img")
-    fallback.src = "/placeholder.svg?height=200&width=300"
-    fallback.className = styles.clickableImage
-    fallback.alt = "Video unavailable"
-    fallback.onclick = () => handleMediaClick(video.src)
-    video.parentNode?.insertBefore(fallback, video)
-  }
+  }, [images, onImageClick, isInView]) // Added isInView to dependency array
 
   return (
     <div ref={scrollerRef} className={`${styles.scroller} ${className}`} data-direction={direction} data-speed={speed}>

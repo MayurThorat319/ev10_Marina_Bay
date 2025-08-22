@@ -124,7 +124,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.intersectionRatio < 0.2) {
+        if (entry.intersectionRatio < 0.4) {
           setIsShrink(true)
         } else {
           setIsShrink(false)
@@ -133,7 +133,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
     },
     {
       root: null,
-      threshold: [0, 0.2, 1], 
+      threshold: [0, 0.4, 1], 
     }
   )
 

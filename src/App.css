@@ -2,6 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Aboreto&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Extraordinaire&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin Sans&display=swap");
 
 /* Base */
 :root {
@@ -113,9 +114,9 @@ body {
 .main-title {
   font-size: 2.4rem;
   margin: 1rem 0 -2rem;
-  font-weight: 400;
+  font-weight: 800;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: 'Josefin Sans', sans-serif;
   text-align: center;
   margin: 0 0rem;
 }
@@ -123,20 +124,20 @@ body {
 .main-title2 {
   font-size: 2.4rem;
   margin: 1rem 0 -2rem;
-  font-weight: 400;
+  font-weight: 800;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: 'Josefin Sans', sans-serif;
   text-align: center;
   margin: -1rem -10rem;
 }
 
 .main-subtitle {
   font-size: 2.0rem;
-  font-weight: 300;
+  font-weight: 600;
   margin-bottom: 2.5rem;
   text-align: center;
   color: #4b5563;
-  font-family: "Extraordinaire", serif;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 /* Add these new title styles */
@@ -581,7 +582,7 @@ body {
   margin: 1rem 0 -2rem;
   font-weight: 400;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: "Josefin Sans", sans-serif;
   text-align: center;
   margin: 0 0rem;
 }
@@ -629,7 +630,7 @@ body {
   margin: 1rem 0 -2rem;
   font-weight: 400;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: "Josefin Sans", sans-serif;
   text-align: center;
   margin: 0 0rem;
 }
@@ -732,7 +733,7 @@ body {
   margin: 1rem 0 -2rem;
   font-weight: 400;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: "Josefin Sans", sans-serif;
   text-align: center;
   margin: 0 0rem;
 }
@@ -1135,7 +1136,7 @@ left: -5%;
   margin: 1rem 0 -2rem;
   font-weight: 400;
   color: #003261;
-  font-family: "Extraordinaire", serif;
+  font-family: "Josefin Sans", sans-serif;
   text-align: center;
   margin: 0 0rem;
 }
@@ -1610,6 +1611,7 @@ left: -5%;
   position: relative;
   z-index: 3;
   transition: opacity 1s ease, transform 1s ease; /* added transform */
+
 }
 
 .property-section.shift-up {
@@ -1632,13 +1634,3 @@ left: -5%;
 }
 
 
-.carousel {
-  transition: all 0.8s ease-in-out;
-  width: 100%;
-}
-
-.carousel.shrink {
-  width: 95%;  
-  margin: 0 auto;
-  border-radius: 25px;
-}
