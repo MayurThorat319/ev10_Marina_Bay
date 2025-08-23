@@ -1,11 +1,14 @@
-
 /* tailwind */
 @import "tailwindcss";
 
-html, body, #root { height: 100%; }
-body { margin: 0; }
-
-
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
 
 @font-face {
   font-family: "Long";
@@ -445,20 +448,11 @@ body {
   width: 100dvw;
   overflow-x: hidden;
   font-family: "Round", sans-serif;
-  background-color: black;
+  background-color: white;
 }
 
 main {
-  background: linear-gradient(
-    223.17deg,
-    rgb(28, 24, 41) 0%,
-    rgb(27, 24, 40) 8.61%,
-    rgb(25, 23, 36) 17.21%,
-    rgb(22, 21, 32) 25.82%,
-    rgb(20, 19, 28) 34.42%,
-    rgb(18, 18, 24) 43.03%,
-    rgb(17, 17, 23) 51.63%
-  );
+  background: linear-gradient(223.17deg, white);
 }
 
 @layer utilities {
@@ -496,11 +490,11 @@ main {
       @apply absolute -bottom-5 w-48 left-1/2 -translate-x-1/2;
     }
     .play-img {
-      @apply rounded-full md:size-28 size-150 bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center;
+      @apply rounded-full md:size-28 size-150 bg-black absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex justify-center items-center;
     }
-    .fake-logo-wrapper {
+    /* .fake-logo-wrapper {
       @apply absolute z-50 xs:top-[9.5rem] sm:top-[12.8rem] md:top-[8.5rem] 2xl:top-44 3xl:top-48 left-1/2 -translate-x-1/2;
-    }
+    } */
     .overlay-logo {
       @apply size-full object-cover opacity-0 w-60 md:w-60 2xl:w-72 3xl:w-80;
     }
@@ -651,7 +645,7 @@ main {
 }
 
 .mask-wrapper {
-  mask-image: url("/images/AAA-text3.svg");
+  mask-image: url("/images/BAY.svg");
   mask-repeat: no-repeat;
 }
 .mask-img {
@@ -676,3 +670,13 @@ main {
   left: 8%;
 }
 
+.fake-logo-wrapper {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  background-color: "red";
+  z-index: 9999999;
+  opacity: 0;
+}

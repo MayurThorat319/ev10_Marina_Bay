@@ -13,18 +13,18 @@ const BuildingProgress: React.FC = () => {
 
   const images = [
     "/images/mb_vid_ind_1.mp4",
-    "/images/mb_normal_1.jpg",
-    "/images/mb_vid_normal_1.mp4",
-    "/images/mb_ind_1.jpg",
-    "/images/mb_normal_2.jpg",
+    // "/images/mb_normal_1.jpg",
+    "/images/mb_vid_n2.mp4",
+     "/images/mb_vid_n6.mp4",
+     "/images/mb_vid_n4.mp4",
   ]
 
   const images1 = [
     "/images/mb_vid_normal_2.mp4",
-    "/images/mb_ind_2.jpg",
-    "/images/mb_normal_3.jpg",
+    // "/images/mb_ind_2.jpg",
+     "/images/mb_vid_n7.mp4",
     "/images/mb_vid_ind_2.mp4",
-    "/images/mb_normal_4.jpg",
+     "/images/mb_vid_n5.mp4",
   ]
 
   const handleImageClick = (imageSrc: string) => {
@@ -41,7 +41,7 @@ const BuildingProgress: React.FC = () => {
   }
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" data-scroll data-scroll-speed="-.8">
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-200 flex flex-col items-center justify-center gap-8 p-8">
         <div className="w-full max-w-6xl bg-black/20 backdrop-blur-sm rounded-lg p-6 space-y-6">
           {/* Left scrolling slider - should only show images array */}

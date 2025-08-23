@@ -9,6 +9,8 @@ import OtherProjects from "./components/other-projects/other-projects";
 import Hero from "./sections/Hero";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
+import LocomotiveScroll from "locomotive-scroll"
+import "locomotive-scroll/dist/locomotive-scroll.css"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -356,6 +358,21 @@ const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
   const [isShrink, setIsShrink] = useState(false)
 const section = useRef<HTMLDivElement | null>(null)
+const scrollRef = useRef<HTMLDivElement | null>(null)
+
+ useEffect(() => {
+    if (!scrollRef.current) return;
+
+    const scroll = new LocomotiveScroll({
+      el: scrollRef.current,
+      smooth: true,
+      multiplier: 1,
+    });
+
+    return () => {
+      scroll.destroy();
+    };
+  }, []);
   useEffect(() => {
   const observer = new IntersectionObserver(
     (entries) => {
@@ -387,7 +404,7 @@ const section = useRef<HTMLDivElement | null>(null)
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.intersectionRatio >= 0.2) {
+          if (entry.intersectionRatio >= 0.4) {
             setShowOther(false);
           } else {
             setShowOther(true);
@@ -498,28 +515,30 @@ const section = useRef<HTMLDivElement | null>(null)
           </div>
         </div>
       </section> */}
+      
       <Hero />
-      <div className="header-center animate-fade-up">
+      <div className="header-center animate-fade-up" >
         <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
       </div>
 
-      <div className="animate-scale">
+      <div className="animate-scale" >
         <BuildingProgress />
       </div>
 
-      <div
+      
+      <main>
+        {/* Amenities Carousel */}
+         <h1 className="main-title2">AMENITIES</h1>
+        <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
+        <div 
         className="header-center animate-slide-left"
         style={{ marginTop: "2rem", marginBottom: "1rem" }}
       >
-        <h1 className="main-title2">AMENITIES</h1>
-        <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
-      </div>
+      
 
-      <main>
-        {/* Amenities Carousel */}
-        <section
+         <section
           className={`carousel ${amenities.direction} animate-slide-right`}
-          aria-label="Amenities carousel"
+          aria-label="Amenities carousel" 
         >
           <div className="list">
             {carouselItems.map((item, index) => (
@@ -566,14 +585,18 @@ const section = useRef<HTMLDivElement | null>(null)
             </button>
           </div>
         </section>
- <div className="section-container">
+      </div>
+
+       
+
         {/* Community Corners */}
-        <div className="header-center animate-flip">
+        <div>
+          <div className="header-center animate-flip">
           <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
         </div>
 
         <section ref={section}
-          className={`carousel ${corners.direction} animate-bounce ${isShrink ? "shrink" : ""}`}
+          className={`carousel ${corners.direction}  `}
           aria-label="Community corners carousel"
         >
           <div className="list">
@@ -621,7 +644,9 @@ const section = useRef<HTMLDivElement | null>(null)
             </button>
           </div>
         </section>
-
+        </div>
+        
+ <div className="section-container">
         <div
           className="header-center animate-rotate"
           style={{ marginTop: "2rem", marginBottom: "1rem" }}

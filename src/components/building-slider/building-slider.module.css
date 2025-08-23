@@ -1,3 +1,4 @@
+/* building-slider.module.css - Fixed Play Button */
 .scroller {
   max-width: 100%;
   overflow: hidden;
@@ -46,6 +47,12 @@
   }
 }
 
+/* Container for each item */
+.itemContainer {
+  position: relative;
+  display: flex;
+}
+
 /* Updated styles to support both images and videos */
 .clickableImage {
   width: 350px;
@@ -67,4 +74,43 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Video container with play button */
+.videoContainer {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+}
+
+/* Play button overlay - Fixed position */
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1); /* Fixed transform */
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  pointer-events: none; /* Allow clicks to pass through to container */
+}
+
+.videoContainer:hover .playButton {
+  opacity: 1;
+  /* Removed transform scaling to prevent position change */
+}
+
+/* Optional: Add a subtle pulse animation to draw attention */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.playButton {
+  animation: pulse 2s infinite;
+}
+
+.videoContainer:hover .playButton {
+  animation: none; /* Stop pulse on hover for cleaner look */
 }
