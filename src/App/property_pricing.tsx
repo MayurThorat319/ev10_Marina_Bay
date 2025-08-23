@@ -124,29 +124,35 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.intersectionRatio < 0.4) {
-          setIsShrink(true)
+        const rect = entry.boundingClientRect;
+        const viewportHeight = window.innerHeight;
+
+        // bottom 40% condition
+        const isBottom40Visible = rect.bottom <= viewportHeight * 0.6; 
+
+        if (isBottom40Visible) {
+          setIsShrink(true);
         } else {
-          setIsShrink(false)
+          setIsShrink(false);
         }
-      })
+      });
     },
     {
       root: null,
-      threshold: [0, 0.4, 1], 
+      threshold: [0, 0.4, 1],
     }
-  )
+  );
 
   if (sectionRef.current) {
-    observer.observe(sectionRef.current)
+    observer.observe(sectionRef.current);
   }
 
   return () => {
     if (sectionRef.current) {
-      observer.unobserve(sectionRef.current)
+      observer.unobserve(sectionRef.current);
     }
-  }
-}, [])
+  };
+}, []);
   // Filter properties based on selected tab
   const filteredProperties = useMemo(() => {
     switch (activeFilter) {
