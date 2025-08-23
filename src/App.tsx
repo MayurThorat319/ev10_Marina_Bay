@@ -481,7 +481,8 @@ export default function App() {
 
       <Hero />
 
-      <main>
+      <main  >
+        
         {/* Amenities Carousel */}
         <div className="header-center animate-fade-up">
           <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
@@ -554,7 +555,7 @@ export default function App() {
             aria-label="Community corners carousel"
           >
             <div className="header-center animate-flip">
-              <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
+              <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
             </div>
             <div className="list">
               {communityCornersItems.map((item, index) => (
@@ -610,7 +611,7 @@ export default function App() {
         <div className="section-container">
           <div
             className="header-center animate-rotate"
-            style={{ marginTop: "1rem", marginBottom: "1rem" }}
+            style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}
           >
             <h1 className="main-title">PROPERTY PRICING</h1>
           </div>
@@ -640,7 +641,7 @@ export default function App() {
               <div className="video-testimonials-stat-label">
                 Overall rating
               </div>
-              <div className="video-testimonials-rating">★★★★★</div>
+              {/* <div className="video-testimonials-rating">★★★★★</div> */}
             </div>
           </div>
         </div>

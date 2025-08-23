@@ -1648,3 +1648,6 @@ margin-top: -10%;
   flex-direction: column;
   justify-content: center;
 }
+.padding{
+  padding: 0.8rem 0rem;
+}
