@@ -352,51 +352,27 @@ export default function App() {
   const corners = useCarousel(communityCornersItems.length, 5000)
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0)
   const [videoCarouselItems, setVideoCarouselItems] = useState([...videoTestimonials, ...videoTestimonials])
-const sectionRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
-  const [isShrink, setIsShrink] = useState(false)
-const section = useRef<HTMLDivElement | null>(null)
+
+
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio < 0.5) {
-          setIsShrink(true)
-        } else {
-          setIsShrink(false)
-        }
-      })
-    },
-    {
-      root: null,
-      threshold: [0, 0.5, 1], 
-    }
-  )
-
-  if (section.current) {
-    observer.observe(section.current)
-  }
-
-  return () => {
-    if (section.current) {
-      observer.unobserve(section.current)
-    }
-  }
-}, [])
-    useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.intersectionRatio >= 0.2) {
-            setShowOther(false);
-          } else {
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
+          const isBottom40Visible = rect.bottom <= viewportHeight * 0.6;
+          if (isBottom40Visible) {
             setShowOther(true);
+          } else {
+            setShowOther(false);
           }
         });
       },
       {
         root: null,
-        threshold: Array.from({ length: 11 }, (_, i) => i / 10), 
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10),
       }
     );
 
@@ -410,8 +386,8 @@ const section = useRef<HTMLDivElement | null>(null)
         observer.unobserve(sectionRef.current);
       }
     };
-  }, []); 
-  
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentVideoIndex((prev) => {
@@ -499,148 +475,166 @@ const section = useRef<HTMLDivElement | null>(null)
         </div>
       </section> */}
       <Hero />
-      <div className="header-center animate-fade-up">
-        <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
-      </div>
 
-      <div className="animate-scale">
-        <BuildingProgress />
-      </div>
 
-      <div
-        className="header-center animate-slide-left"
-        style={{ marginTop: "2rem", marginBottom: "1rem" }}
-      >
-        <h1 className="main-title2">AMENITIES</h1>
-        <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
-      </div>
-
-      <main>
+      <main >
         {/* Amenities Carousel */}
-        <section
-          className={`carousel ${amenities.direction} animate-slide-right`}
-          aria-label="Amenities carousel"
-        >
-          <div className="list">
-            {carouselItems.map((item, index) => (
-              <article
-                key={item.id}
-                className={getItemClass(
-                  index,
-                  amenities.active,
-                  amenities.other_1,
-                  amenities.other_2
-                )}
+        <div >
+          <div className="header-center animate-fade-up">
+            <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
+          </div>
+
+          <div className="animate-scale">
+            <BuildingProgress />
+          </div>
+
+        </div>
+        <div className="wrapper">
+
+          <div className="section-wrapper Amenities-wrapper">
+            <section
+              className={`carousel ${amenities.direction} animate-slide-right`}
+              aria-label="Amenities carousel"
+            >
+
+              <div
+                className="header-center animate-slide-left"
+                style={{ marginTop: "2rem", marginBottom: "1rem" }}
               >
-                <div
-                  className="main-content"
-                  style={{
-                    backgroundImage: `url(${item.backgroundImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="content">
-                    <h2>{item.title}</h2>
-                    <p className="description">{item.description}</p>
-                  </div>
-                </div>
+                <h1 className="main-title2">AMENITIES</h1>
+                <h2 className="main-subtitle">WELLNESS & RECREATION</h2>
+              </div>
+              <div className="list">
+                {carouselItems.map((item, index) => (
+                  <article
+                    key={item.id}
+                    className={getItemClass(
+                      index,
+                      amenities.active,
+                      amenities.other_1,
+                      amenities.other_2
+                    )}
+                  >
+                    <div
+                      className="main-content"
+                      style={{
+                        backgroundImage: `url(${item.backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="content">
+                        <h2>{item.title}</h2>
+                        <p className="description">{item.description}</p>
+                      </div>
+                    </div>
 
-                <figure className="image">
-                  <img
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.caption}
-                  />
-                  <figcaption>{item.caption}</figcaption>
-                </figure>
-              </article>
-            ))}
+                    <figure className="image">
+                      <img
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.caption}
+                      />
+                      <figcaption>{item.caption}</figcaption>
+                    </figure>
+                  </article>
+                ))}
+              </div>
+
+              <div className="arrows">
+                <button onClick={amenities.prev} aria-label="Previous">
+                  {"<"}
+                </button>
+                <button onClick={amenities.next} aria-label="Next">
+                  {">"}
+                </button>
+              </div>
+            </section>
+          </div>
+          <div className="section-wrapper Amenities-wrappertwo">
+            <section
+              className={`carousel ${corners.direction} `}
+              aria-label="Community corners carousel"
+            >
+              <div className="header-center animate-flip">
+                <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
+              </div>
+              <div className="list">
+                {communityCornersItems.map((item, index) => (
+                  <article
+                    key={item.id}
+                    className={getItemClass(
+                      index,
+                      corners.active,
+                      corners.other_1,
+                      corners.other_2
+                    )}
+                  >
+                    <div
+                      className="main-content"
+                      style={{
+                        backgroundImage: `url(${item.backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="content">
+                        <h2>{item.title}</h2>
+                        <p className="description">{item.description}</p>
+                      </div>
+                    </div>
+
+                    <figure className="image">
+                      <img
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.caption}
+                      />
+                      <figcaption>{item.caption}</figcaption>
+                    </figure>
+                  </article>
+                ))}
+              </div>
+
+              <div className="arrows">
+                <button onClick={corners.prev} aria-label="Previous">
+                  {"<"}
+                </button>
+                <button onClick={corners.next} aria-label="Next">
+                  {">"}
+                </button>
+              </div>
+            </section>
           </div>
 
-          <div className="arrows">
-            <button onClick={amenities.prev} aria-label="Previous">
-              {"<"}
-            </button>
-            <button onClick={amenities.next} aria-label="Next">
-              {">"}
-            </button>
+        </div>
+        <div className="section-container">
+
+          <div
+            className="header-center animate-rotate"
+            style={{ marginTop: "1rem", marginBottom: "1rem" }}
+          >
+            <h1 className="main-title">PROPERTY PRICING</h1>
           </div>
-        </section>
- <div className="section-container">
+
+
+
+          <div ref={sectionRef} id="property-section"
+            className={`property-section ${showOther ? "shift-up" : ""}`}>
+            <PropertyPricing />
+          </div>
+
+
+
+          <div className={`other-section ${showOther ? "active" : ""}`}>
+            <OtherProjects />
+          </div>
+
+        </div>
+
         {/* Community Corners */}
-        <div className="header-center animate-flip">
-          <h2 className="main-subtitle">COMMUNITY CORNERS</h2>
-        </div>
 
-        <section ref={section}
-          className={`carousel ${corners.direction} animate-bounce ${isShrink ? "shrink" : ""}`}
-          aria-label="Community corners carousel"
-        >
-          <div className="list">
-            {communityCornersItems.map((item, index) => (
-              <article
-                key={item.id}
-                className={getItemClass(
-                  index,
-                  corners.active,
-                  corners.other_1,
-                  corners.other_2
-                )}
-              >
-                <div
-                  className="main-content"
-                  style={{
-                    backgroundImage: `url(${item.backgroundImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                  }}
-                >
-                  <div className="content">
-                    <h2>{item.title}</h2>
-                    <p className="description">{item.description}</p>
-                  </div>
-                </div>
 
-                <figure className="image">
-                  <img
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.caption}
-                  />
-                  <figcaption>{item.caption}</figcaption>
-                </figure>
-              </article>
-            ))}
-          </div>
 
-          <div className="arrows">
-            <button onClick={corners.prev} aria-label="Previous">
-              {"<"}
-            </button>
-            <button onClick={corners.next} aria-label="Next">
-              {">"}
-            </button>
-          </div>
-        </section>
 
-        <div
-          className="header-center animate-rotate"
-          style={{ marginTop: "2rem", marginBottom: "1rem" }}
-        >
-          <h1 className="main-title">PROPERTY PRICING</h1>
-        </div>
-
-        
-        
-        <div ref={sectionRef} id="property-section" 
-     className={`property-section ${showOther ? "shift-up" : ""}`}>
-  <PropertyPricing />
-</div>
-
-<div className={`other-section ${showOther ? "active" : ""}`}>
-  <OtherProjects />
-</div>
-
-        </div>
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">
           <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
@@ -846,19 +840,19 @@ const section = useRef<HTMLDivElement | null>(null)
         </div>
 
         <div
-  className="maharera-section animate-flip"
-  style={{
-    display: "flex",
-    alignItems: "flex-start",
-    maxWidth: "1200px",
-    margin: "40px auto",
-    padding: "40px 40px 40px 20px", // top right bottom left
-    gap: "40px",
-    backgroundColor: "#f8f9fa",
-    borderRadius: "8px",
-    boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-  }}
->
+          className="maharera-section animate-flip"
+          style={{
+            display: "flex",
+            alignItems: "flex-start",
+            maxWidth: "1200px",
+            margin: "40px auto",
+            padding: "40px 40px 40px 20px", // top right bottom left
+            gap: "40px",
+            backgroundColor: "#f8f9fa",
+            borderRadius: "8px",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+          }}
+        >
 
           {/* Left side - QR Code */}
           <div
@@ -1076,18 +1070,18 @@ const section = useRef<HTMLDivElement | null>(null)
             >
               {/* Subscribe Section */}
 
-             <div>
-  <h3 className="subscribe-title">Subscribe</h3>
+              <div>
+                <h3 className="subscribe-title">Subscribe</h3>
 
-  <div className="subscribe-form">
-    <input type="email" placeholder="Your e-mail" className="subscribe-input" />
-    <button className="subscribe-button">Send →</button>
-  </div>
+                <div className="subscribe-form">
+                  <input type="email" placeholder="Your e-mail" className="subscribe-input" />
+                  <button className="subscribe-button">Send →</button>
+                </div>
 
-  <p className="subscribe-text">
-    Subscribe our newsletter to receive our weekly feed.
-  </p>
-</div>
+                <p className="subscribe-text">
+                  Subscribe our newsletter to receive our weekly feed.
+                </p>
+              </div>
 
 
 
