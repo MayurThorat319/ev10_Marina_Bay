@@ -360,7 +360,39 @@ export default function App() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
+const [showPricing, setShowPricing] = useState(false);
+  const PricingnRef = useRef<HTMLDivElement | null>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
+          const isBottom40Visible = rect.bottom <= viewportHeight * 0.6;
+          if (isBottom40Visible) {
+            setShowPricing(true);
+          } else {
+            setShowPricing(false);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: Array.from({ length: 11 }, (_, i) => i / 10),
+      }
+    );
 
+    if (PricingnRef.current) {
+      observer.observe(PricingnRef.current);
+    }
+
+    return () => {
+      if (PricingnRef.current) {
+        observer.unobserve(PricingnRef.current);
+      }
+    };
+  }, []);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -490,6 +522,7 @@ export default function App() {
         <div className="animate-scale">
           <BuildingProgress />
         </div>
+         <div className="section-container">
         <div className="wrapper">
           <div className="section-wrapper Amenities-wrapper">
             <section
@@ -545,8 +578,7 @@ export default function App() {
               </div>
             </section>
           </div>
-          <div className="section-wrapper Amenities-wrapper">
-            <section
+<div ref={PricingnRef} className={`section-wrapper Amenities-wrapper property-section ${showPricing ? "shift-up" : ""}`} >            <section
               className={`carousel ${corners.direction}  `}
               aria-label="Community corners carousel"
             >
@@ -603,19 +635,19 @@ export default function App() {
 
         {/* Community Corners */}
 
-        <div className="section-container">
+       
+         
+
           <div
+            ref={sectionRef}
+            id="property-section"
+className={`property-section ${showOther ? "shift-up" : ""} other-section ${showPricing ? "active" : ""}`}          >
+             <div
             className="header-center animate-rotate"
             style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}
           >
             <h1 className="main-title">PROPERTY PRICING</h1>
           </div>
-
-          <div
-            ref={sectionRef}
-            id="property-section"
-            className={`property-section ${showOther ? "shift-up" : ""}`}
-          >
             <PropertyPricing />
           </div>
 

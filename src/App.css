@@ -111,7 +111,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: white;
 }
 
 .main-title {
@@ -1611,12 +1610,11 @@ left: -5%;
   }
 .section-container {
   position: relative;
-  overflow: hidden;
 }
 
 .property-section {
   position: relative;
-  z-index: 3;
+  z-index: 4;
  transition: margin-top 1s ease; 
 }
 
@@ -1636,7 +1634,7 @@ margin-top: -10%;
 .other-section.active {
   transform: translateY(0); 
   opacity: 1;
-  z-index: 2;
+  z-index: 3;
 }
 
 .wrapper {
@@ -1647,7 +1645,13 @@ margin-top: -10%;
   position: sticky;
   top: 0;
   height: 100vh;   
-  overflow: hidden;
+      overflow: hidden;
+      transform: margin-top 4s ease; 
+
+}
+.section-wrapper.shift-up {
+  position: relative;
+
 }
 .property-wrapper,
 .carousel {
@@ -1656,7 +1660,22 @@ margin-top: -10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+    overflow: hidden;
+
 }
 .padding{
   padding: 0.8rem 0rem;
+  color: white;
+}
+.color {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.926),
+    rgba(103, 103, 103, 0.579)
+  );
+  backdrop-filter: blur(5px); /* blur bhi add kar diya */
+  -webkit-backdrop-filter: blur(5px);
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 12px;
 }
