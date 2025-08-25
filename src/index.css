@@ -444,6 +444,16 @@ body {
   --breakpoint-3xl: 120rem;
 } */
 
+/* body {
+  width: 100dvw;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  font-family: "Round", sans-serif;
+  background: url("/images/bg_pricing.jpg") no-repeat center center fixed;
+  background-size: cover; /* makes image cover whole page 
+} */
+
+
 body {
   width: 100dvw;
   overflow-x: hidden;

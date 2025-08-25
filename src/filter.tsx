@@ -145,7 +145,7 @@ export default function FiveTabsSection({
   const sectionTitleStyle: React.CSSProperties = {
     fontSize: 18,
     fontWeight: 600,
-    marginBottom: 10,
+    // marginBottom: 10,
     color: "#333",
     textAlign: "center",
   }
@@ -154,7 +154,7 @@ export default function FiveTabsSection({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: 12,
+    // gap: 12,
   }
 
   const contentBoxStyle: React.CSSProperties = {

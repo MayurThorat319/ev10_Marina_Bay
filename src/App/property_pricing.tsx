@@ -193,6 +193,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
      <section  ref={sectionRef}
 className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}      style={{
         backgroundImage: "url(/images/bg_pricing.jpg)",
+        //  backgroundColor: "white",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
