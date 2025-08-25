@@ -52,3 +52,109 @@ Enhanced styles for the building progress section .building-progress-container {
   bottom: 0 !important;
   z-index: 9999 !important;
 }
+
+@media screen and (min-width: 691px) and (max-width: 768px) {
+  .modal-content {
+    max-width: 95% !important;
+    padding: 1rem !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: 60vh !important;
+    object-fit: contain !important;
+  }
+}
+
+@media screen and (min-width: 581px) and (max-width: 690px) {
+  .modal-content {
+    max-width: 90% !important;
+    padding: 0.8rem !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: 55vh !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 580px) {
+  .modal-content {
+    max-width: 95% !important;
+    padding: 0.6rem !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: 50vh !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media screen and (min-width: 382px) and (max-width: 480px) {
+  .modal-content {
+    max-width: 100% !important;
+    padding: 0.5rem !important;
+    border-radius: 6px !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: 45vh !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+}
+
+@media screen and (min-width: 250px) and (max-width: 381px) {
+  .modal-content {
+    max-width: 100% !important;
+    padding: 0.4rem !important;
+    border-radius: 4px !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    max-width: 100% !important;
+    max-height: 40vh !important;
+    object-fit: contain !important;
+    border-radius: 4px !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .modal-content {
+    max-width: 95% !important;
+    padding: 0.0rem !important;
+    border-radius: 6px !important;
+  }
+
+  .modal-content video,
+  .modal-content img {
+    min-width: auto !important;
+    min-height: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 55vh !important;
+    object-fit: contain !important;
+    border-radius: 6px !important;
+  }
+}

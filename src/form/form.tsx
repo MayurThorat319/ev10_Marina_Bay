@@ -24,10 +24,12 @@ export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps)
       if (e.key === "Escape") onClose()
     }
 
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape)
-      document.body.style.overflow = "hidden"
-    }
+   if (isOpen) {
+  document.addEventListener("keydown", handleEscape)
+  // ❌ remove this line
+  // document.body.style.overflow = "hidden"
+}
+
 
     return () => {
       document.removeEventListener("keydown", handleEscape)
@@ -59,7 +61,7 @@ export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps)
 
       <div className="layout-modal-content" onClick={(e) => e.stopPropagation()}>
         <button className="layout-modal-close" onClick={onClose} aria-label="Close modal">
-          <X size={24} color="red" />
+          <X size={16} color="white" />
         </button>
 
         <div className="layout-modal-header">

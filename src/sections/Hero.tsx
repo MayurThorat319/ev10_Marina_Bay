@@ -57,9 +57,9 @@ const Hero = () => {
 
   return (
     <section className="hero-section">
-      <div className=" mask-wrapper">
+      <div className="mask-wrapper">
         <img
-          src="/images/bg.png"
+          src="/images/bg-img.jpg"
           alt="background"
           className="scale-out mask-img"
         />
@@ -88,7 +88,7 @@ const Hero = () => {
                      <div className="fake-logo-wrapper overlay-logo">
         <video
           className="overlay-logo" 
-          src="/images/video-1.mp4"
+          src="/images/marina_vid.mp4"
           autoPlay
           loop
           muted
