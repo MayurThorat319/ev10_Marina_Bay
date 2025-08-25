@@ -126,7 +126,7 @@ export default function FiveTabsSection({
     border: "none",
     padding: "12px 8px",
     fontSize: 14,
-    fontWeight: 600,
+    fontWeight: 800,
     color: "#374151",
     cursor: "pointer",
     position: "relative", // needed for ripple positioning

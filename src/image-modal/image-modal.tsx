@@ -1,7 +1,8 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { X } from "lucide-react"
+import "./image-modal.css"
 
 interface ImageModalProps {
   isOpen: boolean
@@ -15,6 +16,8 @@ const isVideoFile = (src: string): boolean => {
 }
 
 export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
+  const contentRef = useRef<HTMLDivElement>(null)
+
   // Handle escape key press
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
@@ -39,30 +42,21 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md"
+      className="modal-overlay fixed inset-0 z-[99999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
       onClick={onClose}
-      style={{
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: "#00000094",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        objectFit: "cover",
-      }}
     >
-      <div className="absolute inset-0 flex items-center justify-center p-4">
-        <div className="relative max-w-5xl max-h-[90vh] w-full" onClick={(e) => e.stopPropagation()}>
-          {/* Close button */}
-          <button onClick={onClose} className=" absolute -top-3 -right-4 z-[100000] p-1" aria-label="Close modal">
-            <X className="w-6 h-6 text-red-500 hover:text-red-600" />
-          </button>
+      
 
-          <div className="relative overflow-hidden rounded-lg shadow-2xl bg-white flex items-center justify-center">
-            {isVideoFile(imageSrc) ? (
+      <div
+        ref={contentRef}
+        className="modal-content relative bg-gray-900 rounded-xl shadow-2xl overflow-hidden max-w-5xl w-full max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()}
+        
+      >
+        {/* Modal content */}
+        <div className="h-full w-full flex items-center justify-center p-8">
+          {isVideoFile(imageSrc) ? (
+            <div className="relative w-full h-full flex items-center justify-center">
               <video
                 src={imageSrc}
                 controls
@@ -70,24 +64,21 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
                 muted
                 loop
                 playsInline
-                className="max-w-[40vw] max-h-[85vh] object-contain"
-                style={{ minHeight: "480px", minWidth: "600px", maxWidth: "400px", maxHeight: "400px" }}
-                onError={(e) => {
-                  console.log("[v0] Video failed to load in modal:", e.currentTarget.src)
-                }}
+                className="max-w-full max-h-[50vh] object-contain rounded-lg"
+                style={{ minHeight: "335px", minWidth: "700px", maxWidth: "900px", maxHeight: "400px" }}
               >
                 <source src={imageSrc} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-            ) : (
-              <img
-                src={imageSrc || "/placeholder.svg"}
-                alt="Building progress detail"
-                className="max-w-[40vw] max-h-[85vh] object-contain"
-                style={{ minHeight: "480px", minWidth: "600px", maxWidth: "400px", maxHeight: "400px" }}
-              />
-            )}
-          </div>
+            </div>
+          ) : (
+            <img
+              src={imageSrc || "/placeholder.svg"}
+              alt="Building progress detail"
+              className="max-w-full max-h-[50vh] object-contain rounded-lg"
+              style={{ minHeight: "480px", minWidth: "600px", maxWidth: "400px", maxHeight: "400px" }}
+            />
+          )}
         </div>
       </div>
     </div>

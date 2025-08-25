@@ -86,6 +86,35 @@
   text-align: center;      /* centers text inside */
 }
 
+/* Bottom overlay for properties 1, 2, and 5 - HIDDEN BY DEFAULT */
+.property-overlay-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show bottom overlay on hover */
+.property-item:hover .property-overlay-bottom {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.property-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: 'Amaranth', sans-serif;
+}
 
 .property-count {
   font-size: 2.5rem;
@@ -100,6 +129,7 @@
   margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-family: 'Amaranth', sans-serif;
 }
 
 .property-description {
@@ -109,9 +139,8 @@
   opacity: 0.9;
   max-width: 180px;
   text-align: center;
+  font-family: 'Amaranth', sans-serif;
 }
-
-
 
 /* Responsive design */
 @media (max-width: 768px) {
@@ -147,8 +176,13 @@
     grid-row: 3 / 4;
   }
 
-  .property-overlay {
+  .property-overlay,
+  .property-overlay-bottom {
     padding: 15px;
+  }
+
+  .property-title {
+    font-size: 1rem;
   }
 
   .property-count {
@@ -162,6 +196,12 @@
   .property-description {
     font-size: 0.75rem;
     max-width: 150px;
+  }
+  
+  /* Show titles on mobile without hover */
+  .property-overlay-bottom {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

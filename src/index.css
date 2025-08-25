@@ -645,7 +645,7 @@ main {
 }
 
 .mask-wrapper {
-  mask-image: url("/images/BAY.svg");
+  mask-image: url("/images/BAY_1.svg");
   mask-repeat: no-repeat;
 }
 .mask-img {
