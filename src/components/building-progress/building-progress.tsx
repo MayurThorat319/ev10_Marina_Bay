@@ -11,6 +11,12 @@ const BuildingProgress: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+
+  const handleOpenModal = (imageSrc: string) => {
+    setSelectedImage(imageSrc)
+    setIsModalOpen(true)
+  }
+
   const images = [
     "/images/mb_vid_ind_1.mp4",
     // "/images/mb_normal_1.jpg",
@@ -47,13 +53,13 @@ const BuildingProgress: React.FC = () => {
           {/* Left scrolling slider - should only show images array */}
           <div className="w-full">
         
-            <BuildingSlider images={images} direction="left" speed="slow" onImageClick={handleImageClick} />
+            <BuildingSlider images={images} direction="left" speed="slow" onImageClick={handleOpenModal} />
           </div>
 
           {/* Right scrolling slider - should only show images1 array */}
           <div className="w-full">
         
-            <BuildingSlider images={images1} direction="right" speed="slow" onImageClick={handleImageClick} />
+            <BuildingSlider images={images1} direction="right" speed="slow" onImageClick={handleOpenModal} />
           </div>
         </div>
       </div>

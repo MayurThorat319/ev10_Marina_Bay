@@ -216,7 +216,7 @@ const carouselItems = [
     id: 1,
     title: "Jogging Track",
     description:
-      "TAKE A WALK, GO FOR A JOG, OR ENJOY A QUIET RUN ALONG THE JOGGING TRACK. IT’S A GREAT WAY TO MOVE YOUR BODY WHILE SOAKING IN THE VIEWS. FITNESS FEELS EASY WHEN IT LOOKS THIS GOOD.",
+      "Take a walk, go for a jog, or enjoy a quiet run along the jogging track. It’s a great way to move your body while soaking in the views. Fitness feels easy when it looks this good.",
     image: "/images/jogging_track.png",
     backgroundImage: "/background_images/blur_jogging_track.png",
     caption: "Jogging Track",
@@ -226,7 +226,7 @@ const carouselItems = [
     id: 2,
     title: "Exclusive Gym",
     description:
-      "STEP INTO OUR WELCOMING, WELL-EQUIPPED GYM WHERE EVERY CORNER IS DESIGNED TO INSPIRE YOUR FITNESS JOURNEY. LATEST MACHINES AND STUNNING SCENIC VIEWS, WORKING OUT BECOMES A REFRESHING EXPERIENCE THAT LIFTS BOTH BODY AND SPIRIT.",
+      "Step into our welcoming, well-equipped gym where every corner is designed to inspire your fitness journey. Latest machines and stunning scenic views, working out becomes a refreshing experience that lifts both body and spirit.",
     image: "/images/GYM.png",
     backgroundImage: "/background_images/blur_gym.png",
     caption: "Exclusive Gym",
@@ -236,7 +236,7 @@ const carouselItems = [
     id: 3,
     title: "Infinity Pool",
     description:
-      "THE INFINITY POOL OFFERS A SERENE ESCAPE WHERE THE WATER APPEARS TO MERGE WITH THE SKY. ENJOY A COOL, REFRESHING SWIM SURROUNDED BY BREATHTAKING VIEWS. IT’S THE PERFECT PLACE TO RELAX, RECHARGE, AND TAKE IN THE BEAUTY AROUND YOU.",
+      "The infinity pool offers a serene escape where the water appears to merge with the sky. Enjoy a cool, refreshing swim surrounded by breathtaking views. It’s the perfect place to relax, recharge, and take in the beauty around you.",
     image: "/images/Infinity_pool.png",
     backgroundImage: "/background_images/blur_infinity_pool.png",
     caption: "Infinity Pool",
@@ -246,7 +246,7 @@ const carouselItems = [
     id: 4,
     title: "Meditation Centre",
     description:
-      "A SERENE SANCTUARY TO HELP YOU RECONNECT WITH YOUR INNER SELF AND FIND PEACE AMID LIFE’S HUSTLE. NESTLED IN A TRANQUIL SETTING WITH STUNNING VIEWS, OUR CENTER OFFERS A PERFECT BLEND OF MINDFULNESS, SPIRITUALITY, AND RELAXATION TO REFRESH YOUR MIND, BODY, AND SOUL.",
+      "A serene sanctuary to help you reconnect with your inner self and find peace amid life’s hustle. Nestled in a tranquil setting with stunning views, our center offers a perfect blend of mindfulness, spirituality, and relaxation to refresh your mind, body, and soul.",
     image: "/images/Meditation_center.png",
     backgroundImage: "/background_images/blur_meditation_center.png",
     caption: "Meditation Centre",
@@ -259,7 +259,7 @@ const communityCornersItems = [
     id: 1,
     title: "Rooftop Lounge",
     description:
-      "WHETHER IT’S A SUNSET COCKTAIL, A ROMANTIC DINNER, OR A LIVELY CELEBRATION, OUR ROOFTOP PARTY LOUNGE WITH STUNNING SEA VIEWS OFFERS A MAGICAL EXPERIENCE. EVERY MOMENT HERE BECOMES A CHERISHED MEMORY AGAINST THE BACKDROP OF BREATHTAKING SCENERY. JOIN US AND MAKE YOUR SPECIAL OCCASIONS TRULY UNFORGETTABLE.",
+      "Whether it’s a sunset cocktail, a romantic dinner, or a lively celebration, our rooftop party lounge with stunning sea views offers a magical experience. Every moment here becomes a cherished memory against the backdrop of breathtaking scenery. Join us and make your special occasions truly unforgettable.",
     image: "/images/rooftop_lounge.png",
     backgroundImage: "/background_images/blur_rooftop_lounge.png",
     caption: "Rooftop Lounge",
@@ -269,7 +269,7 @@ const communityCornersItems = [
     id: 2,
     title: "Barbeque Zone",
     description:
-      "FIRE UP THE GRILL AND BRING EVERYONE TOGETHER IN OUR LIVELY BARBECUE ZONE. IT’S THE IDEAL PLACE TO ENJOY GREAT FOOD, GOOD COMPANY, AND PLENTY OF SMILES. MAKE EVERY MEAL A CELEBRATION AND EVERY MOMENT A MEMORY.",
+      "Fire up the grill and bring everyone together in our lively Barbecue Zone. It’s the ideal place to enjoy great food, good company, and plenty of smiles. Make every meal a celebration and every moment a memory.",
     image: "/images/Barbeque_zone.png",
     backgroundImage: "/background_images/blur_barbeque_zone.png",
     caption: "Barbeque Zone",
@@ -279,7 +279,7 @@ const communityCornersItems = [
     id: 3,
     title: "Marina Bay Garden",
     description:
-      "STEP INTO A VIBRANT GARDEN BURSTING WITH COLORFUL BLOOMS, TREES, AND SECRET PATHS WAITING TO BE DISCOVERED. EACH CORNER OFFERS A NEW CHANCE TO PAUSE, BREATHE, AND LET NATURE’S BEAUTY WASH OVER YOU. IT’S YOUR EVERYDAY ESCAPE TO PEACE.",
+      "Step into a vibrant garden bursting with colorful blooms, trees, and secret paths waiting to be discovered. Each corner offers a new chance to pause, breathe, and let nature’s beauty wash over you.  It’s your everyday escape to peace.",
     image: "/images/Marina_bay_garden.png",
     backgroundImage: "/background_images/blur_marina_bay_garden.png",
     caption: "Marina Bay Garden",
@@ -289,7 +289,7 @@ const communityCornersItems = [
     id: 4,
     title: "Kids Play Area",
     description:
-      "A VIBRANT AND EXCITING SPACE BUILT TO SPARK JOY, CREATIVITY, AND ADVENTURE FOR CHILDREN OF ALL AGES. OUR PLAY AREA IS CAREFULLY DESIGNED WITH FUN, SAFETY, AND IMAGINATION IN MIND. IT’S A WELCOMING PLACE WHERE KIDS CAN EXPLORE, LEARN, AND GROW.",
+      "A vibrant and exciting space built to spark joy, creativity, and adventure for children of all ages. Our play area is carefully designed with fun, safety, and imagination in mind. It’s a welcoming place where kids can explore, learn, and grow.",
     image: "/images/Kids_play_area.png",
     backgroundImage: "/background_images/blur_kids_play_area.png",
     caption: "Kids Play Area",
@@ -481,8 +481,7 @@ export default function App() {
 
       <Hero />
 
-      <main  >
-        
+      <main>
         {/* Amenities Carousel */}
         <div className="header-center animate-fade-up">
           <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
@@ -493,120 +492,116 @@ export default function App() {
         </div>
         <div className="wrapper">
           <div className="section-wrapper Amenities-wrapper">
-            
-              <section
-                className={`carousel ${amenities.direction} animate-slide-right`}
-                aria-label="Amenities carousel"
-              >
-                
+            <section
+              className={`carousel ${amenities.direction} animate-slide-right`}
+              aria-label="Amenities carousel"
+            >
               <h1 className="main-title2">AMENITIES</h1>
               <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
 
-                <div className="list">
-                  {carouselItems.map((item, index) => (
-                    <article
-                      key={item.id}
-                      className={getItemClass(
-                        index,
-                        amenities.active,
-                        amenities.other_1,
-                        amenities.other_2
-                      )}
-                    >
-                      <div
-                        className="main-content"
-                        style={{
-                          backgroundImage: `url(${item.backgroundImage})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      >
-                        <div className="content">
-                          <h2>{item.title}</h2>
-                          <p className="description">{item.description}</p>
-                        </div>
-                      </div>
-
-                      <figure className="image">
-                        <img
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.caption}
-                        />
-                        <figcaption>{item.caption}</figcaption>
-                      </figure>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="arrows">
-                  <button onClick={amenities.prev} aria-label="Previous">
-                    {"<"}
-                  </button>
-                  <button onClick={amenities.next} aria-label="Next">
-                    {">"}
-                  </button>
-                </div>
-              </section>
-            
-          </div>
-            <div className="section-wrapper Amenities-wrapper">
-          <section
-            className={`carousel ${corners.direction}  `}
-            aria-label="Community corners carousel"
-          >
-            <div className="header-center animate-flip">
-              <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
-            </div>
-            <div className="list">
-              {communityCornersItems.map((item, index) => (
-                <article
-                  key={item.id}
-                  className={getItemClass(
-                    index,
-                    corners.active,
-                    corners.other_1,
-                    corners.other_2
-                  )}
-                >
-                  <div
-                    className="main-content"
-                    style={{
-                      backgroundImage: `url(${item.backgroundImage})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
+              <div className="list">
+                {carouselItems.map((item, index) => (
+                  <article
+                    key={item.id}
+                    className={getItemClass(
+                      index,
+                      amenities.active,
+                      amenities.other_1,
+                      amenities.other_2
+                    )}
                   >
-                    <div className="content">
-                      <h2>{item.title}</h2>
-                      <p className="description">{item.description}</p>
+                    <div
+                      className="main-content"
+                      style={{
+                        backgroundImage: `url(${item.backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="content">
+                        <h2>{item.title}</h2>
+                        <p className="description">{item.description}</p>
+                      </div>
                     </div>
-                  </div>
 
-                  <figure className="image">
-                    <img
-                      src={item.image || "/placeholder.svg"}
-                      alt={item.caption}
-                    />
-                    <figcaption>{item.caption}</figcaption>
-                  </figure>
-                </article>
-              ))}
-            </div>
+                    <figure className="image">
+                      <img
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.caption}
+                      />
+                      <figcaption>{item.caption}</figcaption>
+                    </figure>
+                  </article>
+                ))}
+              </div>
 
-            <div className="arrows">
-              <button onClick={corners.prev} aria-label="Previous">
-                {"<"}
-              </button>
-              <button onClick={corners.next} aria-label="Next">
-                {">"}
-              </button>
-            </div>
-          </section>
-        </div>
+              <div className="arrows">
+                <button onClick={amenities.prev} aria-label="Previous">
+                  {"<"}
+                </button>
+                <button onClick={amenities.next} aria-label="Next">
+                  {">"}
+                </button>
+              </div>
+            </section>
+          </div>
+          <div className="section-wrapper Amenities-wrapper">
+            <section
+              className={`carousel ${corners.direction}  `}
+              aria-label="Community corners carousel"
+            >
+              <div className="header-center animate-flip">
+                <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
+              </div>
+              <div className="list">
+                {communityCornersItems.map((item, index) => (
+                  <article
+                    key={item.id}
+                    className={getItemClass(
+                      index,
+                      corners.active,
+                      corners.other_1,
+                      corners.other_2
+                    )}
+                  >
+                    <div
+                      className="main-content"
+                      style={{
+                        backgroundImage: `url(${item.backgroundImage})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    >
+                      <div className="content">
+                        <h2>{item.title}</h2>
+                        <p className="description">{item.description}</p>
+                      </div>
+                    </div>
+
+                    <figure className="image">
+                      <img
+                        src={item.image || "/placeholder.svg"}
+                        alt={item.caption}
+                      />
+                      <figcaption>{item.caption}</figcaption>
+                    </figure>
+                  </article>
+                ))}
+              </div>
+
+              <div className="arrows">
+                <button onClick={corners.prev} aria-label="Previous">
+                  {"<"}
+                </button>
+                <button onClick={corners.next} aria-label="Next">
+                  {">"}
+                </button>
+              </div>
+            </section>
+          </div>
         </div>
 
         {/* Community Corners */}
-      
 
         <div className="section-container">
           <div
@@ -760,7 +755,7 @@ export default function App() {
                 fontWeight: 600,
                 color: "#003261",
                 marginBottom: "20px",
-                fontFamily: "serif",
+                fontFamily: "'Amaranth', sans-serif", 
               }}
             >
               About EV Group
@@ -773,6 +768,7 @@ export default function App() {
                 color: "#003261",
                 textAlign: "justify",
                 marginBottom: "25px",
+                fontFamily: "'Amaranth', sans-serif", 
               }}
             >
               <p>
@@ -804,6 +800,7 @@ export default function App() {
                   padding: "12px 24px",
                   fontSize: "0.9rem",
                   fontWeight: 500,
+                  fontFamily: "'Amaranth', sans-serif", 
                   border: "none",
                   borderRadius: "6px",
                   cursor: "pointer",
@@ -881,7 +878,7 @@ export default function App() {
                 fontWeight: 600,
                 color: "#003261",
                 marginBottom: "15px",
-                fontFamily: "serif",
+                fontFamily: "'Amaranth', sans-serif", 
               }}
             >
               MAHARERA Registration Number: PST700028722
