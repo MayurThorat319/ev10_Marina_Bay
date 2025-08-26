@@ -132,11 +132,20 @@ body {
 }
 
 .main-subtitle {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 500;
   text-align: center;
-  color: #4b5563;
+  color: white;
   font-family: 'Amaranth', sans-serif;
+  position: absolute;
+  top: 50px;    
+  left: 50%;     
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.padding{
+    top: 20px;    
+
 }
 
 /* Add these new title styles */
@@ -204,6 +213,7 @@ body {
   border-right: 1px solid var(--border-color);
   z-index: 4;
   pointer-events: none;
+  
 }
 .carousel .list::after {
   position: absolute;
@@ -277,22 +287,49 @@ body {
 }
 
 .carousel .list .item .main-content {
+    position: relative;
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+    overflow: hidden;
+
 }
 
 .carousel .list .item .main-content::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Adds a dark overlay for better text visibility */
-  z-index: 1;
+   position: relative;
+  background-size: cover;
+  background-position: center;
+
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+
+  mask-image: linear-gradient(to bottom, transparent, black);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
 }
+/* .boxblur {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  height: 9px;  
+  width: 100%;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.8) 0%,   
+    rgba(255, 255, 255, 0.118) 50%, 
+    rgba(255, 255, 255, 0) 100%    
+  );
+
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+} */
+
 
 .carousel .list .item .main-content .content {
   position: relative;
@@ -1612,29 +1649,96 @@ left: -5%;
   position: relative;
 }
 
+/* --- WRAPPER SECTION (Amenities / Community Corners) --- */
+.wrapper-section {
+  position: relative;
+  z-index: 3; /* sabse upar */
+  transition: margin-top 2s ease;
+}
+.wrapper-section.shift-up {
+  margin-top: -10%;
+}
+
+/* --- PROPERTY SECTION (Pricing) --- */
 .property-section {
   position: relative;
-  z-index: 4;
- transition: margin-top 1s ease; 
+  z-index: 2;
+  transform: translateY(-40vh);
+  transition: transform 2s ease, opacity 2s ease, z-index 0.3s ease;
 }
 
-.property-section.shift-up {
-margin-top: -10%;
+.property-section.active {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 2;
 }
 
+.property-content {
+  position: absolute; /* parent ke andar chipak ke rahega */
+  left: 0;
+  right: 0;
+  top: 0;
+ margin-top: 0;
+  transition: margin-top 0.8s ease, opacity 0.8s ease;  transform: translateY(0);
+}
 
+.property-section.move-up .property-content {
+   /* ya jitna upar chahiye */
+}
+
+.property-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 5; /* content ke upar but parent ke andar */
+}
+.property-section.active::after {
+  opacity: 0;
+}
+
+/* --- OTHER SECTION (Other Projects) --- */
 .other-section {
   position: relative;
-  z-index: 2;
-  transform: translateY(-40vh); 
-  opacity: 0.5;
-  transition: transform 1s ease, opacity 0.8s ease, z-index 0.3s ease;
+  z-index: 1; /* sabse neeche */
+  transform: translateY(-40vh);
+  transition: transform 2s ease, opacity 0.8s ease, z-index 0.3s ease;
+}
+.other-section.active {
+  transform: translateY(0);
+  opacity: 1;
+  z-index: 1; /* neeche hi rahega */
+}
+.property-content {
+  position: relative;
+  transition: transform 1s ease;
+  transform: translateY(0);
 }
 
-.other-section.active {
-  transform: translateY(0); 
-  opacity: 1;
-  z-index: 3;
+.property-section.move-up .property-content {
+  transform: translateY(-10%);
+}
+.other-section::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 5; /* content ke upar but parent ke andar */
+}
+.other-section.active::after {
+  opacity: 0;
 }
 
 .wrapper {
@@ -1646,12 +1750,26 @@ margin-top: -10%;
   top: 0;
   height: 100vh;   
       overflow: hidden;
-      transform: margin-top 4s ease; 
+  transition: transform 1s ease;
 
 }
-.section-wrapper.shift-up {
-  position: relative;
 
+.Amenities-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 2; /* content ke upar */
+}
+
+.Amenities-wrapper.fade-out::after {
+  opacity: 0.6; /* jitna dark chahiye */
 }
 .property-wrapper,
 .carousel {
@@ -1663,10 +1781,7 @@ margin-top: -10%;
     overflow: hidden;
 
 }
-.padding{
-  padding: 0.8rem 0rem;
-  color: white;
-}
+
 .color {
   background: linear-gradient(
     to top,

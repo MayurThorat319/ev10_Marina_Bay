@@ -360,9 +360,31 @@ export default function App() {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
   const scrollRef = useRef<HTMLDivElement | null>(null);
-const [showPricing, setShowPricing] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
   const PricingnRef = useRef<HTMLDivElement | null>(null);
-  
+  const [scrollWithCorners, setScrollWithCorners] = useState(false);
+  const wellnessRef = useRef<HTMLDivElement | null>(null);
+  const cornersRef = useRef<HTMLDivElement | null>(null);
+  const [fadeOut, setFadeOut] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.10) {
+            // Jab COMMUNITY CORNERS visible hoga tab fade out
+            setFadeOut(true);
+          } else {
+            setFadeOut(false);
+          }
+        });
+      },
+      { threshold: [0.10] } // 20% visible hone par trigger
+    );
+
+    if (cornersRef.current) observer.observe(cornersRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -522,132 +544,151 @@ const [showPricing, setShowPricing] = useState(false);
         <div className="animate-scale">
           <BuildingProgress />
         </div>
-         <div className="section-container">
-        <div className="wrapper">
-          <div className="section-wrapper Amenities-wrapper">
-            <section
-              className={`carousel ${amenities.direction} animate-slide-right`}
-              aria-label="Amenities carousel"
+        <div className="section-container">
+          <div className="wrapper">
+            <div ref={wellnessRef} className={`section-wrapper Amenities-wrapper  ${fadeOut ? "fade-out" : ""}
+              }`}
+            //             style={{ 
+            //             transform: `translateY(-${scrollProgress * 100}%)`,
+            // transition: "transform 0.10s ease-in-out"// optional 
+            //             }}
             >
-              <h1 className="main-title2">AMENITIES</h1>
-              <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
+              <section
+                className={`carousel ${amenities.direction} animate-slide-right`}
+                aria-label="Amenities carousel"
+              >
+                <h1 className="main-title2">AMENITIES</h1>
 
-              <div className="list">
-                {carouselItems.map((item, index) => (
-                  <article
-                    key={item.id}
-                    className={getItemClass(
-                      index,
-                      amenities.active,
-                      amenities.other_1,
-                      amenities.other_2
-                    )}
-                  >
-                    <div
-                      className="main-content"
-                      style={{
-                        backgroundImage: `url(${item.backgroundImage})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
+
+                <div className="list">
+                  {carouselItems.map((item, index) => (
+                    <article
+                      key={item.id}
+                      className={getItemClass(
+                        index,
+                        amenities.active,
+                        amenities.other_1,
+                        amenities.other_2
+                      )}
                     >
-                      <div className="content">
-                        <h2>{item.title}</h2>
-                        <p className="description">{item.description}</p>
+
+                      <div
+                        className="main-content"
+                        style={{
+                          backgroundImage: `url(${item.backgroundImage})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                          // WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%)",
+                          // WebkitMaskRepeat: "no-repeat",
+                          // WebkitMaskSize: "100% 100%",
+                          // maskImage: "linear-gradient(to bottom, transparent, black 15%)",
+                          // maskRepeat: "no-repeat",
+                          // maskSize: "100% 100%",
+                        }}
+                      >
+                        <div className="content">
+                          <h2>{item.title}</h2>
+                          <p className="description">{item.description}</p>
+                        </div>
                       </div>
-                    </div>
 
-                    <figure className="image">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.caption}
-                      />
-                      <figcaption>{item.caption}</figcaption>
-                    </figure>
-                  </article>
-                ))}
-              </div>
+                      <figure className="image">
+                        <img
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.caption}
+                        />
+                        <figcaption>{item.caption}</figcaption>
+                      </figure>
+                    </article>
+                  ))}
+                </div>
 
-              <div className="arrows">
-                <button onClick={amenities.prev} aria-label="Previous">
-                  {"<"}
-                </button>
-                <button onClick={amenities.next} aria-label="Next">
-                  {">"}
-                </button>
-              </div>
-            </section>
-          </div>
-<div ref={PricingnRef} className={`section-wrapper Amenities-wrapper property-section ${showPricing ? "shift-up" : ""}`} >            <section
-              className={`carousel ${corners.direction}  `}
-              aria-label="Community corners carousel"
-            >
-              <div className="header-center animate-flip">
+                <div className="arrows">
+                  <button onClick={amenities.prev} aria-label="Previous">
+                    {"<"}
+                  </button>
+                  <button onClick={amenities.next} aria-label="Next">
+                    {">"}
+                  </button>
+                </div>
+                <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
+
+              </section>
+            </div>
+            <div
+              ref={(el) => { PricingnRef.current = el; cornersRef.current = el; }}
+              className={`section-wrapper Amenities-wrapper wrapper-section ${showPricing ? "shift-up" : ""}`} >
+              <section
+                className={`carousel ${corners.direction}  `}
+                aria-label="Community corners carousel"
+              >
+
+                <div className="list">
+                  {communityCornersItems.map((item, index) => (
+                    <article
+                      key={item.id}
+                      className={getItemClass(
+                        index,
+                        corners.active,
+                        corners.other_1,
+                        corners.other_2
+                      )}
+                    >
+
+                      <div
+                        className="main-content"
+                        style={{
+                          backgroundImage: `url(${item.backgroundImage})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      >
+                        <div className="content">
+                          <h2>{item.title}</h2>
+                          <p className="description">{item.description}</p>
+                        </div>
+                      </div>
+
+                      <figure className="image">
+                        <img
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.caption}
+                        />
+                        <figcaption>{item.caption}</figcaption>
+                      </figure>
+                    </article>
+                  ))}
+                </div>
+
                 <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
-              </div>
-              <div className="list">
-                {communityCornersItems.map((item, index) => (
-                  <article
-                    key={item.id}
-                    className={getItemClass(
-                      index,
-                      corners.active,
-                      corners.other_1,
-                      corners.other_2
-                    )}
-                  >
-                    <div
-                      className="main-content"
-                      style={{
-                        backgroundImage: `url(${item.backgroundImage})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    >
-                      <div className="content">
-                        <h2>{item.title}</h2>
-                        <p className="description">{item.description}</p>
-                      </div>
-                    </div>
-
-                    <figure className="image">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.caption}
-                      />
-                      <figcaption>{item.caption}</figcaption>
-                    </figure>
-                  </article>
-                ))}
-              </div>
-
-              <div className="arrows">
-                <button onClick={corners.prev} aria-label="Previous">
-                  {"<"}
-                </button>
-                <button onClick={corners.next} aria-label="Next">
-                  {">"}
-                </button>
-              </div>
-            </section>
+                <div className="boxblur"></div>
+                <div className="arrows">
+                  <button onClick={corners.prev} aria-label="Previous">
+                    {"<"}
+                  </button>
+                  <button onClick={corners.next} aria-label="Next">
+                    {">"}
+                  </button>
+                </div>
+              </section>
+            </div>
           </div>
-        </div>
 
-        {/* Community Corners */}
+          {/* Community Corners */}
 
-       
-         
+
+
 
           <div
             ref={sectionRef}
             id="property-section"
-className={`property-section ${showOther ? "shift-up" : ""} other-section ${showPricing ? "active" : ""}`}          >
-             <div
-            className="header-center animate-rotate"
-            style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}
-          >
-            <h1 className="main-title">PROPERTY PRICING</h1>
-          </div>
+            className={`property-section ${showOther ? "move-up" : ""} section-property ${showPricing ? "active" : ""}`}          >
+            <div
+              className="header-center animate-rotate"
+              style={{ marginBottom: "0.2rem" }}
+            >
+              <h1 className="main-title">PROPERTY PRICING</h1>
+            </div>
             <PropertyPricing />
           </div>
 
@@ -787,7 +828,7 @@ className={`property-section ${showOther ? "shift-up" : ""} other-section ${show
                 fontWeight: 600,
                 color: "#003261",
                 marginBottom: "20px",
-                fontFamily: "'Amaranth', sans-serif", 
+                fontFamily: "'Amaranth', sans-serif",
               }}
             >
               About EV Group
@@ -800,7 +841,7 @@ className={`property-section ${showOther ? "shift-up" : ""} other-section ${show
                 color: "#003261",
                 textAlign: "justify",
                 marginBottom: "25px",
-                fontFamily: "'Amaranth', sans-serif", 
+                fontFamily: "'Amaranth', sans-serif",
               }}
             >
               <p>
@@ -832,7 +873,7 @@ className={`property-section ${showOther ? "shift-up" : ""} other-section ${show
                   padding: "12px 24px",
                   fontSize: "0.9rem",
                   fontWeight: 500,
-                  fontFamily: "'Amaranth', sans-serif", 
+                  fontFamily: "'Amaranth', sans-serif",
                   border: "none",
                   borderRadius: "6px",
                   cursor: "pointer",
@@ -910,7 +951,7 @@ className={`property-section ${showOther ? "shift-up" : ""} other-section ${show
                 fontWeight: 600,
                 color: "#003261",
                 marginBottom: "15px",
-                fontFamily: "'Amaranth', sans-serif", 
+                fontFamily: "'Amaranth', sans-serif",
               }}
             >
               MAHARERA Registration Number: PST700028722
