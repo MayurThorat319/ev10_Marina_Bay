@@ -845,7 +845,7 @@ export default function App() {
 
         <div
           id="about"
-          className="about-section animate-slide-right"
+          className="about-section animate-scale"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -968,7 +968,7 @@ export default function App() {
         </div>
 
         <div
-          className="maharera-section"
+          className="maharera-section animate-scale"
           style={{
             display: "flex",
             alignItems: "flex-start",
