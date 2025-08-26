@@ -316,25 +316,25 @@ const videoTestimonials = [
   {
     id: 1,
     title: "Mr./Mrs. Margret Kingsley",
-    thumbnail: "/images/Testimonial-1.jpeg",
+    thumbnail: "/images/Testimonial-1.png",
     youtubeUrl: "https://www.youtube.com/watch?v=nOLkacqbZU4",
   },
   {
     id: 2,
     title: "Mr./Mrs. Kacholia's",
-    thumbnail: "/images/Testimonial-2.jpeg",
+    thumbnail: "/images/Testimonial-2.png",
     youtubeUrl: "https://www.youtube.com/watch?v=9mS37VEgWHU",
   },
   {
     id: 3,
     title: "Mr./Mrs. Anurag Tripathi",
-    thumbnail: "/images/Testimonial-3.jpeg",
+    thumbnail: "/images/Testimonial-3.png",
     youtubeUrl: "https://www.youtube.com/watch?v=O-h8oQ4e2Nw",
   },
   {
     id: 4,
     title: "Mr./Mrs. Uday K Kalgutkar",
-    thumbnail: "/images/Testimonial-4.jpeg",
+    thumbnail: "/images/Testimonial-4.png",
     youtubeUrl: "https://www.youtube.com/watch?v=NzOE1F1lqsw",
   },
 ];
@@ -752,26 +752,32 @@ export default function App() {
                   className="video-testimonial-card"
                   onClick={() => handleVideoClick(video.youtubeUrl)}
                 >
-                  <div className="video-thumbnail-container">
-                    <img
-                      src={video.thumbnail || "/placeholder.svg"}
-                      alt={video.title}
-                      className="video-thumbnail"
-                    />
-                    <div className="play-button-overlay">
-                      <div className="play-button">
-                        <svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="white"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="video-title">{video.title}</div>
+                 <div
+  key={`${video.id}-${index}`}
+  className="video-testimonial-card"
+  onClick={() => handleVideoClick(video.youtubeUrl)}
+>
+  <div className="video-thumbnail-container">
+    <img
+      src={video.thumbnail || "/placeholder.svg"}
+      alt={video.title}
+      className="video-thumbnail"
+    />
+    <div className="play-button-overlay">
+      <div className="play-button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </div>
+    </div>
+
+    {/* Title overlay inside thumbnail */}
+    <div className="video-title-overlay">
+      {video.title}
+    </div>
+  </div>
+</div>
+
                 </div>
               ))}
             </div>
