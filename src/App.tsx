@@ -9,7 +9,7 @@ import OtherProjects from "./components/other-projects/other-projects";
 import Hero from "./sections/Hero";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import LocomotiveScroll from "locomotive-scroll";
+// import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 import MarinaNavbar from "./components/NavBar/NavBar";
 
@@ -18,6 +18,20 @@ gsap.registerPlugin(ScrollTrigger);
 // CSS for all the animations
 const scrollAnimationCSS = `
   /* Fade in from bottom */
+   @keyframes slideDownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-down-fade {
+    animation: slideDownFadeIn 0.5s ease-out forwards;
+  }
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -360,9 +374,48 @@ export default function App() {
   ]);
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+  // const scrollRef = useRef<HTMLDivElement | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const PricingnRef = useRef<HTMLDivElement | null>(null);
+ const [showNavbar, setShowNavbar] = useState(false);
+  const buildingRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+       const handleScroll = () => {
+    // show navbar after 300px scroll (you can adjust this)
+    if (window.scrollY > 1800) {
+      setShowNavbar(true);
+    } else {
+      setShowNavbar(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+
+  // const observer = new IntersectionObserver(
+  //   (entries) => {
+  //     entries.forEach((entry) => {
+  //       // ✅ Show navbar only when this section is reached
+  //       if (entry.isIntersecting) {
+  //         setShowNavbar(true);
+  //       } else {
+  //         setShowNavbar(false);
+  //       }
+  //     });
+  //   },
+  //   { threshold: 0.4 } // adjust visibility percentage
+  // );
+
+  // if (buildingRef.current) {
+  //   observer.observe(buildingRef.current);
+  // }
+
+  // return () => {
+  //   if (buildingRef.current) observer.unobserve(buildingRef.current);
+  // };
+}, []);
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -511,9 +564,9 @@ export default function App() {
           </div>
         </div>
       </section> */}
-      <MarinaNavbar />
-
-      <Hero />
+    {showNavbar && <MarinaNavbar />} {/* navbar shows only after reaching ref */}
+<Hero />
+<div ref={buildingRef}/>
 
       <main>
         {/* Amenities Carousel */}
@@ -521,9 +574,11 @@ export default function App() {
           <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
         </div>
 
+
         <div className="animate-scale">
           <BuildingProgress />
         </div>
+        
         <div className="section-container">
           <div className="wrapper" id="amenities">
             <div className="section-wrapper Amenities-wrapper" >

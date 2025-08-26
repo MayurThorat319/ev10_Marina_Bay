@@ -1685,7 +1685,7 @@ left: -5%;
 
 .property-section {
   position: relative;
-  z-index: 4;
+  z-index: 5;
   transition: margin-top 1s ease;
 }
 
@@ -1701,6 +1701,7 @@ left: -5%;
   transition: transform 1s ease, opacity 0.8s ease, z-index 0.3s ease;
 }
 
+
 .pricing-section.active {
   transform: translateY(0);
   opacity: 1;
@@ -1709,7 +1710,7 @@ left: -5%;
 
 .other-section {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   transform: translateY(-40vh);
   opacity: 0.5;
   transition: transform 1s ease, opacity 0.8s ease, z-index 0.3s ease;
@@ -1718,7 +1719,7 @@ left: -5%;
 .other-section.active {
   transform: translateY(0);
   opacity: 1;
-  z-index: 3;
+  z-index: 2;
 }
 
 .wrapper {
@@ -1759,4 +1760,20 @@ left: -5%;
   color: #fff;
   padding: 10px 25px;
   border-radius: 12px;
+}
+
+/* Wrapper to handle animation */
+.navbar-wrapper {
+  animation: slideDown 0.6s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
