@@ -374,6 +374,7 @@ export default function App() {
   ]);
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
+
   // const scrollRef = useRef<HTMLDivElement | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const PricingnRef = useRef<HTMLDivElement | null>(null);
@@ -415,6 +416,7 @@ export default function App() {
   //   if (buildingRef.current) observer.unobserve(buildingRef.current);
   // };
 }, []);
+
 
 
   useEffect(() => {
@@ -578,16 +580,23 @@ export default function App() {
         <div className="animate-scale">
           <BuildingProgress />
         </div>
-        
+
         <div className="section-container">
-          <div className="wrapper" id="amenities">
-            <div className="section-wrapper Amenities-wrapper" >
+          <div className="wrapper">
+            <div ref={wellnessRef} className={`section-wrapper Amenities-wrapper  ${fadeOut ? "fade-out" : ""}
+              }`}
+            //             style={{ 
+            //             transform: `translateY(-${scrollProgress * 100}%)`,
+            // transition: "transform 0.10s ease-in-out"// optional 
+            //             }}
+            >
+
               <section
                 className={`carousel ${amenities.direction} animate-slide-right`}
                 aria-label="Amenities carousel"
               >
                 <h1 className="main-title2">AMENITIES</h1>
-                <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
+
 
                 <div className="list">
                   {carouselItems.map((item, index) => (
@@ -600,12 +609,14 @@ export default function App() {
                         amenities.other_2
                       )}
                     >
+
                       <div
                         className="main-content"
                         style={{
                           backgroundImage: `url(${item.backgroundImage})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
+
                         }}
                       >
                         <div className="content">
@@ -633,22 +644,20 @@ export default function App() {
                     {">"}
                   </button>
                 </div>
+
+                <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
+
               </section>
             </div>
             <div
-              ref={PricingnRef}
-              className={`section-wrapper Amenities-wrapper property-section ${
-                showPricing ? "shift-up" : ""
-              }`}
-            >
-              {" "}
+              ref={(el) => { PricingnRef.current = el; cornersRef.current = el; }}
+              className={`section-wrapper Amenities-wrapper wrapper-section ${showPricing ? "shift-up" : ""}`} >
+
               <section
                 className={`carousel ${corners.direction}  `}
                 aria-label="Community corners carousel"
               >
-                <div className="header-center animate-flip">
-                  <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
-                </div>
+
                 <div className="list">
                   {communityCornersItems.map((item, index) => (
                     <article
@@ -660,6 +669,7 @@ export default function App() {
                         corners.other_2
                       )}
                     >
+
                       <div
                         className="main-content"
                         style={{
@@ -685,6 +695,10 @@ export default function App() {
                   ))}
                 </div>
 
+
+                <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
+                <div className="boxblur"></div>
+
                 <div className="arrows">
                   <button onClick={corners.prev} aria-label="Previous">
                     {"<"}
@@ -697,18 +711,16 @@ export default function App() {
             </div>
           </div>
 
-          {/* Community Corners */}
 
           <div
             ref={sectionRef}
             id="property-section"
-            className={`pricing-section ${
-              showOther ? "shift-up" : ""
-            } pricing-section ${showPricing ? "active" : ""}`}
-          >
+
+            className={`property-section ${showOther ? "move-up" : ""} section-property ${showPricing ? "active" : ""}`}          >
             <div
-              className="header-center"
-              style={{ marginTop: "0.2rem", marginBottom: "0.2rem" }}
+              className="header-center animate-rotate"
+              style={{ marginBottom: "0.2rem" }}
+
             >
               <h1 className="main-title">PROPERTY PRICING</h1>
             </div>
@@ -864,7 +876,9 @@ export default function App() {
                 color: "#003261",
                 textAlign: "justify",
                 marginBottom: "25px",
+
                 // fontFamily: "'Amaranth', sans-serif",
+
               }}
             >
               <p>
