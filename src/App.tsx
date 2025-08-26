@@ -380,6 +380,28 @@ export default function App() {
   const PricingnRef = useRef<HTMLDivElement | null>(null);
  const [showNavbar, setShowNavbar] = useState(false);
   const buildingRef = useRef<HTMLDivElement | null>(null);
+ const [scrollWithCorners, setScrollWithCorners] = useState(false);
+  const wellnessRef = useRef<HTMLDivElement | null>(null);
+  const cornersRef = useRef<HTMLDivElement | null>(null);
+  const [fadeOut, setFadeOut] = useState(false);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.10) {
+            // Jab COMMUNITY CORNERS visible hoga tab fade out
+            setFadeOut(true);
+          } else {
+            setFadeOut(false);
+          }
+        });
+      },
+      { threshold: [0.10] } // 20% visible hone par trigger
+    );
+
+    if (cornersRef.current) observer.observe(cornersRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
        const handleScroll = () => {
@@ -718,7 +740,7 @@ export default function App() {
 
             className={`property-section ${showOther ? "move-up" : ""} section-property ${showPricing ? "active" : ""}`}          >
             <div
-              className="header-center animate-rotate"
+              className="header-center"
               style={{ marginBottom: "0.2rem" }}
 
             >
