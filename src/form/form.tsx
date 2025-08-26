@@ -10,7 +10,7 @@ interface FormProps {
   propertyTitle?: string
 }
 
-export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps) {
+export default function FormModal({ isOpen, onClose }: FormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,7 +26,8 @@ export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps)
 
     if (isOpen) {
       document.addEventListener("keydown", handleEscape)
-      document.body.style.overflow = "hidden"
+      // ❌ remove this line
+      // document.body.style.overflow = "hidden"
     }
 
     return () => {
@@ -58,16 +59,18 @@ export default function FormModal({ isOpen, onClose, propertyTitle }: FormProps)
       </div>
 
       <div className="layout-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="layout-modal-close" onClick={onClose} aria-label="Close modal">
-          <X size={24} color="red" />
-        </button>
+        
 
-        <div className="layout-modal-header">
-          <h2>Your New Address Awaits !</h2>
-        </div>
+      
 
         <form onSubmit={handleSubmit} className="layout-modal-form">
           <div className="layout-modal-field">
+              <div className="layout-modal-header">
+          <h2>Your New Address Awaits !</h2>
+          <button className="layout-modal-close" onClick={onClose} aria-label="Close modal">
+          <X size={16} color="white" />
+        </button>
+        </div>
             <input
               type="text"
               name="name"

@@ -9,14 +9,29 @@ import OtherProjects from "./components/other-projects/other-projects";
 import Hero from "./sections/Hero";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import LocomotiveScroll from "locomotive-scroll";
+// import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+import MarinaNavbar from "./components/NavBar/NavBar";
 
 gsap.registerPlugin(ScrollTrigger);
 
 // CSS for all the animations
 const scrollAnimationCSS = `
   /* Fade in from bottom */
+   @keyframes slideDownFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-down-fade {
+    animation: slideDownFadeIn 0.5s ease-out forwards;
+  }
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -244,7 +259,7 @@ const carouselItems = [
   },
   {
     id: 4,
-    title: "Meditation Centre",
+    title: "Meditate Centre",
     description:
       "A serene sanctuary to help you reconnect with your inner self and find peace amid life’s hustle. Nestled in a tranquil setting with stunning views, our center offers a perfect blend of mindfulness, spirituality, and relaxation to refresh your mind, body, and soul.",
     image: "/images/Meditation_center.png",
@@ -359,31 +374,50 @@ export default function App() {
   ]);
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const [showOther, setShowOther] = useState(false);
-  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  // const scrollRef = useRef<HTMLDivElement | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const PricingnRef = useRef<HTMLDivElement | null>(null);
-  const [scrollWithCorners, setScrollWithCorners] = useState(false);
-  const wellnessRef = useRef<HTMLDivElement | null>(null);
-  const cornersRef = useRef<HTMLDivElement | null>(null);
-  const [fadeOut, setFadeOut] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.10) {
-            // Jab COMMUNITY CORNERS visible hoga tab fade out
-            setFadeOut(true);
-          } else {
-            setFadeOut(false);
-          }
-        });
-      },
-      { threshold: [0.10] } // 20% visible hone par trigger
-    );
+ const [showNavbar, setShowNavbar] = useState(false);
+  const buildingRef = useRef<HTMLDivElement | null>(null);
 
-    if (cornersRef.current) observer.observe(cornersRef.current);
-    return () => observer.disconnect();
-  }, []);
+  useEffect(() => {
+       const handleScroll = () => {
+    // show navbar after 300px scroll (you can adjust this)
+    if (window.scrollY > 1800) {
+      setShowNavbar(true);
+    } else {
+      setShowNavbar(false);
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+
+  // const observer = new IntersectionObserver(
+  //   (entries) => {
+  //     entries.forEach((entry) => {
+  //       // ✅ Show navbar only when this section is reached
+  //       if (entry.isIntersecting) {
+  //         setShowNavbar(true);
+  //       } else {
+  //         setShowNavbar(false);
+  //       }
+  //     });
+  //   },
+  //   { threshold: 0.4 } // adjust visibility percentage
+  // );
+
+  // if (buildingRef.current) {
+  //   observer.observe(buildingRef.current);
+  // }
+
+  // return () => {
+  //   if (buildingRef.current) observer.unobserve(buildingRef.current);
+  // };
+}, []);
+
+
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -532,8 +566,9 @@ export default function App() {
           </div>
         </div>
       </section> */}
-
-      <Hero />
+    {showNavbar && <MarinaNavbar />} {/* navbar shows only after reaching ref */}
+<Hero />
+<div ref={buildingRef}/>
 
       <main>
         {/* Amenities Carousel */}
@@ -541,9 +576,11 @@ export default function App() {
           <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
         </div>
 
+
         <div className="animate-scale">
           <BuildingProgress />
         </div>
+
         <div className="section-container">
           <div className="wrapper">
             <div ref={wellnessRef} className={`section-wrapper Amenities-wrapper  ${fadeOut ? "fade-out" : ""}
@@ -553,6 +590,7 @@ export default function App() {
             // transition: "transform 0.10s ease-in-out"// optional 
             //             }}
             >
+
               <section
                 className={`carousel ${amenities.direction} animate-slide-right`}
                 aria-label="Amenities carousel"
@@ -578,12 +616,7 @@ export default function App() {
                           backgroundImage: `url(${item.backgroundImage})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
-                          // WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%)",
-                          // WebkitMaskRepeat: "no-repeat",
-                          // WebkitMaskSize: "100% 100%",
-                          // maskImage: "linear-gradient(to bottom, transparent, black 15%)",
-                          // maskRepeat: "no-repeat",
-                          // maskSize: "100% 100%",
+
                         }}
                       >
                         <div className="content">
@@ -611,6 +644,7 @@ export default function App() {
                     {">"}
                   </button>
                 </div>
+
                 <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
 
               </section>
@@ -618,6 +652,7 @@ export default function App() {
             <div
               ref={(el) => { PricingnRef.current = el; cornersRef.current = el; }}
               className={`section-wrapper Amenities-wrapper wrapper-section ${showPricing ? "shift-up" : ""}`} >
+
               <section
                 className={`carousel ${corners.direction}  `}
                 aria-label="Community corners carousel"
@@ -660,8 +695,10 @@ export default function App() {
                   ))}
                 </div>
 
+
                 <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
                 <div className="boxblur"></div>
+
                 <div className="arrows">
                   <button onClick={corners.prev} aria-label="Previous">
                     {"<"}
@@ -674,31 +711,29 @@ export default function App() {
             </div>
           </div>
 
-          {/* Community Corners */}
-
-
-
 
           <div
             ref={sectionRef}
             id="property-section"
+
             className={`property-section ${showOther ? "move-up" : ""} section-property ${showPricing ? "active" : ""}`}          >
             <div
               className="header-center animate-rotate"
               style={{ marginBottom: "0.2rem" }}
+
             >
               <h1 className="main-title">PROPERTY PRICING</h1>
             </div>
             <PropertyPricing />
           </div>
 
-          <div className={`other-section ${showOther ? "active" : ""}`}>
+          <div className={`other-section ${showOther ? "active" : ""}`} id="projects">
             <OtherProjects />
           </div>
         </div>
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">
-          <h1 className="main-title">FEEDBACK THAT FUELS US</h1>
+          <h1 className="main-title" id="feedback">FEEDBACK THAT FUELS US</h1>
           <div className="video-testimonials-stats">
             <div className="video-testimonials-stat">
               <div className="video-testimonials-stat-value">10m+</div>
@@ -796,7 +831,7 @@ export default function App() {
           }}
         >
           {/* Left side - Image */}
-          <div
+          <div className="building-wrapper"
             style={{
               flex: "0 0 300px",
               minHeight: "250px",
@@ -824,8 +859,8 @@ export default function App() {
           >
             <h2
               style={{
-                fontSize: "1.8rem",
-                fontWeight: 600,
+                fontSize: "2.4rem",
+                fontWeight: 800,
                 color: "#003261",
                 marginBottom: "20px",
                 fontFamily: "'Amaranth', sans-serif",
@@ -841,7 +876,9 @@ export default function App() {
                 color: "#003261",
                 textAlign: "justify",
                 marginBottom: "25px",
-                fontFamily: "'Amaranth', sans-serif",
+
+                // fontFamily: "'Amaranth', sans-serif",
+
               }}
             >
               <p>
@@ -903,7 +940,7 @@ export default function App() {
         </div>
 
         <div
-          className="maharera-section animate-flip"
+          className="maharera-section"
           style={{
             display: "flex",
             alignItems: "flex-start",
@@ -917,7 +954,7 @@ export default function App() {
           }}
         >
           {/* Left side - QR Code */}
-          <div
+          <div className="qr-wrapper"
             style={{
               flex: "0 0 200px",
               minHeight: "200px",
@@ -999,7 +1036,7 @@ export default function App() {
         </div>
 
         <footer
-          className="animate-fade-up"
+          className="animate-fade-up" id="contact"
           style={{
             backgroundColor: "#1a1a1a",
             color: "#ffffff",
@@ -1316,16 +1353,50 @@ export default function App() {
                 >
                   Contact Us
                 </h3>
-                <div
-                  style={{
-                    fontSize: "0.9rem",
-                    color: "#ccc",
-                    lineHeight: "1.6",
-                  }}
-                >
-                  <p style={{ marginBottom: "8px" }}>www.evgroup.in</p>
-                  <p style={{ marginBottom: "8px" }}>+91 98674 56777</p>
-                </div>
+           <div
+  style={{
+    fontSize: "0.9rem",
+    color: "#ccc",
+    lineHeight: "1.6",
+  }}
+>
+  <a
+    href="https://evgroup.in/profile.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      color: "#ccc",
+      textDecoration: "none",
+      fontSize: "0.9rem",
+      display: "block",
+      marginBottom: "8px",
+      transition: "color 0.3s ease",
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+  >
+    www.evgroup.in
+  </a>
+
+  <a
+    href="https://wa.me/919867456777"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      color: "#ccc",
+      textDecoration: "none",
+      fontSize: "0.9rem",
+      display: "block",
+      marginBottom: "8px",
+      transition: "color 0.3s ease",
+    }}
+    onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
+    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+  >
+    +91 98674 56777
+  </a>
+</div>
+
               </div>
 
               {/* Our Address Section */}
