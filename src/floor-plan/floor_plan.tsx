@@ -95,7 +95,7 @@ export default function FloorPlanCarousel({
 
   return (
     <section className={`fp3-carousel ${className ?? ""}`.trim()}>
-      <div className="fp3-bg" style={{ backgroundImage: `url(/images/sample-living-room.png)` }} aria-hidden="true" />
+      <div className="fp3-bg" style={{ backgroundImage: `url()` }} aria-hidden="true" />
       <div className="fp3-overlay" aria-hidden="true" />
 
       <div className="fp3-viewport">
