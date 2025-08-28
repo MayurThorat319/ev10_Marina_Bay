@@ -18,20 +18,19 @@ const BuildingProgress: React.FC = () => {
   }
 
   const images = [
-    // "/images/mb_vid_ind_1.mp4",
-    "/images/mb_normal_1.jpg",
-    // "/images/mb_vid_n2.mp4",
-    //  "/images/mb_vid_n6.mp4",
-    //  "/images/mb_vid_n4.mp4",
+    "/images1/mb_vid_ind_1.mp4",
+    // "/images/mb_normal_1.jpg",
+    "/images1/mb_vid_n2.mp4",
+     "/images1/mb_vid_n6.mp4",
+     "/images1/mb_vid_n4.mp4",
   ]
 
   const images1 = [
-    
-    // "/images/mb_vid_normal_2.mp4",
-    "/images/mb_ind_2.jpg",
-    //  "/images/mb_vid_n7.mp4",
-    // "/images/mb_vid_ind_2.mp4",
-    //  "/images/mb_vid_n5.mp4",
+    "/images1/mb_vid_normal_2.mp4",
+    // "/images/mb_ind_2.jpg",
+     "/images1/mb_vid_n7.mp4",
+    "/images1/mb_vid_ind_2.mp4",
+     "/images1/mb_vid_n5.mp4",
   ]
 
 
