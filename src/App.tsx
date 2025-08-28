@@ -703,6 +703,7 @@ export default function App() {
                         <div className="content">
                           <h2>{item.title}</h2>
                           <p className="description">{item.description}</p>
+                        
                         </div>
                       </div>
 
@@ -721,7 +722,7 @@ export default function App() {
                 <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
                 <div className="boxblur"></div>
 
-                <div className="arrows">
+                  <div className="arrows">
                   <button onClick={corners.prev} aria-label="Previous">
                     {"<"}
                   </button>

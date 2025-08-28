@@ -19,7 +19,7 @@ const plans: FloorPlan[] = [
       "King-Sized Bedrooms",
       "Generous Kitchen Space",
     ],
-    price: "$2.35*Cr",
+    price: "₹2.35*Cr",
     stats: { beds: 2, baths: 1, area: 940 },
   },
   {
@@ -34,7 +34,7 @@ const plans: FloorPlan[] = [
       "Generous Kitchen Space",
       "Stunning Cityscape Views",
     ],
-    price: "$2.7*Cr",
+    price: "₹2.7*Cr",
     stats: { beds: 2, baths: 2, area: 1180, unit: "sq ft" },
   },
   {
@@ -49,7 +49,7 @@ const plans: FloorPlan[] = [
       "Exclusive Puja Room",
       "Ensuite Bathrooms",
     ],
-    price: "$2.95*Cr",
+    price: "₹2.95*Cr",
     stats: { beds: 3, baths: 3, area: 1260, unit: "sq ft" },
   },
   {
@@ -64,7 +64,7 @@ const plans: FloorPlan[] = [
       "Oversized Balcony",
       "Breathtaking Cityscape Views",
     ],
-    price: "$3.35*Cr",
+    price: "₹3.35*Cr",
     stats: { beds: 3, baths: 3, area: 1850, unit: "sq ft" },
   },
   {
@@ -79,7 +79,7 @@ const plans: FloorPlan[] = [
       "Expensive Kitchen & Storage", 
       "Elegant Ensuite Bathrooms", 
     ],
-    price: "$3.75*Cr",
+    price: "₹3.75*Cr",
     stats: { beds: 3, baths: 3, area: 990, unit: "sq ft" },
   },
   {
@@ -94,7 +94,7 @@ const plans: FloorPlan[] = [
       "Expensive Sun Deck",
       "Breathtaking City & Sea Views",
     ],
-    price: "$4.45*Cr",
+    price: "₹4.45*Cr",
     stats: { beds: 3, baths: 3, area: 1215, unit: "sq ft" },
   },
   {
@@ -109,7 +109,7 @@ const plans: FloorPlan[] = [
       "Expensive Living & Dining",
       "Large Sun Deck with Stunning Cityscape Views",
     ],
-    price: "$5.35*Cr",
+    price: "₹5.35*Cr",
     stats: { beds: 3, baths: 4, area: 3100, unit: "sq ft" },
   },
 ]
