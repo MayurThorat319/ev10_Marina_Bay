@@ -12,6 +12,7 @@
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "gsap": "^3.13.0",
+    "hls.js": "^1.6.11",
     "locomotive-scroll": "^4.1.4",
     "lucide-react": "^0.539.0",
     "react": "^19.1.0",
