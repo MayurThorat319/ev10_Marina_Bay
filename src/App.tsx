@@ -868,6 +868,7 @@ export default function App() {
             <img
               src="/images/mb_ind_1.jpg"
               alt="EV Group Building"
+              loading="lazy"
               style={{
                 width: "100%",
                 height: "250px",
