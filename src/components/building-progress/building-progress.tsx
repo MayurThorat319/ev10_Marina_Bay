@@ -33,13 +33,6 @@ const BuildingProgress: React.FC = () => {
      "/images/mb_vid_n5.mp4",
   ]
 
-  const handleImageClick = (imageSrc: string) => {
-    console.log("[v0] Media clicked:", imageSrc)
-    const isVideo = imageSrc.toLowerCase().includes(".mp4")
-    console.log("[v0] Is video file:", isVideo)
-    setSelectedImage(imageSrc)
-    setIsModalOpen(true)
-  }
 
   const handleCloseModal = () => {
     setIsModalOpen(false)
