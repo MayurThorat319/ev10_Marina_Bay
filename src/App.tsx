@@ -1,17 +1,29 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, Suspense, lazy } from "react";
+
 import "./App.css";
 
-import BuildingProgress from "./components/building-progress/building-progress";
-import PropertyPricing from "./App/property_pricing";
-import OtherProjects from "./components/other-projects/other-projects";
+// import BuildingProgress from "./components/building-progress/building-progress";
 import Hero from "./sections/Hero";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 // import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
-import MarinaNavbar from "./components/NavBar/NavBar";
+
+const MarinaNavbar = lazy(() => import("./components/NavBar/NavBar"));
+
+const BuildingProgress = lazy(
+  () => import("./components/building-progress/building-progress")
+);
+
+const AmenitiesSection = lazy(() => import("./components/AmenitiesSection"));
+
+const OtherProjects = lazy(() => import("./components/other-projects/other-projects"));
+
+const PropertyPricing = lazy(() => import("./App/property_pricing"));
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -378,9 +390,9 @@ export default function App() {
   // const scrollRef = useRef<HTMLDivElement | null>(null);
   const [showPricing, setShowPricing] = useState(false);
   const PricingnRef = useRef<HTMLDivElement | null>(null);
- const [showNavbar, setShowNavbar] = useState(false);
+  const [showNavbar, setShowNavbar] = useState(false);
   const buildingRef = useRef<HTMLDivElement | null>(null);
- const [] = useState(false);
+  const [] = useState(false);
   const wellnessRef = useRef<HTMLDivElement | null>(null);
   const cornersRef = useRef<HTMLDivElement | null>(null);
   const [fadeOut, setFadeOut] = useState(false);
@@ -388,7 +400,7 @@ export default function App() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio > 0.10) {
+          if (entry.isIntersecting && entry.intersectionRatio > 0.1) {
             // Jab COMMUNITY CORNERS visible hoga tab fade out
             setFadeOut(true);
           } else {
@@ -396,7 +408,7 @@ export default function App() {
           }
         });
       },
-      { threshold: [0.10] } // 20% visible hone par trigger
+      { threshold: [0.1] } // 20% visible hone par trigger
     );
 
     if (cornersRef.current) observer.observe(cornersRef.current);
@@ -404,42 +416,40 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-       const handleScroll = () => {
-    // show navbar after 300px scroll (you can adjust this)
-    if (window.scrollY > 1800) {
-      setShowNavbar(true);
-    } else {
-      setShowNavbar(false);
-    }
-  };
+    const handleScroll = () => {
+      // show navbar after 300px scroll (you can adjust this)
+      if (window.scrollY > 1800) {
+        setShowNavbar(true);
+      } else {
+        setShowNavbar(false);
+      }
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
 
-  // const observer = new IntersectionObserver(
-  //   (entries) => {
-  //     entries.forEach((entry) => {
-  //       // ✅ Show navbar only when this section is reached
-  //       if (entry.isIntersecting) {
-  //         setShowNavbar(true);
-  //       } else {
-  //         setShowNavbar(false);
-  //       }
-  //     });
-  //   },
-  //   { threshold: 0.4 } // adjust visibility percentage
-  // );
+    // const observer = new IntersectionObserver(
+    //   (entries) => {
+    //     entries.forEach((entry) => {
+    //       // ✅ Show navbar only when this section is reached
+    //       if (entry.isIntersecting) {
+    //         setShowNavbar(true);
+    //       } else {
+    //         setShowNavbar(false);
+    //       }
+    //     });
+    //   },
+    //   { threshold: 0.4 } // adjust visibility percentage
+    // );
 
-  // if (buildingRef.current) {
-  //   observer.observe(buildingRef.current);
-  // }
+    // if (buildingRef.current) {
+    //   observer.observe(buildingRef.current);
+    // }
 
-  // return () => {
-  //   if (buildingRef.current) observer.unobserve(buildingRef.current);
-  // };
-}, []);
-
-
+    // return () => {
+    //   if (buildingRef.current) observer.unobserve(buildingRef.current);
+    // };
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -588,98 +598,62 @@ export default function App() {
           </div>
         </div>
       </section> */}
-    {showNavbar && <MarinaNavbar />} {/* navbar shows only after reaching ref */}
-<Hero />
-<div ref={buildingRef}/>
-
+      {showNavbar && 
+       <Suspense fallback={<div>Loading content...</div>}>
+            <MarinaNavbar />
+          </Suspense>
+      }{" "}
+      {/* navbar shows only after reaching ref */}
+      <Hero />
+      <div ref={buildingRef} />
       <main>
         {/* Amenities Carousel */}
         <div className="header-center animate-fade-up">
           <h1 className="main-title">STAY UPDATED ON YOUR BUILDING PROGRESS</h1>
         </div>
 
-
-        <div className="animate-scale">
+        {/* <div className="animate-scale">
           <BuildingProgress />
+        </div> */}
+        <div className="animate-scale">
+          <Suspense fallback={<div>Loading content...</div>}>
+            <BuildingProgress />
+          </Suspense>
         </div>
 
         <div className="section-container">
           <div className="wrapper">
-            <div ref={wellnessRef} className={`section-wrapper Amenities-wrapper  ${fadeOut ? "fade-out" : ""}
+            <div
+              ref={wellnessRef}
+              className={`section-wrapper Amenities-wrapper  ${
+                fadeOut ? "fade-out" : ""
+              }
               }`}
-            //             style={{ 
-            //             transform: `translateY(-${scrollProgress * 100}%)`,
-            // transition: "transform 0.10s ease-in-out"// optional 
-            //             }}
+              //             style={{
+              //             transform: `translateY(-${scrollProgress * 100}%)`,
+              // transition: "transform 0.10s ease-in-out"// optional
+              //             }}
             >
-
-              <section
-                className={`carousel ${amenities.direction} animate-slide-right`}
-                aria-label="Amenities carousel"
-              >
-                <h1 className="main-title2">AMENITIES</h1>
-
-
-                <div className="list">
-                  {carouselItems.map((item, index) => (
-                    <article
-                      key={item.id}
-                      className={getItemClass(
-                        index,
-                        amenities.active,
-                        amenities.other_1,
-                        amenities.other_2
-                      )}
-                    >
-
-                      <div
-                        className="main-content"
-                        style={{
-                          backgroundImage: `url(${item.backgroundImage})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-
-                        }}
-                      >
-                        <div className="content">
-                          <h2>{item.title}</h2>
-                          <p className="description">{item.description}</p>
-                        </div>
-                      </div>
-
-                      <figure className="image">
-                        <img
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.caption}
-                        />
-                        <figcaption>{item.caption}</figcaption>
-                      </figure>
-                    </article>
-                  ))}
-                </div>
-
-                <div className="arrows">
-                  <button onClick={amenities.prev} aria-label="Previous">
-                    {"<"}
-                  </button>
-                  <button onClick={amenities.next} aria-label="Next">
-                    {">"}
-                  </button>
-                </div>
-
-                <h1 className="main-subtitle">WELLNESS & RECREATION</h1>
-
-              </section>
+              <Suspense fallback={<div>Loading content...</div>}>
+                <AmenitiesSection
+                  amenities={amenities}
+                  carouselItems={carouselItems}
+                />
+              </Suspense>
             </div>
             <div
-              ref={(el) => { PricingnRef.current = el; cornersRef.current = el; }}
-              className={`section-wrapper Amenities-wrapper wrapper-section ${showPricing ? "shift-up" : ""}`} >
-
+              ref={(el) => {
+                PricingnRef.current = el;
+                cornersRef.current = el;
+              }}
+              className={`section-wrapper Amenities-wrapper wrapper-section ${
+                showPricing ? "shift-up" : ""
+              }`}
+            >
               <section
                 className={`carousel ${corners.direction}  `}
                 aria-label="Community corners carousel"
               >
-
                 <div className="list">
                   {communityCornersItems.map((item, index) => (
                     <article
@@ -691,7 +665,6 @@ export default function App() {
                         corners.other_2
                       )}
                     >
-
                       <div
                         className="main-content"
                         style={{
@@ -716,7 +689,6 @@ export default function App() {
                     </article>
                   ))}
                 </div>
-
 
                 <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
                 <div className="boxblur"></div>
@@ -733,29 +705,35 @@ export default function App() {
             </div>
           </div>
 
-
           <div
             ref={sectionRef}
             id="property-section"
-
-            className={`property-section ${showOther ? "move-up" : ""} section-property ${showPricing ? "active" : ""}`}          >
-            <div
-              className="header-center"
-              style={{ marginBottom: "0.2rem" }}
-
-            >
+            className={`property-section ${
+              showOther ? "move-up" : ""
+            } section-property ${showPricing ? "active" : ""}`}
+          >
+            <div className="header-center" style={{ marginBottom: "0.2rem" }}>
               <h1 className="main-title">PROPERTY PRICING</h1>
             </div>
+             <Suspense fallback={<div>Loading content...</div>}>
             <PropertyPricing />
+          </Suspense>
           </div>
 
-          <div className={`other-section ${showOther ? "active" : ""}`} id="projects">
+          <div
+            className={`other-section ${showOther ? "active" : ""}`}
+            id="projects"
+          >
+             <Suspense fallback={<div>Loading content...</div>}>
             <OtherProjects />
+          </Suspense>
           </div>
         </div>
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">
-          <h1 className="main-title" id="feedback">FEEDBACK THAT FUELS US</h1>
+          <h1 className="main-title" id="feedback">
+            FEEDBACK THAT FUELS US
+          </h1>
           <div className="video-testimonials-stats">
             <div className="video-testimonials-stat">
               <div className="video-testimonials-stat-value">10m+</div>
@@ -771,7 +749,9 @@ export default function App() {
           </div>
         </div>
 
+          <Suspense fallback={<div>Loading content...</div>}>
         <div className="video-testimonials-section animate-slide-left">
+        
           <div className="video-carousel-container">
             <div
               className="video-carousel-track"
@@ -786,32 +766,34 @@ export default function App() {
                   className="video-testimonial-card"
                   onClick={() => handleVideoClick(video.youtubeUrl)}
                 >
-                 <div
-  key={`${video.id}-${index}`}
-  className="video-testimonial-card"
-  onClick={() => handleVideoClick(video.youtubeUrl)}
->
-  <div className="video-thumbnail-container">
-    <img
-      src={video.thumbnail || "/placeholder.svg"}
-      alt={video.title}
-      className="video-thumbnail"
-    />
-    <div className="play-button-overlay">
-      <div className="play-button">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-          <path d="M8 5v14l11-7z" />
-        </svg>
-      </div>
-    </div>
+                  <div
+                    key={`${video.id}-${index}`}
+                    className="video-testimonial-card"
+                    onClick={() => handleVideoClick(video.youtubeUrl)}
+                  >
+                    <div className="video-thumbnail-container">
+                      <img
+                        src={video.thumbnail || "/placeholder.svg"}
+                        alt={video.title}
+                        className="video-thumbnail"
+                      />
+                      <div className="play-button-overlay">
+                        <div className="play-button">
+                          <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                          >
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
 
-    {/* Title overlay inside thumbnail */}
-    <div className="video-title-overlay">
-      {video.title}
-    </div>
-  </div>
-</div>
-
+                      {/* Title overlay inside thumbnail */}
+                      <div className="video-title-overlay">{video.title}</div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -842,6 +824,7 @@ export default function App() {
             ))}
           </div>
         </div>
+        </Suspense>
 
         <div
           id="about"
@@ -859,7 +842,8 @@ export default function App() {
           }}
         >
           {/* Left side - Image */}
-          <div className="building-wrapper"
+          <div
+            className="building-wrapper"
             style={{
               flex: "0 0 300px",
               minHeight: "250px",
@@ -907,7 +891,6 @@ export default function App() {
                 marginBottom: "25px",
 
                 // fontFamily: "'Amaranth', sans-serif",
-
               }}
             >
               <p>
@@ -983,7 +966,8 @@ export default function App() {
           }}
         >
           {/* Left side - QR Code */}
-          <div className="qr-wrapper"
+          <div
+            className="qr-wrapper"
             style={{
               flex: "0 0 200px",
               minHeight: "200px",
@@ -1065,7 +1049,8 @@ export default function App() {
         </div>
 
         <footer
-          className="animate-fade-up" id="contact"
+          className="animate-fade-up"
+          id="contact"
           style={{
             backgroundColor: "#1a1a1a",
             color: "#ffffff",
@@ -1382,50 +1367,53 @@ export default function App() {
                 >
                   Contact Us
                 </h3>
-           <div
-  style={{
-    fontSize: "0.9rem",
-    color: "#ccc",
-    lineHeight: "1.6",
-  }}
->
-  <a
-    href="https://evgroup.in/profile.html"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      color: "#ccc",
-      textDecoration: "none",
-      fontSize: "0.9rem",
-      display: "block",
-      marginBottom: "8px",
-      transition: "color 0.3s ease",
-    }}
-    onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
-  >
-    www.evgroup.in
-  </a>
+                <div
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#ccc",
+                    lineHeight: "1.6",
+                  }}
+                >
+                  <a
+                    href="https://evgroup.in/profile.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#ccc",
+                      textDecoration: "none",
+                      fontSize: "0.9rem",
+                      display: "block",
+                      marginBottom: "8px",
+                      transition: "color 0.3s ease",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#003261")
+                    }
+                    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                  >
+                    www.evgroup.in
+                  </a>
 
-  <a
-    href="https://wa.me/919867456777"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      color: "#ccc",
-      textDecoration: "none",
-      fontSize: "0.9rem",
-      display: "block",
-      marginBottom: "8px",
-      transition: "color 0.3s ease",
-    }}
-    onMouseOver={(e) => (e.currentTarget.style.color = "#003261")}
-    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
-  >
-    +91 98674 56777
-  </a>
-</div>
-
+                  <a
+                    href="https://wa.me/919867456777"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: "#ccc",
+                      textDecoration: "none",
+                      fontSize: "0.9rem",
+                      display: "block",
+                      marginBottom: "8px",
+                      transition: "color 0.3s ease",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.color = "#003261")
+                    }
+                    onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
+                  >
+                    +91 98674 56777
+                  </a>
+                </div>
               </div>
 
               {/* Our Address Section */}

@@ -1,6 +1,7 @@
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useMaskSettings } from "../../constants"
+import VideoPlayer2 from "../components/videoPlayer_2"
 
 const Hero = () => {
   const { initialMaskPos, initialMaskSize, maskSize } = useMaskSettings()
@@ -96,7 +97,8 @@ const Hero = () => {
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
-        <video className="overlay-logo" src="/images1/marina_vid.mp4" autoPlay loop muted playsInline />
+        <VideoPlayer2 imageSrc={"https://cdn.evhomes.tech/hls/marina_vid_1/marina_vid_1.m3u8"}/>
+        {/* <video className="overlay-logo" src="/images1/marina_vid.mp4" autoPlay loop muted playsInline /> */}
       </div>
     </section>
   )

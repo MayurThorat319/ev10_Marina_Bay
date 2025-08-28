@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import "./image-modal.css"
+import VideoPlayer from "../components/videoplayer"
 
 interface ImageModalProps {
   isOpen: boolean
@@ -10,7 +11,7 @@ interface ImageModalProps {
 }
 
 const isVideoFile = (src: string): boolean => {
-  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi"]
+  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov", ".avi", ".m3u8"]
   return videoExtensions.some((ext) => src.toLowerCase().includes(ext.toLowerCase()))
 }
 
@@ -55,21 +56,11 @@ export function ImageModal({ isOpen, imageSrc, onClose }: ImageModalProps) {
         {/* Modal content */}
         <div className="h-full w-full flex items-center justify-center p-8">
           {isVideoFile(imageSrc) ? (
-            <div className="relative w-full h-full flex items-center justify-center">
-              <video
-                src={imageSrc}
-                controls
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="max-w-full max-h-[50vh] object-contain rounded-lg"
-                style={{ minHeight: "335px", minWidth: "700px", maxWidth: "900px", maxHeight: "400px" }}
-              >
-                <source src={imageSrc} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
+            <>
+            <VideoPlayer imageSrc={imageSrc} />
+          
+            </>
+
           ) : (
             <img
               src={imageSrc || "/placeholder.svg"}
