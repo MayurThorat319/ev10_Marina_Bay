@@ -19,7 +19,7 @@ const OtherProjects: React.FC = () => {
 
         {/* Property 2 - Ocean view */}
         <div className="property-item property-wide">
-          <img src="/images/ev9square.jpg" alt="Ocean View Property" className="property-image" />
+          <img src="/images1/ev9square.jpg" alt="Ocean View Property" className="property-image" />
           <div className="property-overlay-bottom">
             <div className="property-title">EV9 Square</div>
           </div>
@@ -27,7 +27,7 @@ const OtherProjects: React.FC = () => {
 
         {/* Property 3 - High rise building */}
         <div className="property-item property-medium">
-          <img src="/images/ev23malibu.jpg" alt="High Rise Building" className="property-image" />
+          <img src="/images1/ev23malibu.jpg" alt="High Rise Building" className="property-image" />
           <div className="property-overlay">
             <div className="property-description">
               Explore our wide variety of properties to find your dream home today
@@ -37,7 +37,7 @@ const OtherProjects: React.FC = () => {
 
         {/* Property 4 - Modern apartments */}
         <div className="property-item property-tall">
-          <img src="/images/evheartcity.png" alt="Modern Apartments" className="property-image" />
+          <img src="/images1/evheartcity.jpeg" alt="Modern Apartments" className="property-image" />
           <div className="property-overlay">
             <div className="property-count">28+</div>
             <div className="property-label">Properties</div>

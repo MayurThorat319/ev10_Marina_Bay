@@ -232,7 +232,7 @@ const carouselItems = [
     title: "Jogging Track",
     description:
       "Take a walk, go for a jog, or enjoy a quiet run along the jogging track. It’s a great way to move your body while soaking in the views. Fitness feels easy when it looks this good.",
-    image: "/images/jogging_track.png",
+    image: "/images1/jogging_track.jpeg",
     backgroundImage: "/background_images/blur_jogging_track.png",
     caption: "Jogging Track",
     backgroundColor: "#f5bfaf",
@@ -242,7 +242,7 @@ const carouselItems = [
     title: "Exclusive Gym",
     description:
       "Step into our welcoming, well-equipped gym where every corner is designed to inspire your fitness journey. Latest machines and stunning scenic views, working out becomes a refreshing experience that lifts both body and spirit.",
-    image: "/images/GYM.png",
+    image: "/images1/GYM.jpg",
     backgroundImage: "/background_images/blur_gym.png",
     caption: "Exclusive Gym",
     backgroundColor: "#9c4d2f",
@@ -252,7 +252,7 @@ const carouselItems = [
     title: "Infinity Pool",
     description:
       "The infinity pool offers a serene escape where the water appears to merge with the sky. Enjoy a cool, refreshing swim surrounded by breathtaking views. It’s the perfect place to relax, recharge, and take in the beauty around you.",
-    image: "/images/Infinity_pool.png",
+    image: "/images1/Infinity_pool.jpeg",
     backgroundImage: "/background_images/blur_infinity_pool.png",
     caption: "Infinity Pool",
     backgroundColor: "#b47993",
@@ -262,7 +262,7 @@ const carouselItems = [
     title: "Meditate Centre",
     description:
       "A serene sanctuary to help you reconnect with your inner self and find peace amid life’s hustle. Nestled in a tranquil setting with stunning views, our center offers a perfect blend of mindfulness, spirituality, and relaxation to refresh your mind, body, and soul.",
-    image: "/images/Meditation_center.png",
+    image: "/images1/Meditation_center.jpg",
     backgroundImage: "/background_images/blur_meditation_center.png",
     caption: "Meditation Centre",
     backgroundColor: "#7eb63d",
@@ -275,7 +275,7 @@ const communityCornersItems = [
     title: "Rooftop Lounge",
     description:
       "Whether it’s a sunset cocktail, a romantic dinner, or a lively celebration, our rooftop party lounge with stunning sea views offers a magical experience. Every moment here becomes a cherished memory against the backdrop of breathtaking scenery. Join us and make your special occasions truly unforgettable.",
-    image: "/images/rooftop_lounge.png",
+    image: "/images1/rooftop_lounge.jpeg",
     backgroundImage: "/background_images/blur_rooftop_lounge.png",
     caption: "Rooftop Lounge",
     backgroundColor: "#0f172a",
@@ -285,7 +285,7 @@ const communityCornersItems = [
     title: "Barbeque Zone",
     description:
       "Fire up the grill and bring everyone together in our lively Barbecue Zone. It’s the ideal place to enjoy great food, good company, and plenty of smiles. Make every meal a celebration and every moment a memory.",
-    image: "/images/Barbeque_zone.png",
+    image: "/images1/Barbeque_zone.jpeg",
     backgroundImage: "/background_images/blur_barbeque_zone.png",
     caption: "Barbeque Zone",
     backgroundColor: "#7c2d12",
@@ -295,7 +295,7 @@ const communityCornersItems = [
     title: "Marina Bay Garden",
     description:
       "Step into a vibrant garden bursting with colorful blooms, trees, and secret paths waiting to be discovered. Each corner offers a new chance to pause, breathe, and let nature’s beauty wash over you.  It’s your everyday escape to peace.",
-    image: "/images/Marina_bay_garden.png",
+    image: "/images1/Marina_bay_garden.jpg",
     backgroundImage: "/background_images/blur_marina_bay_garden.png",
     caption: "Marina Bay Garden",
     backgroundColor: "#3b0764",
@@ -305,7 +305,7 @@ const communityCornersItems = [
     title: "Kids Play Area",
     description:
       "A vibrant and exciting space built to spark joy, creativity, and adventure for children of all ages. Our play area is carefully designed with fun, safety, and imagination in mind. It’s a welcoming place where kids can explore, learn, and grow.",
-    image: "/images/Kids_play_area.png",
+    image: "/images1/Kids_play_area.jpeg",
     backgroundImage: "/background_images/blur_kids_play_area.png",
     caption: "Kids Play Area",
     backgroundColor: "#166534",
@@ -316,25 +316,25 @@ const videoTestimonials = [
   {
     id: 1,
     title: "Mr./Mrs. Margret Kingsley",
-    thumbnail: "/images/Testimonial-1.png",
+    thumbnail: "/images1/Testimonial-1.jpeg",
     youtubeUrl: "https://www.youtube.com/watch?v=nOLkacqbZU4",
   },
   {
     id: 2,
     title: "Mr./Mrs. Kacholia's",
-    thumbnail: "/images/Testimonial-2.png",
+    thumbnail: "/images1/Testimonial-2.jpeg",
     youtubeUrl: "https://www.youtube.com/watch?v=9mS37VEgWHU",
   },
   {
     id: 3,
     title: "Mr./Mrs. Anurag Tripathi",
-    thumbnail: "/images/Testimonial-3.png",
+    thumbnail: "/images1/Testimonial-3.jpeg",
     youtubeUrl: "https://www.youtube.com/watch?v=O-h8oQ4e2Nw",
   },
   {
     id: 4,
     title: "Mr./Mrs. Uday K Kalgutkar",
-    thumbnail: "/images/Testimonial-4.png",
+    thumbnail: "/images1/Testimonial-4.jpeg",
     youtubeUrl: "https://www.youtube.com/watch?v=NzOE1F1lqsw",
   },
 ];
@@ -866,7 +866,7 @@ export default function App() {
             }}
           >
             <img
-              src="/images/mb_ind_1.jpg"
+              src="/images1/mb_ind_1.jpg"
               alt="EV Group Building"
               loading="lazy"
               style={{

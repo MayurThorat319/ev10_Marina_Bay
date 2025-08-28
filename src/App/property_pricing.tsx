@@ -11,7 +11,7 @@ const plans: FloorPlan[] = [
     id: 1,
     title: "Luxury 2BHK + Deck",
     // caption: "For those who believe a home should feel as expansive as their dreams.",
-    image: "/images/floor_plan.png",
+    image: "/images1/floor_plan.jpeg",
     features: [
       "Expensive Balcony",
       "Stunning Cityscape Views",
@@ -26,7 +26,7 @@ const plans: FloorPlan[] = [
     id: 2,
     title: "Luxury 2BHK + Deck",
     // caption: "More room to grow, gather, and get inspired.",
-    image: "/images/floor_plan_2.png",
+    image: "/images1/floor_plan_2.jpeg",
     features: [
       "Higher Floor Advantage",
       "Expensive Living & Dining",
@@ -41,7 +41,7 @@ const plans: FloorPlan[] = [
     id: 3,
     title: "Flexi 3BHK + Deck",
     // caption: "Open vistas and timeless finishes for elevated living.",
-    image: "/images/floor_plan_3.png",
+    image: "/images1/floor_plan_3.jpeg",
     features: [
       "Large Balcony with City & Sea Views",
       "Spacious Kitchen & Storage",
@@ -56,7 +56,7 @@ const plans: FloorPlan[] = [
     id: 4,
     title: "Flexi 3BHK + Deck",
     // caption: "Expansive horizons, crafted for connoisseurs.",
-    image: "/images/floor_plan_4.png",
+    image: "/images1/floor_plan_4.jpeg",
     features: [
       "Premium Higher Floor Advantage",
       "Expensive Kitchen & Ample Storage",
@@ -71,7 +71,7 @@ const plans: FloorPlan[] = [
     id: 5,
     title: "Sea-Facing Lux 3BHK + Deck",
     // caption: "A calming connection to nature at your doorstep.",
-    image: "/images/floor_plan_5.png",
+    image: "/images1/floor_plan_5.jpeg",
     features: [
       "Dual Ventilation",
       "Expensive Living & Dining",
@@ -86,7 +86,7 @@ const plans: FloorPlan[] = [
     id: 6,
     title: "Sea-Facing Lux 3BHK + Deck",
     // caption: "Corner serenity with extra light and privacy.",
-    image: "/images/floor_plan_6.png",
+    image: "/images1/floor_plan_6.jpeg",
     features: [
       "Prime Higher Floor Advantage",
       "Exclusive Pooja Room",
@@ -101,7 +101,7 @@ const plans: FloorPlan[] = [
     id: 7,
     title: "Sea-Facing Ultra Lux 3BHK + Deck",
     // caption: "A statement in scale, sophistication and skyline.",
-    image: "/images/floor_plan.png",
+    image: "/images1/floor_plan.jpeg",
     features: [
       "Ultra Luxury 3 BHK",
       "Exclusive Pooja Room",
