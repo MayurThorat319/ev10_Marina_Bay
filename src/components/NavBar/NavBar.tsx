@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import styles from "./navbar.module.css"
+import styles from "./NavBar.module.css"
 import { Home, Users, DollarSign, FolderOpen, MessageSquare, Info, Phone, Menu, X } from "lucide-react"
 
 function MarinaNavbar() {
