@@ -38,7 +38,7 @@ export default function FloorPlanCarousel({
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 820)
+      setIsMobile(window.innerWidth <= 1920)
     }
 
     checkMobile()

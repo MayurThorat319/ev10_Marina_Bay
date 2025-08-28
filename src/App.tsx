@@ -245,7 +245,7 @@ const carouselItems = [
     description:
       "Take a walk, go for a jog, or enjoy a quiet run along the jogging track. It’s a great way to move your body while soaking in the views. Fitness feels easy when it looks this good.",
     image: "/images1/jogging_track.jpeg",
-    backgroundImage: "/background_images/blur_jogging_track.png",
+    backgroundImage: "/images1/blur_jogging_track.png",
     caption: "Jogging Track",
     backgroundColor: "#f5bfaf",
   },
@@ -255,7 +255,7 @@ const carouselItems = [
     description:
       "Step into our welcoming, well-equipped gym where every corner is designed to inspire your fitness journey. Latest machines and stunning scenic views, working out becomes a refreshing experience that lifts both body and spirit.",
     image: "/images1/GYM.jpg",
-    backgroundImage: "/background_images/blur_gym.png",
+    backgroundImage: "/images1/blur_gym.jpeg",
     caption: "Exclusive Gym",
     backgroundColor: "#9c4d2f",
   },
@@ -265,7 +265,7 @@ const carouselItems = [
     description:
       "The infinity pool offers a serene escape where the water appears to merge with the sky. Enjoy a cool, refreshing swim surrounded by breathtaking views. It’s the perfect place to relax, recharge, and take in the beauty around you.",
     image: "/images1/Infinity_pool.jpeg",
-    backgroundImage: "/background_images/blur_infinity_pool.png",
+    backgroundImage: "/images1/blur_infinity_pool.jpeg",
     caption: "Infinity Pool",
     backgroundColor: "#b47993",
   },
@@ -275,7 +275,7 @@ const carouselItems = [
     description:
       "A serene sanctuary to help you reconnect with your inner self and find peace amid life’s hustle. Nestled in a tranquil setting with stunning views, our center offers a perfect blend of mindfulness, spirituality, and relaxation to refresh your mind, body, and soul.",
     image: "/images1/Meditation_center.jpg",
-    backgroundImage: "/background_images/blur_meditation_center.png",
+    backgroundImage: "/images1/blur_meditation_center.jpeg",
     caption: "Meditation Centre",
     backgroundColor: "#7eb63d",
   },
@@ -288,7 +288,7 @@ const communityCornersItems = [
     description:
       "Whether it’s a sunset cocktail, a romantic dinner, or a lively celebration, our rooftop party lounge with stunning sea views offers a magical experience. Every moment here becomes a cherished memory against the backdrop of breathtaking scenery. Join us and make your special occasions truly unforgettable.",
     image: "/images1/rooftop_lounge.jpeg",
-    backgroundImage: "/background_images/blur_rooftop_lounge.png",
+    backgroundImage: "/images1/blur_rooftop_lounge.jpeg",
     caption: "Rooftop Lounge",
     backgroundColor: "#0f172a",
   },
@@ -298,7 +298,7 @@ const communityCornersItems = [
     description:
       "Fire up the grill and bring everyone together in our lively Barbecue Zone. It’s the ideal place to enjoy great food, good company, and plenty of smiles. Make every meal a celebration and every moment a memory.",
     image: "/images1/Barbeque_zone.jpeg",
-    backgroundImage: "/background_images/blur_barbeque_zone.png",
+    backgroundImage: "/images1/blur_barbeque_zone.jpeg",
     caption: "Barbeque Zone",
     backgroundColor: "#7c2d12",
   },
@@ -308,7 +308,7 @@ const communityCornersItems = [
     description:
       "Step into a vibrant garden bursting with colorful blooms, trees, and secret paths waiting to be discovered. Each corner offers a new chance to pause, breathe, and let nature’s beauty wash over you.  It’s your everyday escape to peace.",
     image: "/images1/Marina_bay_garden.jpg",
-    backgroundImage: "/background_images/blur_marina_bay_garden.png",
+    backgroundImage: "/images1/blur_marina_bay_garden.jpeg",
     caption: "Marina Bay Garden",
     backgroundColor: "#3b0764",
   },
@@ -318,7 +318,7 @@ const communityCornersItems = [
     description:
       "A vibrant and exciting space built to spark joy, creativity, and adventure for children of all ages. Our play area is carefully designed with fun, safety, and imagination in mind. It’s a welcoming place where kids can explore, learn, and grow.",
     image: "/images1/Kids_play_area.jpeg",
-    backgroundImage: "/background_images/blur_kids_play_area.png",
+    backgroundImage: "/images1/blur_kids_play_area.jpeg",
     caption: "Kids Play Area",
     backgroundColor: "#166534",
   },
