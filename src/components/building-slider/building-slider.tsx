@@ -1,6 +1,5 @@
 "use client"
 
-import type React from "react"
 import { useEffect, useRef, useState } from "react"
 import styles from "./building-slider.module.css"
 
@@ -64,7 +63,7 @@ export function BuildingSlider({
       if (!scrollerInner) return
 
       // Create a function to generate items
-      const createItem = (src: string, index: number, isClone = false) => {
+      const createItem = (src: string, index: number,) => {
         const itemDiv = document.createElement("div")
         itemDiv.className = styles.itemContainer
 
@@ -140,7 +139,7 @@ export function BuildingSlider({
 
       // Create duplicated items for seamless scrolling
       images.forEach((src, index) => {
-        const duplicatedItem = createItem(src, index, true)
+        const duplicatedItem = createItem(src, index,)
         duplicatedItem.setAttribute("aria-hidden", "true")
         scrollerInner.appendChild(duplicatedItem)
       })
