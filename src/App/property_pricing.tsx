@@ -193,8 +193,8 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
      <section  ref={sectionRef}
 className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}     
     >
-   {/* <video 
-  src="/images/property_vid_1.mp4" 
+   <video 
+  src="/images1/property_vid_1.mp4" 
   autoPlay 
   loop 
   muted 
@@ -208,7 +208,7 @@ className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "s
   
   }}
 >
-  </video> */}
+  </video>
 
       {/* Filter Tabs */}
     <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
