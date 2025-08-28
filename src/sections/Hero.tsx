@@ -96,7 +96,7 @@ const Hero = () => {
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
-        <video className="overlay-logo" src="/images/marina_vid.mp4" autoPlay loop muted playsInline />
+        {/* <video className="overlay-logo" src="/images/marina_vid.mp4" autoPlay loop muted playsInline /> */}
       </div>
     </section>
   )
