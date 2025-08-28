@@ -1,24 +1,24 @@
-import gsap from "gsap"
-import { useGSAP } from "@gsap/react"
-import { useMaskSettings } from "../../constants"
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { useMaskSettings } from "../../constants";
 
 const Hero = () => {
-  const { initialMaskPos, initialMaskSize, maskSize } = useMaskSettings()
+  const { initialMaskPos, initialMaskSize, maskSize } = useMaskSettings();
 
   useGSAP(() => {
     gsap.set(".mask-wrapper", {
       maskPosition: initialMaskPos,
       maskSize: initialMaskSize,
-    })
+    });
 
-    gsap.set(".mask-logo", { opacity: 0 })
-    gsap.set(".entrance-message", { marginTop: "0vh" })
+    gsap.set(".mask-logo", { opacity: 0 });
+    gsap.set(".entrance-message", { marginTop: "0vh" });
 
     gsap.set(".NavMain", {
       y: -100,
       opacity: 0,
       pointerEvents: "none",
-    })
+    });
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -35,7 +35,7 @@ const Hero = () => {
             pointerEvents: "none",
             duration: 0.4,
             ease: "power2.out",
-          })
+          });
         },
         onLeave: () => {
           gsap.to(".NavMain", {
@@ -44,7 +44,7 @@ const Hero = () => {
             pointerEvents: "auto",
             duration: 0.6,
             ease: "power2.out",
-          })
+          });
         },
         onEnterBack: () => {
           gsap.to(".NavMain", {
@@ -53,7 +53,7 @@ const Hero = () => {
             pointerEvents: "none",
             duration: 0.4,
             ease: "power2.out",
-          })
+          });
         },
         onLeaveBack: () => {
           gsap.to(".NavMain", {
@@ -62,10 +62,10 @@ const Hero = () => {
             pointerEvents: "auto",
             duration: 0.6,
             ease: "power2.out",
-          })
+          });
         },
       },
-    })
+    });
 
     tl.to(".fade-out", { opacity: 0, ease: "power1.inOut" })
       .to(".scale-out", { scale: 1, ease: "power1.inOut", duration: 1 })
@@ -77,7 +77,7 @@ const Hero = () => {
         {
           opacity: 1,
         },
-        "<",
+        "<"
       )
       .to(
         ".animate-scale",
@@ -85,21 +85,26 @@ const Hero = () => {
           duration: 1,
           ease: "power1.inOut",
         },
-        "<",
-      )
-  })
+        "<"
+      );
+  });
 
   return (
     <section className="hero-section">
       <div className="mask-wrapper">
-        <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img" />
+        <img
+          src="/images/bg-img-1.jpg"
+          alt="background"
+          className="scale-out mask-img"
+          loading="lazy"
+        />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
         {/* <video className="overlay-logo" src="/images/marina_vid.mp4" autoPlay loop muted playsInline /> */}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;
