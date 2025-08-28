@@ -39,7 +39,6 @@ export default function FiveTabsSection({
   width = "90%",
   initialIndex = 0,
   onChange,
-  title = "Five Tabs",
 }: FiveTabsSectionProps) {
   const [active, setActive] = useState(initialIndex)
 
@@ -142,13 +141,6 @@ export default function FiveTabsSection({
     fontWeight: 800,
   }
 
-  const sectionTitleStyle: React.CSSProperties = {
-    fontSize: 18,
-    fontWeight: 600,
-    // marginBottom: 10,
-    color: "#333",
-    textAlign: "center",
-  }
 
   const sectionWrapperStyle: React.CSSProperties = {
     display: "flex",
@@ -157,15 +149,6 @@ export default function FiveTabsSection({
     // gap: 12,
   }
 
-  const contentBoxStyle: React.CSSProperties = {
-    width: "100%",
-    background: "#fff",
-    border: `1px solid ${activeBorderColor}`,
-    borderRadius: 12,
-    padding: 16,
-    marginTop: 12,
-    boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-  }
 
   return (
     <section style={containerStyle} aria-label="Five tabs section">

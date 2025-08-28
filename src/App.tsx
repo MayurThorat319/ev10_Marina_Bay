@@ -380,7 +380,7 @@ export default function App() {
   const PricingnRef = useRef<HTMLDivElement | null>(null);
  const [showNavbar, setShowNavbar] = useState(false);
   const buildingRef = useRef<HTMLDivElement | null>(null);
- const [scrollWithCorners, setScrollWithCorners] = useState(false);
+ const [] = useState(false);
   const wellnessRef = useRef<HTMLDivElement | null>(null);
   const cornersRef = useRef<HTMLDivElement | null>(null);
   const [fadeOut, setFadeOut] = useState(false);

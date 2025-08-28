@@ -127,7 +127,6 @@ export default function FloorPlanCarousel({
 function Card({
   plan,
   position,
-  onSiteVisit,
   onViewLayout,
 }: {
   plan: FloorPlan
