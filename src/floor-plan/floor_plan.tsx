@@ -34,68 +34,64 @@ export default function FloorPlanCarousel({
   const count = items.length
   const [active, setActive] = useState(() => (count ? ((initialIndex % count) + count) % count : 0))
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 820)
+    }
+
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
+    return () => window.removeEventListener("resize", checkMobile)
+  }, [])
+
+  const shouldEnableScrolling = enableScrolling || (isMobile && count > 1)
 
   const leftIndex = useMemo(() => (active - 1 + count) % count, [active, count])
   const rightIndex = useMemo(() => (active + 1) % count, [active, count])
 
   const prev = useCallback(() => {
-    if (isTransitioning || !enableScrolling) return
+    if (isTransitioning || !shouldEnableScrolling) return
     setIsTransitioning(true)
     setActive((i) => (i - 1 + count) % count)
     setTimeout(() => setIsTransitioning(false), 420)
-  }, [count, isTransitioning, enableScrolling])
+  }, [count, isTransitioning, shouldEnableScrolling])
 
   const next = useCallback(() => {
-    if (isTransitioning || !enableScrolling) return
+    if (isTransitioning || !shouldEnableScrolling) return
     setIsTransitioning(true)
     setActive((i) => (i + 1) % count)
     setTimeout(() => setIsTransitioning(false), 420)
-  }, [count, isTransitioning, enableScrolling])
+  }, [count, isTransitioning, shouldEnableScrolling])
 
   useEffect(() => {
-    if (!autoPlayMs || !enableScrolling) return
+    if (!autoPlayMs || !shouldEnableScrolling) return
     const t = setInterval(next, autoPlayMs)
     return () => clearInterval(t)
-  }, [next, autoPlayMs, enableScrolling])
+  }, [next, autoPlayMs, shouldEnableScrolling])
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (!enableScrolling) return
+      if (!shouldEnableScrolling) return
       if (e.key === "ArrowLeft") prev()
       if (e.key === "ArrowRight") next()
     }
     window.addEventListener("keydown", onKey)
     return () => window.removeEventListener("keydown", onKey)
-  }, [prev, next, enableScrolling])
+  }, [prev, next, shouldEnableScrolling])
 
   useEffect(() => {
-    if (!enableScrolling) {
+    if (!shouldEnableScrolling) {
       setActive(0)
     }
-  }, [items, enableScrolling])
+  }, [items, shouldEnableScrolling])
 
   if (count === 0) return null
 
   const left = items[leftIndex]
   const center = items[active]
   const right = items[rightIndex]
-
-  // <CHANGE> Show multiple items side by side when scrolling is disabled and there are 2 items
-  if (!enableScrolling && count === 2) {
-    return (
-      <section className={`fp3-carousel ${className ?? ""}`.trim()}>
-        <div className="fp3-bg" style={{ backgroundImage: `url(/images/sample-living-room.png)` }} aria-hidden="true" />
-        <div className="fp3-overlay" aria-hidden="true" />
-
-        <div className="fp3-viewport">
-          <div className="fp3-row fp3-side-by-side">
-            <Card plan={items[0]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-            <Card plan={items[1]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-          </div>
-        </div>
-      </section>
-    )
-  }
 
   return (
     <section className={`fp3-carousel ${className ?? ""}`.trim()}>
@@ -104,17 +100,17 @@ export default function FloorPlanCarousel({
 
       <div className="fp3-viewport">
         <div className={`fp3-row ${isTransitioning ? "fp3-transitioning" : ""}`}>
-          {enableScrolling && count > 1 && (
+          {shouldEnableScrolling && count > 1 && (
             <Card plan={left} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
           )}
           <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-          {enableScrolling && count > 1 && (
+          {shouldEnableScrolling && count > 1 && (
             <Card plan={right} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
           )}
         </div>
       </div>
 
-      {enableScrolling && count > 1 && (
+      {shouldEnableScrolling && count > 1 && (
         <div className="fp3-arrows">
           <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
             <ChevronLeft />
