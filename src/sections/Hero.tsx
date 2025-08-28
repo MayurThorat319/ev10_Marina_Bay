@@ -92,7 +92,7 @@ const Hero = () => {
   return (
     <section className="hero-section">
       <div className="mask-wrapper">
-        <img src="/images1/bg-img.jpg" alt="background" className="scale-out mask-img" />
+        <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img" />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
