@@ -5,6 +5,7 @@ import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import FormModal from '../form/form'
+import VideoPlayer3 from '../components/videoPlayer_3'
 
 const plans: FloorPlan[] = [
   {
@@ -193,22 +194,20 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
      <section  ref={sectionRef}
 className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}     
     >
-   <video 
-  src="https://cdn.evhomes.tech/hls/property_vid_1/property_vid_1_1.m3u8" 
-  autoPlay 
-  loop 
-  muted 
-  playsInline
-  style={{
-    width: "100vw",
-    height: "120vh",
-    objectFit: "cover",
-    top: 0,
-    left: 0,
+   <VideoPlayer3 imageSrc
+  ="https://cdn.evhomes.tech/hls/property_vid_1/property_vid_1_1.m3u8"
+
+ 
+  // style={{
+  //   width: "100vw",
+  //   height: "120vh",
+  //   objectFit: "cover",
+  //   top: 0,
+  //   left: 0,
   
-  }}
->
-  </video>
+  // }}
+/>
+  {/* </video> */}
 
       {/* Filter Tabs */}
     <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
