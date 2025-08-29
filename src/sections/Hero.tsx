@@ -4,7 +4,7 @@ import { useMaskSettings } from "../../constants"
 import VideoPlayer2 from "../components/videoPlayer_2"
 
 const Hero = () => {
-  const { initialMaskPos, initialMaskSize, maskSize } = useMaskSettings()
+  const { initialMaskPos, initialMaskSize, maskPos, maskSize } = useMaskSettings()
 
   useGSAP(() => {
     gsap.set(".mask-wrapper", {
@@ -68,37 +68,24 @@ const Hero = () => {
       },
     })
 
+    // 🔥 Animate both maskSize and maskPosition
     tl.to(".fade-out", { opacity: 0, ease: "power1.inOut" })
       .to(".scale-out", { scale: 1, ease: "power1.inOut", duration: 1 })
-      .to(".mask-wrapper", { maskSize, ease: "power1.inOut" }, "<")
+      .to(".mask-wrapper", { maskSize, maskPosition: maskPos, ease: "power1.inOut" }, "<")
       .to(".mask-wrapper", { opacity: 0 })
       .to(".fake-logo-wrapper", { opacity: 1 })
-      .to(
-        ".animate-scale",
-        {
-          opacity: 1,
-        },
-        "<",
-      )
-      .to(
-        ".animate-scale",
-        {
-          duration: 1,
-          ease: "power1.inOut",
-        },
-        "<",
-      )
+      .to(".animate-scale", { opacity: 1 }, "<")
+      .to(".animate-scale", { duration: 1, ease: "power1.inOut" }, "<")
   })
 
   return (
     <section className="hero-section">
       <div className="mask-wrapper">
-        <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img"  />
+        <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img" />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
-        <VideoPlayer2 imageSrc={"https://cdn.evhomes.tech/hls/marina_vid_1/marina_vid_1.m3u8"}/>
-        {/* <video className="overlay-logo" src="/images1/marina_vid.mp4" autoPlay loop muted playsInline /> */}
+        <VideoPlayer2 imageSrc="https://cdn.evhomes.tech/hls/marina_vid_1/marina_vid_1.m3u8" />
       </div>
     </section>
   )

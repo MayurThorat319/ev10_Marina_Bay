@@ -465,6 +465,68 @@ main {
   background: linear-gradient(223.17deg, white);
 }
 
+/* Hero section fills the viewport */
+.hero-section {
+  position: relative;
+  width: 100vw;
+  height: 100svh; /* handles mobile URL bar better */
+  overflow: hidden;
+  display: grid;
+  place-items: center; /* centers mask wrapper */
+}
+
+/* Mask container spans the viewport and stays centered */
+.mask-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+
+  /* Cross-browser mask */
+  mask-image: url("/images/BAY_1.svg");
+  -webkit-mask-image: url("/images/BAY_1.svg");
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: 50% 50%;
+  -webkit-mask-position: 50% 50%;
+
+  /* Sensible, responsive starting size; GSAP will animate these too */
+  /* ~ from 160px up to 520px depending on viewport */
+  mask-size: clamp(10rem, 22vmin, 32.5rem);
+  -webkit-mask-size: clamp(10rem, 22vmin, 32.5rem);
+}
+
+.mask-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Ensure the video layer aligns and covers correctly */
+.fake-logo-wrapper,
+.overlay-logo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none; /* pass scroll/gestures through unless you need controls */
+}
+
+.overlay-logo video,
+.overlay-logo canvas,
+.overlay-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional: reduce motion users still see everything, just without the scroll-animated scaling */
+@media (prefers-reduced-motion: reduce) {
+  .hero-section {
+    scroll-behavior: auto;
+  }
+}
+
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
@@ -690,3 +752,4 @@ main {
   z-index: 9999999;
   opacity: 0;
 }
+
