@@ -29,7 +29,6 @@ export default function FloorPlanCarousel({
   onSiteVisit,
   onViewLayout,
   className,
-  enableScrolling = true,
 }: Props) {
   const count = items.length
   const [active, setActive] = useState(() => (count ? ((initialIndex % count) + count) % count : 0))
@@ -99,52 +98,40 @@ export default function FloorPlanCarousel({
       <div className="fp3-overlay" aria-hidden="true" />
 
       <div className="fp3-viewport">
-       <div className={`fp3-row ${isTransitioning ? "fp3-transitioning" : ""}`}>
-  {!isMobile && count > 1 ? (
-    count === 2 ? (
-      // Agar sirf 2 properties hain to side by side dono dikhao
-      <>
-        <Card plan={items[0]} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-        <Card plan={items[1]} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-      </>
-    ) : (
-      // Normal case: 3 ya usse zyada
-      <>
-        <Card plan={left} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-        <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-        <Card plan={right} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-      </>
-    )
-  ) : (
-    // Mobile pe sirf ek card
-    <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
-  )}
-</div>
+        <div className={`fp3-row ${isTransitioning ? "fp3-transitioning" : ""}`}>
+          {!isMobile && count > 1 ? (
+            count === 2 ? (
+              <>
+                <Card plan={items[0]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+                <Card plan={items[1]} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+              </>
+            ) : (
+              <>
+                <Card plan={left} position="left" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+                <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+                <Card plan={right} position="right" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+              </>
+            )
+          ) : (
+            <Card plan={center} position="center" onSiteVisit={onSiteVisit} onViewLayout={onViewLayout} />
+          )}
+        </div>
 
 
       </div>
 
-      {/* {shouldEnableScrolling && count > 1 && (
-        <div className="fp3-arrows">
-          <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
-            <ChevronLeft />
-          </button>
-          <button className="fp3-arrow" aria-label="Next" onClick={next} disabled={isTransitioning}>
-            <ChevronRight />
-          </button>
-        </div>
-      )} */}
-      { shouldEnableScrolling && (
-        (isMobile && count > 1) || (!isMobile && count >2) )&&(
-            <div className="fp3-arrows">
-          <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
-            <ChevronLeft />
-          </button>
-          <button className="fp3-arrow" aria-label="Next" onClick={next} disabled={isTransitioning}>
-            <ChevronRight />
-          </button>
-        </div>
-      )
+
+      {shouldEnableScrolling && (
+        (isMobile && count > 1) || (!isMobile && count > 2)) && (
+          <div className="fp3-arrows">
+            <button className="fp3-arrow" aria-label="Previous" onClick={prev} disabled={isTransitioning}>
+              <ChevronLeft />
+            </button>
+            <button className="fp3-arrow" aria-label="Next" onClick={next} disabled={isTransitioning}>
+              <ChevronRight />
+            </button>
+          </div>
+        )
 
       }
     </section>
