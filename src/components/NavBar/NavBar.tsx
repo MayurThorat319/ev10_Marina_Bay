@@ -20,7 +20,7 @@ function MarinaNavbar() {
       <div className={styles.NavMain}>
         <div className={styles.NavContainer}>
           <div className={styles.leftSide}>
-            <img src="/images1/10m_logo.jpeg" alt="10 Marina Bay Vashi Logo" className={styles.Logo} />
+            <img src="/images1/10m_logo.png" alt="10 Marina Bay Vashi Logo" className={styles.Logo} />
           </div>
 
           <button className={styles.mobileMenuToggle} onClick={toggleMobileMenu} aria-label="Toggle mobile menu">
