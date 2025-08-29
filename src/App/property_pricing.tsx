@@ -194,7 +194,7 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
 className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}     
     >
    <video 
-  src="/images1/property_vid_1.mp4" 
+  src="https://cdn.evhomes.tech/hls/property_vid_1/property_vid_1_1.m3u8" 
   autoPlay 
   loop 
   muted 
