@@ -16,19 +16,19 @@ const BuildingProgress: React.FC = () => {
   };
 
   const images = [
-    "/images1/mb_vid_ind_1.mp4",
+    "https://cdn.evhomes.tech/hls/mb_vid_ind_1/mb_vid_ind_1_1.m3u8",
     // "/images/mb_normal_1.jpg",
-    "/images1/mb_vid_n2.mp4",
-    "/images1/mb_vid_n6.mp4",
-    "/images1/mb_vid_n4.mp4",
+    "https://cdn.evhomes.tech/hls/mb_vid_n2/mb_vid_n2_1.m3u8",
+    "https://cdn.evhomes.tech/hls/mb_vid_n6/mb_vid_n6_1.m3u8",
+    "https://cdn.evhomes.tech/hls/mb_vid_n4/mb_vid_n4_1.m3u8",
   ];
 
   const images1 = [
-    "/images1/mb_vid_normal_2.mp4",
+    "https://cdn.evhomes.tech/hls/mb_vid_n2/mb_vid_n2_1.m3u8",
     // "/images/mb_ind_2.jpg",
-    "/images1/mb_vid_n7.mp4",
-    "/images1/mb_vid_ind_2.mp4",
-    "/images1/mb_vid_n5.mp4",
+    "https://cdn.evhomes.tech/hls/mb_vid_n7/mb_vid_n7_1.m3u8",
+    "https://cdn.evhomes.tech/hls/mb_vid_ind_2/mb_vid_ind_2_1.m3u8",
+    "https://cdn.evhomes.tech/hls/mb_vid_n5/mb_vid_n5_1.m3u8",
   ];
 
   const handleCloseModal = () => {
