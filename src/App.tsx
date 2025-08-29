@@ -19,11 +19,11 @@ const BuildingProgress = lazy(
 
 const AmenitiesSection = lazy(() => import("./components/AmenitiesSection"));
 
-const OtherProjects = lazy(() => import("./components/other-projects/other-projects"));
+const OtherProjects = lazy(
+  () => import("./components/other-projects/other-projects")
+);
 
 const PropertyPricing = lazy(() => import("./App/property_pricing"));
-
-
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -598,11 +598,11 @@ export default function App() {
           </div>
         </div>
       </section> */}
-      {showNavbar && 
-       <Suspense fallback={<div>Loading content...</div>}>
-            <MarinaNavbar />
-          </Suspense>
-      }{" "}
+      {showNavbar && (
+        <Suspense fallback={<div>Loading content...</div>}>
+          <MarinaNavbar />
+        </Suspense>
+      )}{" "}
       {/* navbar shows only after reaching ref */}
       <Hero />
       <div ref={buildingRef} />
@@ -676,7 +676,6 @@ export default function App() {
                         <div className="content">
                           <h2>{item.title}</h2>
                           <p className="description">{item.description}</p>
-                        
                         </div>
                       </div>
 
@@ -694,7 +693,7 @@ export default function App() {
                 <h2 className="main-subtitle padding">COMMUNITY CORNERS</h2>
                 <div className="boxblur"></div>
 
-                  <div className="arrows">
+                <div className="arrows">
                   <button onClick={corners.prev} aria-label="Previous">
                     {"<"}
                   </button>
@@ -716,18 +715,18 @@ export default function App() {
             <div className="header-center" style={{ marginBottom: "0.2rem" }}>
               <h1 className="main-title">PROPERTY PRICING</h1>
             </div>
-             <Suspense fallback={<div>Loading content...</div>}>
-            <PropertyPricing />
-          </Suspense>
+            <Suspense fallback={<div>Loading content...</div>}>
+              <PropertyPricing />
+            </Suspense>
           </div>
 
           <div
             className={`other-section ${showOther ? "active" : ""}`}
             id="projects"
           >
-             <Suspense fallback={<div>Loading content...</div>}>
-            <OtherProjects />
-          </Suspense>
+            <Suspense fallback={<div>Loading content...</div>}>
+              <OtherProjects />
+            </Suspense>
           </div>
         </div>
         {/* Video Testimonials Section */}
@@ -750,81 +749,80 @@ export default function App() {
           </div>
         </div>
 
-          <Suspense fallback={<div>Loading content...</div>}>
-        <div className="video-testimonials-section animate-slide-left">
-        
-          <div className="video-carousel-container">
-            <div
-              className="video-carousel-track"
-              style={{
-                transform: `translateX(-${currentVideoIndex * 320}px)`,
-                transition: "transform 0.5s ease-in-out",
-              }}
-            >
-              {videoCarouselItems.map((video, index) => (
-                <div
-                  key={`${video.id}-${index}`}
-                  className="video-testimonial-card"
-                  onClick={() => handleVideoClick(video.youtubeUrl)}
-                >
+        <Suspense fallback={<div>Loading content...</div>}>
+          <div className="video-testimonials-section animate-slide-left">
+            <div className="video-carousel-container">
+              <div
+                className="video-carousel-track"
+                style={{
+                  transform: `translateX(-${currentVideoIndex * 320}px)`,
+                  transition: "transform 0.5s ease-in-out",
+                }}
+              >
+                {videoCarouselItems.map((video, index) => (
                   <div
                     key={`${video.id}-${index}`}
                     className="video-testimonial-card"
                     onClick={() => handleVideoClick(video.youtubeUrl)}
                   >
-                    <div className="video-thumbnail-container">
-                      <img
-                        src={video.thumbnail || "/placeholder.svg"}
-                        alt={video.title}
-                        className="video-thumbnail"
-                      />
-                      <div className="play-button-overlay">
-                        <div className="play-button">
-                          <svg
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="white"
-                          >
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
+                    <div
+                      key={`${video.id}-${index}`}
+                      className="video-testimonial-card"
+                      onClick={() => handleVideoClick(video.youtubeUrl)}
+                    >
+                      <div className="video-thumbnail-container">
+                        <img
+                          src={video.thumbnail || "/placeholder.svg"}
+                          alt={video.title}
+                          className="video-thumbnail"
+                        />
+                        <div className="play-button-overlay">
+                          <div className="play-button">
+                            <svg
+                              width="24"
+                              height="24"
+                              viewBox="0 0 24 24"
+                              fill="white"
+                            >
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Title overlay inside thumbnail */}
-                      <div className="video-title-overlay">{video.title}</div>
+                        {/* Title overlay inside thumbnail */}
+                        <div className="video-title-overlay">{video.title}</div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "8px",
+                marginTop: "20px",
+              }}
+            >
+              {videoTestimonials.map((_, index) => (
+                <div
+                  key={index}
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    backgroundColor:
+                      currentVideoIndex === index ? "#003261" : "#ccc",
+                    cursor: "pointer",
+                    transition: "background-color 0.3s ease",
+                  }}
+                  onClick={() => setCurrentVideoIndex(index)}
+                />
               ))}
             </div>
           </div>
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "8px",
-              marginTop: "20px",
-            }}
-          >
-            {videoTestimonials.map((_, index) => (
-              <div
-                key={index}
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  backgroundColor:
-                    currentVideoIndex === index ? "#003261" : "#ccc",
-                  cursor: "pointer",
-                  transition: "background-color 0.3s ease",
-                }}
-                onClick={() => setCurrentVideoIndex(index)}
-              />
-            ))}
-          </div>
-        </div>
         </Suspense>
 
         <div
@@ -1241,7 +1239,6 @@ export default function App() {
                       }}
                     >
                       <a
-                        href="#"
                         style={{
                           color: "#ccc",
                           textDecoration: "none",
@@ -1334,7 +1331,6 @@ export default function App() {
                         }}
                       >
                         <a
-                          href="#"
                           style={{
                             color: "#ccc",
                             textDecoration: "none",
