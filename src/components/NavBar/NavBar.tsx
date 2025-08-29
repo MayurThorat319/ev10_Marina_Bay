@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import styles from "./NavBar.module.css"
-import { Home, Users, DollarSign, FolderOpen, MessageSquare, Info, Phone, Menu, X } from "lucide-react"
+import { Home, Users, IndianRupee, FolderOpen, MessageSquare, Info, Phone, Menu, X } from "lucide-react"
 
 function MarinaNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -43,7 +43,7 @@ function MarinaNavbar() {
               </li>
               <li>
                 <a href="#property-section" className={styles.navLink} onClick={closeMobileMenu}>
-                  <DollarSign className={styles.navIcon} />
+                  <IndianRupee  className={styles.navIcon} />
                   <span className={styles.navText}>Property Pricing</span>
                 </a>
               </li>
