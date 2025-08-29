@@ -1137,9 +1137,9 @@ export default function App() {
                     }
                   >
                     <img
-                      src="/images/insta.png"
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
                       alt="Instagram"
-                      style={{ width: "30px", height: "30px" }}
+                      style={{ width: "20px", height: "20px" }}
                     />
                   </div>
 
