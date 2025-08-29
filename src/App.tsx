@@ -621,7 +621,7 @@ export default function App() {
           </Suspense>
         </div>
 
-        <div className="section-container">
+        <div className="section-container" id="amenities">
           <div className="wrapper">
             <div
               ref={wellnessRef}
