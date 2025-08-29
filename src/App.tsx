@@ -245,7 +245,7 @@ const carouselItems = [
     description:
       "Take a walk, go for a jog, or enjoy a quiet run along the jogging track. It’s a great way to move your body while soaking in the views. Fitness feels easy when it looks this good.",
     image: "/images1/jogging_track.jpeg",
-    backgroundImage: "/images1/blur_jogging_track.png",
+    backgroundImage: "/images1/blur_jogging_track.jpeg",
     caption: "Jogging Track",
     backgroundColor: "#f5bfaf",
   },
