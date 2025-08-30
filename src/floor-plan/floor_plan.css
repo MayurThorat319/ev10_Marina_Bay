@@ -514,4 +514,13 @@
   .pp-section {
     bottom: 270px;
   }
+  .pp-section-carousel {
+
+   height: auto; 
+  top: 220px;
+
+  justify-content: flex-start; 
+ 
+  padding-top: 20px;
+}
 }
