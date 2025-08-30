@@ -79,7 +79,7 @@ export default function FormModal({
         price: propertyPrice ?? "",
       }
       console.log("Form submitted:", submissionData)
-       await fetch("https://script.google.com/macros/s/AKfycbxLGD8rNZfkaJ2aKSQK5LoYhVVNhDWtAbC9p4wTwvXN1i5QTWXSfNTYcrrRvInwNqn_ng/exec", {
+       await fetch("https://script.google.com/macros/s/AKfycbxaZkbEN1J3igE8yE-3IFE7nhUCf31cVzujRVcjVfja8YAyhZbQeRXfUpovxCEC_JX4_g/exec", {
         method: "POST",
         mode: "no-cors",
         headers: { "Content-Type": "application/json" },
