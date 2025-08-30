@@ -1,7 +1,7 @@
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useMaskSettings } from "../../constants"
-import VideoPlayer2 from "../components/videoPlayer_2"
+import VideoPlayer2 from "./videoPlayer_2"
 
 type HeroProps = {
   id?: string;
@@ -85,7 +85,7 @@ const Hero = ({ id }: HeroProps) => {
   return (
     <section className="hero-section" id={id}>
       <div className="mask-wrapper">
-        <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img" />
+        <img src="/images/beg-img-2.png" alt="background" className="scale-out mask-img" />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">

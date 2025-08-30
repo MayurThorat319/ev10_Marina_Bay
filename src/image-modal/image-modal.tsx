@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react"
 import "./image-modal.css"
-import VideoPlayer from "../components/videoplayer"
+import VideoPlayer from "./videoplayer"
 
 interface ImageModalProps {
   isOpen: boolean

@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState, Suspense, lazy } from "react";
 import "./App.css";
 
 // import BuildingProgress from "./components/building-progress/building-progress";
-import Hero from "./sections/Hero";
+import Hero from "./starter/Hero";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 // import LocomotiveScroll from "locomotive-scroll";
