@@ -5,7 +5,7 @@ import FloorPlanCarousel from "../floor-plan/floor_plan"
 import FiveTabsSection from '../filter'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import FormModal from '../form/form'
-import VideoPlayer3 from '../components/videoPlayer_3'
+import VideoPlayer3 from './videoPlayer_3'
 
 const plans: FloorPlan[] = [
   {

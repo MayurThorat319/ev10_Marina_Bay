@@ -155,22 +155,34 @@ export default function ScrollToggleArrow({
 
           {/* Down Chevron */}
           <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            role="img"
-            aria-hidden="true"
-            fill="none"
-            stroke="black"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{ filter: "drop-shadow(0 0 10px white)" }}
-          >
-            <Bounce>
-              <polyline points="6 9 12 15 18 9" />
-            </Bounce>
-          </svg>
+  width="50"
+  height="50"
+  viewBox="0 0 24 24"
+  role="img"
+  aria-hidden="true"
+  fill="none"
+  stroke="#83cff3ff" // dark gold shade
+  strokeWidth="3"
+  strokeLinecap="round"
+  strokeLinejoin="round"
+  style={{
+    filter: "drop-shadow(0 0 8px #b5dbeeff)",
+  }}
+>
+  <polyline
+    points="6 7 12 13 18 7"
+    style={{ animation: "glowDown 1.5s infinite ease-in-out" }}
+  />
+  <polyline
+    points="6 11 12 17 18 11"
+    style={{ animation: "glowDown 1.5s infinite ease-in-out", animationDelay: "0.3s" }}
+  />
+  <polyline
+    points="6 15 12 21 18 15"
+    style={{ animation: "glowDown 1.5s infinite ease-in-out", animationDelay: "0.6s" }}
+  />
+</svg>
+   
         </button>
       )}
     </>
