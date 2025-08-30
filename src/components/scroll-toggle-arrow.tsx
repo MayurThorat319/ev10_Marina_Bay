@@ -161,11 +161,11 @@ export default function ScrollToggleArrow({
             role="img"
             aria-hidden="true"
             fill="none"
-            stroke="#003261"
+            stroke="black"
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"
-            style={{ filter: "drop-shadow(0 0 8px white)" }}
+            style={{ filter: "drop-shadow(0 0 10px white)" }}
           >
             <Bounce>
               <polyline points="6 9 12 15 18 9" />
