@@ -77,8 +77,8 @@ const plans: FloorPlan[] = [
       "Dual Ventilation",
       "Expensive Living & Dining",
       "Large Sun Deck",
-      "Expensive Kitchen & Storage", 
-      "Elegant Ensuite Bathrooms", 
+      "Expensive Kitchen & Storage",
+      "Elegant Ensuite Bathrooms",
     ],
     price: "₹3.75*Cr",
     stats: { beds: 3, baths: 3, area: 990, unit: "sq ft" },
@@ -116,44 +116,44 @@ const plans: FloorPlan[] = [
 ]
 
 export default function PropertyPricing() {
- const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
-const [isModalOpen, setIsModalOpen] = useState(false)
+  const [activeFilter, setActiveFilter] = useState(0) // 0 = All, 1 = 2BHK, 2 = 3BHK, 3 = LUX, 4 = Ultra LUX
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const [selectedProperty, setSelectedProperty] = useState<FloorPlan | null>(null)
-const [isShrink, setIsShrink] = useState(false)
-const sectionRef = useRef<HTMLDivElement | null>(null)
+  const [isShrink, setIsShrink] = useState(false)
+  const sectionRef = useRef<HTMLDivElement | null>(null)
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        const rect = entry.boundingClientRect;
-        const viewportHeight = window.innerHeight;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
 
-        // bottom 40% condition
-        const isBottom40Visible = rect.bottom <= viewportHeight * 0.6; 
+          // bottom 40% condition
+          const isBottom40Visible = rect.bottom <= viewportHeight * 0.6;
 
-        if (isBottom40Visible) {
-          setIsShrink(true);
-        } else {
-          setIsShrink(false);
-        }
-      });
-    },
-    {
-      root: null,
-      threshold: [0, 0.4, 1],
-    }
-  );
+          if (isBottom40Visible) {
+            setIsShrink(true);
+          } else {
+            setIsShrink(false);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: [0, 0.4, 1],
+      }
+    );
 
-  if (sectionRef.current) {
-    observer.observe(sectionRef.current);
-  }
-
-  return () => {
     if (sectionRef.current) {
-      observer.unobserve(sectionRef.current);
+      observer.observe(sectionRef.current);
     }
-  };
-}, []);
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
   // Filter properties based on selected tab
   const filteredProperties = useMemo(() => {
     switch (activeFilter) {
@@ -182,60 +182,61 @@ const sectionRef = useRef<HTMLDivElement | null>(null)
   const handleViewLayout = (property: FloorPlan) => {
     console.log("View layout requested for:", property.title)
     // Add your view layout logic here setSelectedProperty(property)
+     setSelectedProperty(property)
     setIsModalOpen(true)
   }
 
-   const handleCloseModal = () => {
+  const handleCloseModal = () => {
     setIsModalOpen(false)
     setSelectedProperty(null)
   }
   return (
     <>
-     <section  ref={sectionRef}
-className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}     
-    >
-   <VideoPlayer3 imageSrc
-  ="https://cdn.evhomes.tech/hls/property_vid_1/property_vid_1_1.m3u8"
-
- 
-  // style={{
-  //   width: "100vw",
-  //   height: "120vh",
-  //   objectFit: "cover",
-  //   top: 0,
-  //   left: 0,
-  
-  // }}
-/>
-  {/* </video> */}
-
-      {/* Filter Tabs */}
-    <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
-  <FiveTabsSection
-    tabs={["All", "2BHK", "3BHK", "LUX", "Ultra LUX"]}
-    colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
-    width="90%"
-    initialIndex={0}
-    onChange={setActiveFilter}
-  />
-</div>
+      <section ref={sectionRef}
+        className={`property-pricing-section relative min-h-screen py-16 ${isShrink ? "shrink" : ""}`}
+      >
+        <VideoPlayer3 imageSrc
+          ="https://cdn.evhomes.tech/hls/property_vid_1/property_vid_1_1.m3u8"
 
 
-      {/* Property Carousel */}
-       <div className="pp-section-carousel">
-      <FloorPlanCarousel
-        items={filteredProperties}
-        initialIndex={0}
-        autoPlayMs={null} // Disable autoplay when filtering
-        onSiteVisit={handleSiteVisit}
-        onViewLayout={handleViewLayout}
-        className="property-carousel"
-        enableScrolling={shouldEnableScrolling}
-      />
-      </div>
-    </section>
-    
-      <FormModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} />
+        // style={{
+        //   width: "100vw",
+        //   height: "120vh",
+        //   objectFit: "cover",
+        //   top: 0,
+        //   left: 0,
+
+        // }}
+        />
+        {/* </video> */}
+
+        {/* Filter Tabs */}
+        <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
+          <FiveTabsSection
+            tabs={["All", "2BHK", "3BHK", "LUX", "Ultra LUX"]}
+            colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
+            width="90%"
+            initialIndex={0}
+            onChange={setActiveFilter}
+          />
+        </div>
+
+
+        {/* Property Carousel */}
+        <div className="pp-section-carousel">
+          <FloorPlanCarousel
+            items={filteredProperties}
+            initialIndex={0}
+            autoPlayMs={null} // Disable autoplay when filtering
+            onSiteVisit={handleSiteVisit}
+            onViewLayout={handleViewLayout}
+            className="property-carousel"
+            enableScrolling={shouldEnableScrolling}
+          />
+        </div>
+      </section>
+
+      <FormModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} propertyPrice={selectedProperty?.price} />
 
     </>
   )

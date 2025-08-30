@@ -8,9 +8,22 @@ interface FormProps {
   isOpen: boolean
   onClose: () => void
   propertyTitle?: string
+  propertyPrice?: String
 }
+type FormData = {
+  name?: string;
+  email?: string;
+  phone?: string;
 
-export default function FormModal({ isOpen, onClose }: FormProps) {
+}
+type FromErrors = Partial<Record<keyof FormData, string>>
+
+export default function FormModal({
+  isOpen,
+  onClose,
+  propertyTitle,
+  propertyPrice,
+}: FormProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,7 +31,77 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
     query: "",
   })
 
-  // Close modal on escape key
+  const [errors, setErrors] = useState<FromErrors>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }))
+
+    if (errors[name as keyof typeof errors]) {
+      setErrors(prev => ({ ...prev, [name]: '' }))
+    }
+  };
+
+  const validateForm = () => {
+
+    const newError: FromErrors = {};
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!formData.name.trim()) {
+      newError.name = 'Name is required';
+    }
+    if (!formData.email) {
+      newError.email = "Email is required"
+    } else if (!emailRegex.test(formData.email)) {
+      newError.email = "Please enter a valid email"
+    }
+    if (!formData.phone) {
+      newError.phone = 'Phone number is required';
+    } else if (!phoneRegex.test(formData.phone)) {
+      newError.phone = 'Please enter a valid phone number (10-15 digits)';
+    }
+    setErrors(newError);
+    return Object.keys(newError).length === 0;
+  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!validateForm()) return;
+    setIsSubmitting(true);
+    try {
+      const submissionData = {
+        ...formData,
+        title: propertyTitle ?? "",
+        price: propertyPrice ?? "",
+      }
+      console.log("Form submitted:", submissionData)
+       await fetch("https://script.google.com/macros/s/AKfycbxLGD8rNZfkaJ2aKSQK5LoYhVVNhDWtAbC9p4wTwvXN1i5QTWXSfNTYcrrRvInwNqn_ng/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submissionData),
+      });
+    
+       alert('Form submitted successfully!')
+        onClose()
+      }
+
+  catch (err) {
+      console.error("Form submission error:", err)
+      alert('Failed to send form. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+
+
+  }
+
+
+
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose()
@@ -36,19 +119,7 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
     }
   }, [isOpen, onClose])
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Add your form submission logic here
-    onClose()
-  }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
 
   if (!isOpen) return null
 
@@ -58,19 +129,28 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
         <img src="" alt="Building background" className="layout-modal-bg-image" />
       </div>
 
-      <div className="layout-modal-content" onClick={(e) => e.stopPropagation()}>
-        
 
-      
+      <div className="layout-modal-content" onClick={(e) => e.stopPropagation()}>
+
+        <div className="hidden">
+          {propertyTitle && (
+            <h2>{propertyTitle}</h2>
+          )}
+
+          {propertyPrice && (
+            <p >{propertyPrice}</p>
+          )}
+        </div>
 
         <form onSubmit={handleSubmit} className="layout-modal-form">
           <div className="layout-modal-field">
-              <div className="layout-modal-header">
-          <h2>Your New Address Awaits !</h2>
-          <button className="layout-modal-close" onClick={onClose} aria-label="Close modal">
-          <X size={16} color="white" />
-        </button>
-        </div>
+            <div className="layout-modal-header">
+              <h2>Your New Address Awaits !</h2>
+              <button className="layout-modal-close" onClick={onClose} aria-label="Close modal">
+                <X size={16} color="white" />
+              </button>
+
+            </div>
             <input
               type="text"
               name="name"
@@ -79,6 +159,7 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
               onChange={handleInputChange}
               required
             />
+            {errors.name && <p className="error">{errors.name}</p>}
           </div>
 
           <div className="layout-modal-field">
@@ -90,6 +171,7 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
               onChange={handleInputChange}
               required
             />
+            {errors.email && <p className="error">{errors.email}</p>}
           </div>
 
           <div className="layout-modal-field">
@@ -101,6 +183,7 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
               onChange={handleInputChange}
               required
             />
+            {errors.phone && <p className="error">{errors.phone}</p>}
           </div>
 
           <div className="layout-modal-field">
@@ -113,8 +196,11 @@ export default function FormModal({ isOpen, onClose }: FormProps) {
             />
           </div>
 
-          <button type="submit" className="layout-modal-submit layout-modal-submit-small">
-            SUBMIT
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="layout-modal-submit layout-modal-submit-small">
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </button>
         </form>
       </div>
