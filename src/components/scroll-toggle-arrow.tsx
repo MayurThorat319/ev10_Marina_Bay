@@ -20,7 +20,7 @@ export default function ScrollToggleArrow({
 }: Props) {
   const [atFooter, setAtFooter] = useState(false);
   const [inHeroSection, setInHeroSection] = useState(false); // Track if in hero section
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [, setReducedMotion] = useState(false);
 
   const getFooter = useMemo(() => {
     return () => {
@@ -105,21 +105,6 @@ export default function ScrollToggleArrow({
     style.bottom = `calc(env(safe-area-inset-bottom, 0px) + ${bottomOffsetPx}px)`;
   }
 
-  const Bounce = ({ children }: { children: React.ReactNode }) => (
-    <g>
-      {!reducedMotion && (
-        <animateTransform
-          attributeName="transform"
-          type="translate"
-          values="0 0; 0 -6; 0 0"
-          dur="1.2s"
-          repeatCount="indefinite"
-          begin="0s"
-        />
-      )}
-      {children}
-    </g>
-  );
 
   return (
     <>

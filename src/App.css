@@ -1763,11 +1763,6 @@ left: -5%;
   transition: margin-top 0.8s ease, opacity 0.8s ease;  transform: translateY(0);
 }
 
-
-.property-section.move-up .property-content {
-   /* ya jitna upar chahiye */
-}
-
 .property-section::after {
   content: "";
   position: absolute;
