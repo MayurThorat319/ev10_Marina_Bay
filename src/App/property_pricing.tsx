@@ -211,7 +211,8 @@ export default function PropertyPricing() {
         {/* </video> */}
 
         {/* Filter Tabs */}
-        <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
+        <div className='pp'>
+          <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
           <FiveTabsSection
             tabs={["All", "2BHK", "3BHK", "LUX", "Ultra LUX"]}
             colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}
@@ -234,6 +235,8 @@ export default function PropertyPricing() {
             enableScrolling={shouldEnableScrolling}
           />
         </div>
+        </div>
+        
       </section>
 
       <FormModal isOpen={isModalOpen} onClose={handleCloseModal} propertyTitle={selectedProperty?.title} propertyPrice={selectedProperty?.price} />
