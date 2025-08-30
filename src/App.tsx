@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, Suspense, lazy } from "react";
+import { useEffect, useMemo, useRef, useState, } from "react";
 
 import "./App.css";
 
@@ -10,20 +10,25 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 // import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.css";
+import PropertyPricing from "./App/property_pricing";
+import OtherProjects from "./components/other-projects/other-projects";
+import AmenitiesSection from "./components/AmenitiesSection";
+import BuildingProgress from "./components/building-progress/building-progress";
+import MarinaNavbar from "./components/NavBar/NavBar";
 
-const MarinaNavbar = lazy(() => import("./components/NavBar/NavBar"));
+// const MarinaNavbar = lazy(() => import("./components/NavBar/NavBar"));
 
-const BuildingProgress = lazy(
-  () => import("./components/building-progress/building-progress")
-);
+// const BuildingProgress = lazy(
+//   () => import("./components/building-progress/building-progress")
+// );
 
-const AmenitiesSection = lazy(() => import("./components/AmenitiesSection"));
+// const AmenitiesSection = lazy(() => import("./components/AmenitiesSection"));
 
-const OtherProjects = lazy(
-  () => import("./components/other-projects/other-projects")
-);
+// const OtherProjects = lazy(
+//   () => import("./components/other-projects/other-projects")
+// );
 
-const PropertyPricing = lazy(() => import("./App/property_pricing"));
+// const PropertyPricing = lazy(() => import("./App/property_pricing"));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -599,9 +604,9 @@ export default function App() {
         </div>
       </section> */}
       {showNavbar && (
-        <Suspense fallback={<div>Loading content...</div>}>
+        // <Suspense fallback={<div>Loading content...</div>}>
           <MarinaNavbar />
-        </Suspense>
+        // </Suspense>
       )}{" "}
       {/* navbar shows only after reaching ref */}
       <Hero />
@@ -616,9 +621,9 @@ export default function App() {
           <BuildingProgress />
         </div> */}
         <div className="animate-scale">
-          <Suspense fallback={<div>Loading content...</div>}>
+          {/* <Suspense fallback={<div>Loading content...</div>}> */}
             <BuildingProgress />
-          </Suspense>
+          {/* </Suspense> */}
         </div>
 
         <div className="section-container" id="amenities">
@@ -634,12 +639,12 @@ export default function App() {
               // transition: "transform 0.10s ease-in-out"// optional
               //             }}
             >
-              <Suspense fallback={<div>Loading content...</div>}>
+              {/* <Suspense fallback={<div>Loading content...</div>}> */}
                 <AmenitiesSection
                   amenities={amenities}
                   carouselItems={carouselItems}
                 />
-              </Suspense>
+              {/* </Suspense> */}
             </div>
             <div
               ref={(el) => {
@@ -715,18 +720,18 @@ export default function App() {
             <div className="header-center" style={{ marginBottom: "0.2rem" }}>
               <h1 className="main-title">PROPERTY PRICING</h1>
             </div>
-            <Suspense fallback={<div>Loading content...</div>}>
+            {/* <Suspense fallback={<div>Loading content...</div>}> */}
               <PropertyPricing />
-            </Suspense>
+            {/* </Suspense> */}
           </div>
 
           <div
             className={`other-section ${showOther ? "active" : ""}`}
             id="projects"
           >
-            <Suspense fallback={<div>Loading content...</div>}>
+            {/* <Suspense fallback={<div>Loading content...</div>}> */}
               <OtherProjects />
-            </Suspense>
+            {/* </Suspense> */}
           </div>
         </div>
         {/* Video Testimonials Section */}
@@ -749,7 +754,7 @@ export default function App() {
           </div>
         </div>
 
-        <Suspense fallback={<div>Loading content...</div>}>
+        {/* <Suspense fallback={<div>Loading content...</div>}> */}
           <div className="video-testimonials-section animate-slide-left">
             <div className="video-carousel-container">
               <div
@@ -823,7 +828,7 @@ export default function App() {
               ))}
             </div>
           </div>
-        </Suspense>
+        {/* </Suspense> */}
 
         <div
           id="about"
