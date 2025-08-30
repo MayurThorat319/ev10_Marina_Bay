@@ -485,12 +485,14 @@
     padding: 7px 10px;
   }
 }
-
-.pp-section {
+.pp{
   position: absolute;
+  top: 60px;
+}
+.pp-section {
+
   width: 100%;
   height: 100%;
-  bottom: 260px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -499,10 +501,9 @@
 }
 
 .pp-section-carousel {
-  position: absolute;
   width: 100%;
   height: 100%;
-  top: 60px;
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -514,13 +515,5 @@
   .pp-section {
     bottom: 270px;
   }
-  .pp-section-carousel {
 
-   height: auto; 
-  top: 220px;
-
-  justify-content: flex-start; 
- 
-  padding-top: 20px;
-}
 }
