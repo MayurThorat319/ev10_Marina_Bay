@@ -3,7 +3,11 @@ import { useGSAP } from "@gsap/react"
 import { useMaskSettings } from "../../constants"
 import VideoPlayer2 from "../components/videoPlayer_2"
 
-const Hero = () => {
+type HeroProps = {
+  id?: string;
+};
+
+const Hero = ({ id }: HeroProps) => {
   const { initialMaskPos, initialMaskSize, maskPos, maskSize } = useMaskSettings()
 
   useGSAP(() => {
@@ -79,13 +83,13 @@ const Hero = () => {
   })
 
   return (
-    <section className="hero-section">
+    <section className="hero-section" id={id}>
       <div className="mask-wrapper">
         <img src="/images/bg-img-1.jpg" alt="background" className="scale-out mask-img" />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
-        <VideoPlayer2 imageSrc="https://cdn.evhomes.tech/hls/marina_vid_1/marina_vid_1.m3u8" />
+        <VideoPlayer2 imageSrc="https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8" />
       </div>
     </section>
   )
