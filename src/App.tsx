@@ -1411,7 +1411,7 @@ export default function App() {
                     }
                     onMouseOut={(e) => (e.currentTarget.style.color = "#ccc")}
                   >
-                    +91 98674 56777
+                    +91 82916 68777
                   </a>
                 </div>
               </div>
