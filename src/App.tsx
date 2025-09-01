@@ -735,7 +735,7 @@ export default function App() {
         {/* Video Testimonials Section */}
         <div className="video-testimonials-header animate-scale">
           <h1 className="main-title" id="feedback">
-            FEEDBACK THAT FUELS US
+            FEEDBACK
           </h1>
           <div className="video-testimonials-stats">
             <div className="video-testimonials-stat">
