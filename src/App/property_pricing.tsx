@@ -211,8 +211,9 @@ export default function PropertyPricing() {
         {/* </video> */}
 
         {/* Filter Tabs */}
+        <div></div>
         <div className='pp'>
-          <div className="pp-section" style={{ marginBottom: "2rem", paddingTop: "2rem" }}>
+          <div className="pp-section" style={{ marginBottom: "25px"}}>
           <FiveTabsSection
             tabs={["All", "2BHK", "3BHK", "LUX", "Ultra LUX"]}
             colors={["#003261", "#003261", "#003261", "#003261", "#003261"]}

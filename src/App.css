@@ -116,7 +116,7 @@ body {
 }
 
 .main-title2 {
-  font-size: 1.8rem;
+  font-size: 2.4rem;
   font-weight: 800;
   color: #003261;
   font-family: "Amaranth", sans-serif;
@@ -131,7 +131,7 @@ body {
   color: white;
   font-family: 'Amaranth', sans-serif;
   position: absolute;
-  top: 50px;    
+  top: 60px;    
   left: 50%;     
   transform: translateX(-50%);
   z-index: 10;
