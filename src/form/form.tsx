@@ -63,7 +63,7 @@ export default function FormModal({
     if (!formData.phone) {
       newError.phone = 'Phone number is required';
     } else if (!phoneRegex.test(formData.phone)) {
-      newError.phone = 'Please enter a valid phone number (10-15 digits)';
+      newError.phone = '*Please enter a valid phone number (10-15 digits)';
     }
     setErrors(newError);
     return Object.keys(newError).length === 0;
@@ -87,6 +87,7 @@ export default function FormModal({
       });
     
        alert('Form submitted successfully!')
+       setFormData({name: "", email: "", phone: "", query: "" })
         onClose()
       }
 
@@ -119,6 +120,12 @@ export default function FormModal({
     }
   }, [isOpen, onClose])
 
+useEffect(() => {
+  if (!isOpen) {
+    setFormData({ name: "", email: "", phone: "", query: "" }) // ✅ reset when modal closes
+    setErrors({})
+  }
+}, [isOpen])
 
 
   if (!isOpen) return null
