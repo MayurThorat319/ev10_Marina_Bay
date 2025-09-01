@@ -36,7 +36,7 @@
 
 /* Enhanced glass effect for modal content to match screenshot */
 .layout-modal-content {
-  background: url("../images/form_bg.png")
+  background: url("../images1/form_bg.png")
     no-repeat center center;
   background-size: cover;
   border-radius: 20px;

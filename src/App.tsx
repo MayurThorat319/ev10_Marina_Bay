@@ -976,7 +976,7 @@ export default function App() {
             }}
           >
             <img
-              src="/images/maha_rera_qr.jpeg"
+              src="/images1/maha_rera_qr.jpeg"
               alt="MAHARERA QR Code"
               style={{
                 width: "100%",

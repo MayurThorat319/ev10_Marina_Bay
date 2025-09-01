@@ -1219,8 +1219,12 @@ left: -5%;
   margin: 0;
 }
 .content h2{
-    line-height:0.9 ;
+    line -height:0.9 ;
 } */
+   :root {
+    --calculate: 1;
+    --w-image: 600px;
+  }
  .arrows {
 bottom: 80px;
   right: 42%;
@@ -1288,6 +1292,10 @@ bottom: 80px;
 }
 
 @media screen and (min-width: 1068px) and (max-width: 1200px) {
+   :root {
+    --calculate: 1;
+    --w-image: 600px;
+  }
   /* :root{ --calculate: 1; --w-image: 260px;}
  .page-title {
   
@@ -1402,7 +1410,7 @@ left: -5%;
   }
 
   .carousel .list .item .image img {
-    width: 80%;
+    width: 95%;
     height: auto;
     margin-bottom: 20px;
     object-fit: cover;
@@ -1411,6 +1419,12 @@ left: -5%;
   }
 }
 
+@media screen and (min-width: 1501px) and (max-width: 1920px) {
+:root {
+  --w-image: 600px;
+  --calculate: calc(3 / 2);
+}
+}
 /* @media screen and (min-width: 891px) and (max-width: 1020px){
    :root{ --calculate: 1; --w-image: 260px;}
  .page-title {
