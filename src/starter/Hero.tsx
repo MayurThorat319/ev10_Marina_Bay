@@ -2,6 +2,7 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 import { useMaskSettings } from "../../constants"
 import VideoPlayer2 from "./videoPlayer_2"
+import { useEffect, useState } from "react"
 
 type HeroProps = {
   id?: string;
@@ -9,6 +10,26 @@ type HeroProps = {
 
 const Hero = ({ id }: HeroProps) => {
   const { initialMaskPos, initialMaskSize, maskPos, maskSize } = useMaskSettings()
+
+  const [imgSrc, setImgSrc] = useState("/images1/mb-img.png")
+  const [videoSrc, setVideoSrc] = useState("https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8")
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 450) {
+        setImgSrc("/images1/mobile-img.png") // 👈 mobile fallback image
+        setVideoSrc("https://cdn.evhomes.tech/hls/marina_video_21545/marina_video_21545_1.m3u8") // 👈 mobile video
+      } else {
+        setImgSrc("/images1/mb-img.png")
+        setVideoSrc("https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8")
+      }
+    }
+
+    handleResize() // run on mount
+    window.addEventListener("resize", handleResize)
+
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
   useGSAP(() => {
     gsap.set(".mask-wrapper", {
@@ -72,7 +93,6 @@ const Hero = ({ id }: HeroProps) => {
       },
     })
 
-    // 🔥 Animate both maskSize and maskPosition
     tl.to(".fade-out", { opacity: 0, ease: "power1.inOut" })
       .to(".scale-out", { scale: 1, ease: "power1.inOut", duration: 1 })
       .to(".mask-wrapper", { maskSize, maskPosition: maskPos, ease: "power1.inOut" }, "<")
@@ -85,11 +105,11 @@ const Hero = ({ id }: HeroProps) => {
   return (
     <section className="hero-section" id={id}>
       <div className="mask-wrapper">
-        <img src="/images/beg-img-2.png" alt="background" className="scale-out mask-img" />
+        <img src={imgSrc} alt="background" className="scale-out mask-img" />
       </div>
 
       <div className="fake-logo-wrapper overlay-logo">
-        <VideoPlayer2 imageSrc="https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8" />
+        <VideoPlayer2 imageSrc={videoSrc} />
       </div>
     </section>
   )

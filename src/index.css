@@ -483,8 +483,8 @@ main {
   height: 100%;
 
   /* Cross-browser mask */
-  mask-image: url("/images/BAY_1.svg");
-  -webkit-mask-image: url("/images/BAY_1.svg");
+  mask-image: url("/images1/BAY_1.svg");
+  -webkit-mask-image: url("/images1/BAY_1.svg");
   mask-repeat: no-repeat;
   -webkit-mask-repeat: no-repeat;
   mask-position: 50% 50%;
@@ -717,7 +717,7 @@ main {
 }
 
 .mask-wrapper {
-  mask-image: url("/images/BAY_1.svg");
+  mask-image: url("/images1/BAY_1.svg");
   mask-repeat: no-repeat;
 }
 .mask-img {

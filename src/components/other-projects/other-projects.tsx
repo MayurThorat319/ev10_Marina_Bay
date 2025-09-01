@@ -11,7 +11,7 @@ const OtherProjects: React.FC = () => {
       <div className="property-grid">
         {/* Property 1 - With overlay */}
         <div className="property-item property-large">
-          <img src="/images/mb_bg.jpeg" alt="Luxury Apartments" className="property-image" />
+          <img src="/images1/mb_bg.jpeg" alt="Luxury Apartments" className="property-image" />
           <div className="property-overlay-bottom">
             <div className="property-title">EV10 Marina Bay</div>
           </div>
@@ -46,7 +46,7 @@ const OtherProjects: React.FC = () => {
 
         {/* Property 5 - Luxury tower */}
         <div className="property-item property-small">
-          <img src="/images/v10-himbhindu.jpeg" alt="Luxury Tower" className="property-image" />
+          <img src="/images1/v10-himbhindu.jpeg" alt="Luxury Tower" className="property-image" />
           <div className="property-overlay-bottom">
             <div className="property-title">Himbindu</div>
           </div>
