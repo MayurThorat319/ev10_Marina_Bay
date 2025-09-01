@@ -1,4 +1,3 @@
-
 /* Base */
 :root {
   --w-image: 500px;
@@ -129,17 +128,15 @@ body {
   text-align: center;
   white-space: nowrap;
   color: white;
-  font-family: 'Amaranth', sans-serif;
+  font-family: "Amaranth", sans-serif;
   position: absolute;
-  top: 60px;    
-  left: 50%;     
+  top: 60px;
+  left: 50%;
   transform: translateX(-50%);
   z-index: 10;
 }
-.padding{
-    top: 20px;    
-
-
+.padding {
+  top: 20px;
 }
 
 /* Add these new title styles */
@@ -207,7 +204,6 @@ body {
   border-right: 1px solid var(--border-color);
   z-index: 4;
   pointer-events: none;
-  
 }
 .carousel .list::after {
   position: absolute;
@@ -281,19 +277,17 @@ body {
 }
 
 .carousel .list .item .main-content {
-    position: relative;
+  position: relative;
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
-    overflow: hidden;
-
+  overflow: hidden;
 }
 
 .carousel .list .item .main-content::before {
-
-   position: relative;
+  position: relative;
   background-size: cover;
   background-position: center;
 
@@ -304,7 +298,6 @@ body {
   mask-image: linear-gradient(to bottom, transparent, black);
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
-
 }
 /* .boxblur {
   position: absolute;
@@ -325,7 +318,6 @@ body {
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
 } */
-
 
 .carousel .list .item .main-content .content {
   position: relative;
@@ -472,7 +464,6 @@ body {
     --calculate: 1;
     --w-image: 400px;
   }
- 
 }
 
 @media screen and (max-width: 767px) {
@@ -591,7 +582,7 @@ body {
     width: 45%;
     left: 0;
     justify-content: end;
-    background: rgba(0, 0, 0, 0)
+    background: rgba(0, 0, 0, 0);
   }
   .arrows {
     position: absolute;
@@ -600,7 +591,6 @@ body {
     grid-template-columns: repeat(2, 40px);
     grid-template-rows: 40px;
     gap: 20px;
-    
   }
   .carousel {
     height: 90vh;
@@ -686,7 +676,7 @@ body {
     grid-template-rows: 35px;
     justify-content: end;
     gap: 5px;
-top: 298px;
+    top: 340px;
 
     left: 25%;
   }
@@ -796,7 +786,7 @@ top: 298px;
     grid-template-rows: 35px;
     justify-content: end;
     gap: 5px;
-top: 295px;
+    top: 330px;
     left: 17%;
   }
   .carousel {
@@ -895,7 +885,7 @@ top: 295px;
     grid-template-rows: 35px;
     justify-content: end;
     gap: 5px;
-top: 280px;
+    top: 280px;
     left: 17%;
   }
   .carousel {
@@ -994,7 +984,7 @@ top: 280px;
     grid-template-rows: 35px;
     justify-content: end;
     gap: 5px;
-top: 290px;
+    top: 290px;
     left: 10%;
   }
   .carousel {
@@ -1221,15 +1211,14 @@ left: -5%;
 .content h2{
     line -height:0.9 ;
 } */
-   :root {
+  :root {
     --calculate: 1;
     --w-image: 600px;
   }
- .arrows {
-bottom: 80px;
-  right: 42%;
-
-}
+  .arrows {
+    bottom: 80px;
+    right: 42%;
+  }
   .main-title {
     font-size: 1.9rem;
     margin: 1rem 0 -2rem;
@@ -1292,7 +1281,7 @@ bottom: 80px;
 }
 
 @media screen and (min-width: 1068px) and (max-width: 1200px) {
-   :root {
+  :root {
     --calculate: 1;
     --w-image: 600px;
   }
@@ -1420,10 +1409,10 @@ left: -5%;
 }
 
 @media screen and (min-width: 1501px) and (max-width: 1920px) {
-:root {
-  --w-image: 600px;
-  --calculate: calc(3 / 2);
-}
+  :root {
+    --w-image: 600px;
+    --calculate: calc(3 / 2);
+  }
 }
 /* @media screen and (min-width: 891px) and (max-width: 1020px){
    :root{ --calculate: 1; --w-image: 260px;}
@@ -1559,18 +1548,15 @@ left: -5%;
   /* Strong dark overlay for high contrast */
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.9) 0%,   /* almost black at bottom */
-    rgba(0, 0, 0, 0.7) 50%,  /* still strong halfway */
-    rgba(0, 0, 0, 0.4) 85%, 
+    rgba(0, 0, 0, 0.9) 0%,
+    /* almost black at bottom */ rgba(0, 0, 0, 0.7) 50%,
+    /* still strong halfway */ rgba(0, 0, 0, 0.4) 85%,
     transparent 100%
   );
 
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
 }
-
-
-
 
 .video-carousel-track {
   display: flex;
@@ -1742,7 +1728,6 @@ left: -5%;
   position: relative;
 }
 
-
 /* --- WRAPPER SECTION (Amenities / Community Corners) --- */
 .wrapper-section {
   position: relative;
@@ -1765,7 +1750,6 @@ left: -5%;
   transform: translateY(0);
   opacity: 1;
   z-index: 2;
-
 }
 
 .property-content {
@@ -1773,8 +1757,9 @@ left: -5%;
   left: 0;
   right: 0;
   top: 0;
- margin-top: 0;
-  transition: margin-top 0.8s ease, opacity 0.8s ease;  transform: translateY(0);
+  margin-top: 0;
+  transition: margin-top 0.8s ease, opacity 0.8s ease;
+  transform: translateY(0);
 }
 
 .property-section::after {
@@ -1800,7 +1785,6 @@ left: -5%;
   z-index: 1; /* sabse neeche */
   transform: translateY(-40vh);
   transition: transform 2s ease, opacity 0.8s ease, z-index 0.3s ease;
-
 }
 .other-section.active {
   transform: translateY(0);
@@ -1832,7 +1816,6 @@ left: -5%;
 }
 .other-section.active::after {
   opacity: 0;
-
 }
 
 .wrapper {
@@ -1843,10 +1826,9 @@ left: -5%;
   position: sticky;
   top: 0;
 
-  height: 100vh;   
-      overflow: hidden;
+  height: 100vh;
+  overflow: hidden;
   transition: transform 1s ease;
-
 }
 
 .Amenities-wrapper::after {
@@ -1865,7 +1847,6 @@ left: -5%;
 
 .Amenities-wrapper.fade-out::after {
   opacity: 0.6; /* jitna dark chahiye */
-
 }
 .property-wrapper,
 .carousel {
@@ -1890,7 +1871,6 @@ left: -5%;
   border-radius: 12px;
 }
 
-
 /* Wrapper to handle animation */
 .navbar-wrapper {
   animation: slideDown 0.6s ease forwards;
@@ -1906,4 +1886,3 @@ left: -5%;
     opacity: 1;
   }
 }
-
