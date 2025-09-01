@@ -14,22 +14,29 @@ const Hero = ({ id }: HeroProps) => {
   const [imgSrc, setImgSrc] = useState("/images1/mb-img.png")
   const [videoSrc, setVideoSrc] = useState("https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8")
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 450) {
-        setImgSrc("/images1/mobile-img.png") // 👈 mobile fallback image
-        setVideoSrc("https://cdn.evhomes.tech/hls/marina_video_21545/marina_video_21545_1.m3u8") // 👈 mobile video
-      } else {
-        setImgSrc("/images1/mb-img.png")
-        setVideoSrc("https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8")
-      }
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 450) {
+      // 👇 Mobile
+      setImgSrc("/images1/mobile-img.png")
+      setVideoSrc("https://cdn.evhomes.tech/hls/marina_video_21545/marina_video_21545_1.m3u8")
+    } else if (window.innerWidth > 700 && window.innerWidth <= 1000) {
+      // 👇 Tablet
+      setImgSrc("/images1/tablet-img.png")
+      setVideoSrc("https://cdn.evhomes.tech/hls/marina_video_21545/marina_video_21545_1.m3u8")
+    } else {
+      // 👇 Desktop
+      setImgSrc("/images1/mb-img.png")
+      setVideoSrc("https://cdn.evhomes.tech/hls/marina_vid_new/marina_vid_new_1.m3u8")
     }
+  }
 
-    handleResize() // run on mount
-    window.addEventListener("resize", handleResize)
+  handleResize() // run on mount
+  window.addEventListener("resize", handleResize)
 
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+  return () => window.removeEventListener("resize", handleResize)
+}, [])
+
 
   useGSAP(() => {
     gsap.set(".mask-wrapper", {
